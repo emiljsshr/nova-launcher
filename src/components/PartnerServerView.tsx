@@ -139,8 +139,10 @@ export default function PartnerServerView({ onJoin, onNotify }: PartnerServerVie
                         <div className="partner-row-copy">
                           <strong>
                             {server.name}
-                            {server.featured && (
-                              <span className="nova-chip is-frost">FEATURED</span>
+                            {server.badge && (
+                              <span className={`nova-chip partner-badge is-${server.badge.toLowerCase()}`}>
+                                {server.badge === "VERIFIED" ? "✔ VERIFIED" : "+ PARTNER"}
+                              </span>
                             )}
                           </strong>
                           <span>{server.modes}</span>
@@ -186,8 +188,12 @@ export default function PartnerServerView({ onJoin, onNotify }: PartnerServerVie
 
         <aside className="partner-detail-column">
           <Card className="partner-detail-card" key={selected.id}>
-            <div className="partner-detail-banner">
-              <ServerBanner variant={selected.icon} />
+            <div className={`partner-detail-banner ${selected.banner ? "is-image" : ""}`}>
+              {selected.banner ? (
+                <img src={selected.banner} alt={`Banner von ${selected.name}`} draggable={false} />
+              ) : (
+                <ServerBanner variant={selected.icon} />
+              )}
               <div className="partner-detail-icon">
                 <ServerIcon variant={selected.icon} size={72} />
               </div>

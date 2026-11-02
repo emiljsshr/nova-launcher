@@ -396,3 +396,19 @@
   font-size: 13px;
   line-height: 1.5;
 }
+
+/* Wappen als Server-Icon (Nova-Partner) */
+.server-icon-nova {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  background: #1c1c21;
+}
+
+.server-icon-nova img {
+  display: block;
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}

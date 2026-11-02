@@ -202,9 +202,13 @@ public class NovaMultiplayerScreen extends Screen implements NovaMultiplayer.Sou
 			NovaServerList.PartnerStatus status = statuses.get(index);
 			String motd = data.motd != null && !data.motd.getString().isBlank() && status.state() == NovaServerList.PartnerState.ONLINE
 				? data.motd.getString() : partner.description();
-			result.add(new NovaMultiplayer.Server(data, partner.name(), motd,
+			NovaMultiplayer.Server server = new NovaMultiplayer.Server(data, partner.name(), motd,
 				data.status == null ? "" : data.status.getString(), status(status), status.ping(),
-				partner.badge(), partner.banner(), partner.icon(), this.favicon(data), false));
+				partner.badge(), partner.banner(), partner.icon(), this.favicon(data), false);
+			if (partner.bannerTexture() != null) {
+				server.withBanner(NovaClient.texture(partner.bannerTexture()), partner.bannerWidth(), partner.bannerHeight());
+			}
+			result.add(server);
 		}
 		return result;
 	}

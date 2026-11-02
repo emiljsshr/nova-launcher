@@ -49,14 +49,14 @@ public final class DrawContextCanvas implements NovaCanvas {
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	/** Ganze 64×64-Textur, z. B. ein Server-Icon. */
+	/** Ganze Textur (Server-Icon, Partner-Banner) ins Rechteck. */
 	@Override
-	public void texture(Object texture, int x, int y, int width, int height) {
+	public void texture(Object texture, int x, int y, int width, int height, int textureWidth, int textureHeight) {
 		RenderSystem.enableBlend();
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		this.context.drawTexture(
 			(Identifier) texture, x, y, width, height, 0.0F, 0.0F,
-			64, 64, 64, 64
+			textureWidth, textureHeight, textureWidth, textureHeight
 		);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 	}

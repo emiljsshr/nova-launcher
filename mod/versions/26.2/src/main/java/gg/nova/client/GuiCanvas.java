@@ -48,12 +48,12 @@ public final class GuiCanvas implements NovaCanvas {
 		);
 	}
 
-	/** Ganze 64×64-Textur, z. B. ein Server-Icon. */
+	/** Ganze Textur (Server-Icon, Partner-Banner) ins Rechteck. */
 	@Override
-	public void texture(Object texture, int x, int y, int width, int height) {
+	public void texture(Object texture, int x, int y, int width, int height, int textureWidth, int textureHeight) {
 		this.graphics.blit(
 			RenderPipelines.GUI_TEXTURED, (Identifier) texture, x, y, 0.0F, 0.0F, width, height,
-			64, 64, 64, 64, -1
+			textureWidth, textureHeight, textureWidth, textureHeight, -1
 		);
 	}
 

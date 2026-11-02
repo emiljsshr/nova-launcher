@@ -47,6 +47,10 @@ public final class NovaMultiplayer {
 		/** Textur des Server-Icons für {@link NovaCanvas#texture}, sonst null (dann ein Ersatz-Icon). */
 		final Object icon;
 		final boolean lan;
+		/** Bild-Banner (Textur-ID der Version) statt Pixel-Landschaft, sonst null. */
+		Object bannerImage;
+		int bannerWidth;
+		int bannerHeight;
 
 		public Server(Object handle, String name, String motd, String players, Status status, long ping,
 				NovaContent.Badge badge, NovaContent.Banner banner, NovaContent.IconStyle partnerIcon, Object icon, boolean lan) {
@@ -66,6 +70,14 @@ public final class NovaMultiplayer {
 
 		public Object handle() {
 			return this.handle;
+		}
+
+		/** Bild-Banner setzen ({@code texture} = Textur-ID der Version, Größe in Pixeln). */
+		public Server withBanner(Object texture, int width, int height) {
+			this.bannerImage = texture;
+			this.bannerWidth = width;
+			this.bannerHeight = height;
+			return this;
 		}
 
 		public boolean lan() {
@@ -394,7 +406,10 @@ public final class NovaMultiplayer {
 		}
 
 		int sectionHeight = this.tab == Tab.SAVED ? 18 : 0;
-		int total = partners.size() * (BANNER_HEIGHT + CARD_INFO + GAP) + sectionHeight + rows.size() * (ROW_HEIGHT + 4);
+		int total = sectionHeight + rows.size() * (ROW_HEIGHT + 4);
+		for (Server partner : partners) {
+			total += this.bannerHeight(partner) + CARD_INFO + GAP;
+		}
 		int viewport = this.listY2 - this.listY1;
 		this.maxScroll = Math.max(0, total - viewport);
 		this.scroll = Math.min(this.scroll, this.maxScroll);
@@ -402,8 +417,9 @@ public final class NovaMultiplayer {
 		canvas.enableScissor(this.listX1 - 1, this.listY1, this.listX2 + 1, this.listY2);
 		int y = this.listY1 - this.scroll;
 		for (Server partner : partners) {
-			this.renderEntry(canvas, partner, y, BANNER_HEIGHT, mouseX, mouseY, source);
-			y += BANNER_HEIGHT + CARD_INFO + GAP;
+			int bannerHeight = this.bannerHeight(partner);
+			this.renderEntry(canvas, partner, y, bannerHeight, mouseX, mouseY, source);
+			y += bannerHeight + CARD_INFO + GAP;
 		}
 		if (this.tab == Tab.SAVED) {
 			String label = source.translate("nova.mp.tab.saved");
@@ -446,7 +462,9 @@ public final class NovaMultiplayer {
 		boolean hovered = inside(mouseX, mouseY, x1, Math.max(y, this.listY1), x2, Math.min(y2, this.listY2));
 		boolean selectedEntry = server.handle == this.selected;
 
-		if (bannerHeight > 0) {
+		if (bannerHeight > 0 && server.bannerImage != null) {
+			canvas.texture(server.bannerImage, x1, y, x2 - x1, bannerHeight, server.bannerWidth, server.bannerHeight);
+		} else if (bannerHeight > 0) {
 			banner(canvas, server.banner, x1, y, x2 - x1, bannerHeight);
 		}
 		int infoY = y + bannerHeight;
@@ -501,6 +519,14 @@ public final class NovaMultiplayer {
 				}
 			}
 		}));
+	}
+
+	/** Bild-Banner in voller Listenbreite mit ihrem Seitenverhältnis, Pixel-Landschaften fest 37 hoch. */
+	private int bannerHeight(Server server) {
+		if (server.bannerImage != null && server.bannerWidth > 0) {
+			return Math.round((this.listX2 - this.listX1) * (float) server.bannerHeight / server.bannerWidth);
+		}
+		return BANNER_HEIGHT;
 	}
 
 	/** Spielerzahl und Ping-Balken oben rechts; gibt die belegte Breite zurück. */

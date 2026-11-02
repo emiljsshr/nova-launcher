@@ -111,7 +111,8 @@ export type ServerIconVariant =
   | "grass"
   | "sand"
   | "lava"
-  | "amethyst";
+  | "amethyst"
+  | "nova";
 
 function serverIconColor(
   variant: ServerIconVariant,
@@ -158,6 +159,14 @@ export function ServerIcon({
   variant: ServerIconVariant;
   size?: number;
 }) {
+  // Nova-Server zeigen das Wappen statt eines Mosaiks
+  if (variant === "nova") {
+    return (
+      <span className="server-icon server-icon-nova" style={{ width: size, height: size }} aria-hidden="true">
+        <img src="/favicon.png" alt="" draggable={false} />
+      </span>
+    );
+  }
   const random = seededRandom(variant.length * 97 + 13);
 
   return (

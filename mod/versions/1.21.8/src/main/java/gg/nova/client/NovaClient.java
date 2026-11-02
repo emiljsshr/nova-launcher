@@ -18,6 +18,11 @@ public final class NovaClient implements ClientModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Nova");
 	public static final Identifier LOGO = Identifier.of(MOD_ID, "textures/gui/logo.png");
 
+	/** Textur der Mod (assets/nova/<path>), z. B. ein Partner-Banner. */
+	public static Identifier texture(String path) {
+		return Identifier.of(MOD_ID, path);
+	}
+
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("Nova Client {} geladen", version());

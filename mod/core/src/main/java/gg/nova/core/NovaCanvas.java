@@ -42,6 +42,11 @@ public interface NovaCanvas {
 	 * Ohne Umsetzung passiert nichts – das Menü zeigt dann ein Ersatz-Icon.
 	 */
 	default void texture(Object texture, int x, int y, int width, int height) {
+		this.texture(texture, x, y, width, height, 64, 64);
+	}
+
+	/** Ganze Textur mit der Größe {@code textureWidth} × {@code textureHeight} (z. B. ein Partner-Banner) ins Rechteck. */
+	default void texture(Object texture, int x, int y, int width, int height, int textureWidth, int textureHeight) {
 	}
 
 	void disableScissor();

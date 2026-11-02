@@ -64,98 +64,30 @@ export type PartnerServer = {
   maxPlayers: number;
   version: string;
   region: string;
-  // Platzhalter-Adressen, echte Adressen kommen vom Partner
   address: string;
   description: string;
   icon: ServerIconVariant;
-  featured?: boolean;
+  // Kennzeichnung wie im Mehrspielermenü der Mod
+  badge?: "VERIFIED" | "PARTNER";
+  // Bild-Banner (public/), sonst ein Mosaik in den Farben des Icons
+  banner?: string;
 };
 
 export const partnerServers: PartnerServer[] = [
   {
-    id: "glacier",
-    name: "Glacier Network",
-    modes: "Skyblock · Bedwars",
-    categories: ["SKYBLOCK", "MINIGAMES"],
-    players: 12480,
-    maxPlayers: 20000,
-    version: "1.8 – 1.21",
-    region: "EU",
-    address: "glacier.example",
-    description:
-      "Eines der größten Netzwerke im Nova-Partnerprogramm: Skyblock mit eigener Wirtschaft, schnelle Bedwars-Runden und wöchentliche Events.",
-    icon: "ice",
-    featured: true,
-  },
-  {
-    id: "nova-arena",
-    name: "Nova Arena",
-    modes: "PvP · Practice",
-    categories: ["PVP"],
-    players: 8214,
-    maxPlayers: 12000,
-    version: "1.8.9",
-    region: "EU",
-    address: "arena.example",
-    description:
-      "Ranked 1v1, Kits und Turniere. Offizieller Austragungsort des Frost Cup.",
-    icon: "arena",
-  },
-  {
-    id: "blockhaven",
-    name: "Blockhaven",
-    modes: "Survival · SMP",
-    categories: ["SURVIVAL"],
-    players: 3902,
-    maxPlayers: 6000,
-    version: "1.21.4",
-    region: "EU",
-    address: "blockhaven.example",
-    description:
-      "Entspanntes Vanilla+ SMP mit Grundstücksschutz, Community-Projekten und Spieler-Shops.",
-    icon: "grass",
-  },
-  {
-    id: "pixel-isles",
-    name: "Pixel Isles",
-    modes: "Skyblock · OneBlock",
-    categories: ["SKYBLOCK"],
-    players: 2140,
-    maxPlayers: 4000,
-    version: "1.20 – 1.21",
-    region: "EU",
-    address: "isles.example",
-    description:
-      "Insel-Abenteuer mit Quests, Minions und einem saisonalen OneBlock-Modus.",
-    icon: "sand",
-  },
-  {
-    id: "emberfall",
-    name: "Emberfall",
-    modes: "Factions · Raids",
-    categories: ["PVP", "SURVIVAL"],
-    players: 1675,
-    maxPlayers: 3000,
-    version: "1.21.1",
-    region: "EU",
-    address: "emberfall.example",
-    description:
-      "Hardcore-Factions mit Raids, Belagerungen und monatlichem Map-Reset.",
-    icon: "lava",
-  },
-  {
-    id: "crafthaus",
-    name: "Crafthaus",
-    modes: "Creative · Citybuild",
+    id: "nova-development",
+    name: "Nova Development",
+    modes: "Paper · Build Server",
     categories: ["CREATIVE"],
-    players: 980,
-    maxPlayers: 2000,
-    version: "1.21.4",
-    region: "EU",
-    address: "crafthaus.example",
-    description:
-      "Plots, WorldEdit und Bauwettbewerbe – für alle, die lieber bauen als kämpfen.",
-    icon: "amethyst",
+    players: 0,
+    maxPlayers: 5,
+    version: "26.3",
+    region: "DE",
+    address: "mc.nova-development.de",
+    description: "Der Paper-Bauserver von Nova Development: bauen, gestalten und gemeinsam Projekte umsetzen.",
+    icon: "nova",
+    badge: "VERIFIED",
+    banner: "/images/partners/nova-development.png",
   },
 ];
 

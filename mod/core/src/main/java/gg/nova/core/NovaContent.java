@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Platzhalter-Inhalte für das Hauptmenü (gleich wie im Launcher).
- * Werden ersetzt, sobald es ein Nova-Backend für Partner und News gibt.
+ * Partner-Server für Hauptmenü und Mehrspielermenü (gleich wie im Launcher, src/data/launcherData.ts).
  */
 public final class NovaContent {
 	private NovaContent() {
@@ -15,7 +14,9 @@ public final class NovaContent {
 	public enum IconStyle {
 		ICE,
 		ARENA,
-		GRASS
+		GRASS,
+		/** Nova-Wappen */
+		NOVA
 	}
 
 	/** Kennzeichnung im Mehrspielermenü. */
@@ -38,14 +39,38 @@ public final class NovaContent {
 		private final Badge badge;
 		private final Banner banner;
 		private final String description;
+		private final String bannerTexture;
+		private final int bannerWidth;
+		private final int bannerHeight;
 
 		public Partner(String name, String address, IconStyle icon, Badge badge, Banner banner, String description) {
+			this(name, address, icon, badge, banner, description, null, 0, 0);
+		}
+
+		/** @param bannerTexture Bild-Banner im Namespace nova (z. B. textures/gui/partners/x.png) statt Pixel-Landschaft */
+		public Partner(String name, String address, IconStyle icon, Badge badge, Banner banner, String description,
+				String bannerTexture, int bannerWidth, int bannerHeight) {
 			this.name = name;
 			this.address = address;
 			this.icon = icon;
 			this.badge = badge;
 			this.banner = banner;
 			this.description = description;
+			this.bannerTexture = bannerTexture;
+			this.bannerWidth = bannerWidth;
+			this.bannerHeight = bannerHeight;
+		}
+
+		public String bannerTexture() {
+			return this.bannerTexture;
+		}
+
+		public int bannerWidth() {
+			return this.bannerWidth;
+		}
+
+		public int bannerHeight() {
+			return this.bannerHeight;
 		}
 
 		public Badge badge() {
@@ -74,10 +99,8 @@ public final class NovaContent {
 		}
 	}
 
-	// Platzhalter-Adressen – echte Adressen kommen von den Partnern
 	public static final List<Partner> PARTNERS = Collections.unmodifiableList(Arrays.asList(
-		new Partner("Glacier Network", "glacier.example", IconStyle.ICE, Badge.VERIFIED, Banner.NIGHT, "Skyblock · Bedwars"),
-		new Partner("Nova Arena", "arena.example", IconStyle.ARENA, Badge.PARTNER, Banner.SUNSET, "PvP · Practice"),
-		new Partner("Blockhaven", "blockhaven.example", IconStyle.GRASS, Badge.PARTNER, Banner.BEACH, "Survival · SMP")
+		new Partner("Nova Development", "mc.nova-development.de", IconStyle.NOVA, Badge.VERIFIED, Banner.NIGHT,
+			"Paper Build Server · Build · Create · Together", "textures/gui/partners/nova-development.png", 1400, 120)
 	));
 }

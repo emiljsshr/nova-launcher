@@ -6,6 +6,7 @@ import gg.nova.core.NovaDraw;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.util.Identifier;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
@@ -79,6 +80,16 @@ public final class LegacyCanvas implements NovaCanvas {
 		DrawableHelper.drawTexture(x, y, 0.0F, 0.0F, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, width, height,
 			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+
+	/** Ganze Textur (z. B. ein Partner-Banner) ins Rechteck. */
+	@Override
+	public void texture(Object texture, int x, int y, int width, int height, int textureWidth, int textureHeight) {
+		GlStateManager.enableBlend();
+		GlStateManager.blendFuncSeparate(770, 771, 1, 0);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		this.client.getTextureManager().bindTexture((Identifier) texture);
+		DrawableHelper.drawTexture(x, y, 0.0F, 0.0F, textureWidth, textureHeight, width, height, textureWidth, textureHeight);
 	}
 
 	@Override

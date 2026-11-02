@@ -135,6 +135,14 @@ public final class NovaServerList {
 	}
 
 	static void partnerIcon(NovaCanvas canvas, NovaContent.IconStyle style, int x, int y) {
+		if (style == NovaContent.IconStyle.NOVA) {
+			// Wappen mittig im 24×24-Feld auf dunklem Grund
+			canvas.fill(x, y, x + 24, y + 24, 0xFF1D1D23);
+			int height = 20;
+			int width = NovaDraw.logoWidth(height);
+			NovaDraw.logo(canvas, x + (24 - width) / 2, y + 2, width, 1.0F);
+			return;
+		}
 		int seed = style.ordinal() * 97 + 13;
 		for (int cell = 0; cell < 64; cell++) {
 			int cellX = cell % 8;

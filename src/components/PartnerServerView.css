@@ -187,6 +187,34 @@
   margin-bottom: 42px;
 }
 
+/* Bild-Banner der Partner (z. B. 1400 × 120) in voller Breite */
+.partner-detail-banner.is-image {
+  height: auto;
+}
+
+.partner-detail-banner.is-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: auto;
+}
+
+.partner-badge {
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.partner-badge.is-verified {
+  background: #5fe1ea;
+  color: #0d3a3d;
+}
+
+.partner-badge.is-partner {
+  background: #f5a623;
+  color: #3a2206;
+}
+
 .server-banner {
   display: block;
   width: 100%;
