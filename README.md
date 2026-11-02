@@ -54,6 +54,10 @@ Quelle ist das Wappen `tools/branding/emblem.png` (flache weiße Variante: `embl
 Willkommensbildschirm, Ladebildschirm und Hauptmenü der Mod (`NovaDraw.LOGO_WIDTH/LOGO_HEIGHT` passen zu dessen
 Größe). Danach `npx tauri icon src-tauri/app-icon.png` für die App-Icons und `mod/build-all.sh` für die Mod.
 
+Ladebildschirm der Mod: Entwurf `tools/branding/loading-mockup.png` (1920 × 1080). Weil beim Start noch keine Schriften
+und Texturen geladen sind, zeichnet die Mod Wappen und Texte als Masken; `java tools/branding/LoadingMasks.java`
+erzeugt sie neu (`mod/core/src/main/resources/assets/nova/loading/`).
+
 Die Farben folgen dem Wappen: kühles Graphit und Silber. `node tools/branding/recolor.mjs` hat das frühere
 Frost-Blau einmalig umgestellt (Helligkeit bleibt, Status-, Seltenheits- und Markenfarben bleiben) – nicht erneut
 auf schon umgestellte Dateien anwenden.
