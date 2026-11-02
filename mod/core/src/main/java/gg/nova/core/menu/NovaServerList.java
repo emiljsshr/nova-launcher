@@ -84,8 +84,8 @@ public final class NovaServerList {
 		for (int index = 0; index < NovaContent.PARTNERS.size(); index++) {
 			NovaContent.Partner partner = NovaContent.PARTNERS.get(index);
 			int rowY = this.listY + index * ROW_HEIGHT;
-			canvas.fill(this.listX, rowY + 1, this.listX + this.listWidth, rowY + ROW_HEIGHT - 1, 0xD90E1630);
-			canvas.fill(this.listX, rowY + 1, this.listX + 2, rowY + ROW_HEIGHT - 1, 0xFF4A7FD6);
+			canvas.fill(this.listX, rowY + 1, this.listX + this.listWidth, rowY + ROW_HEIGHT - 1, 0xD917171D);
+			canvas.fill(this.listX, rowY + 1, this.listX + 2, rowY + ROW_HEIGHT - 1, 0xFF47474F);
 
 			partnerIcon(canvas, partner.icon(), this.listX + 8, rowY + 5);
 			int textX = this.listX + 40;

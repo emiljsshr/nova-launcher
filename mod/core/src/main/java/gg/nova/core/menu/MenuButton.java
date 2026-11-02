@@ -112,11 +112,11 @@ public final class MenuButton {
 	/** Icons werden auf 75 % verkleinert (16 → 12 Pixel), damit sie in die Buttons passen. */
 	private static final float ICON_SCALE = 0.75F;
 
-	private static final int FACE = 0xE62B3A52;
-	private static final int FACE_TOP = 0xFF5B6E8C;
-	private static final int FACE_BOTTOM = 0xFF141C2B;
-	private static final int HOVER = 0xFF3E74C9;
-	private static final int HOVER_TOP = 0xFF6F9BE0;
+	private static final int FACE = 0xE639393F;
+	private static final int FACE_TOP = 0xFF6C6C73;
+	private static final int FACE_BOTTOM = 0xFF1B1B21;
+	private static final int HOVER = 0xFF3D3D44;
+	private static final int HOVER_TOP = 0xFF5E5E66;
 
 	/**
 	 * @param badge optionaler Text rechts im Button (z. B. Spielerzahl), sonst {@code null}
@@ -131,7 +131,7 @@ public final class MenuButton {
 
 		if (this.style == Style.ACCENT) {
 			canvas.fill(x1, y1, x2, y2, NovaDraw.fade(highlighted ? HOVER_TOP : HOVER, drawAlpha));
-			canvas.fill(x1, y2 - 1, x2, y2, NovaDraw.fade(0xFF24457F, drawAlpha));
+			canvas.fill(x1, y2 - 1, x2, y2, NovaDraw.fade(0xFF46464D, drawAlpha));
 		} else if (highlighted) {
 			// Blau mit weißem Rahmen, wie der markierte Button im Design
 			canvas.gradient(x1, y1, x2, y2, NovaDraw.fade(HOVER_TOP, drawAlpha), NovaDraw.fade(HOVER, drawAlpha));
@@ -145,7 +145,7 @@ public final class MenuButton {
 			canvas.fill(x1, y1, x2, y2, NovaDraw.fade(FACE, drawAlpha));
 			canvas.fill(x1, y1, x2, y1 + 1, NovaDraw.fade(FACE_TOP, drawAlpha));
 			canvas.fill(x1, y2 - 2, x2, y2, NovaDraw.fade(FACE_BOTTOM, drawAlpha));
-			canvas.fill(x1, y1, x1 + 1, y2 - 2, NovaDraw.fade(0xFF3A4A66, drawAlpha));
+			canvas.fill(x1, y1, x1 + 1, y2 - 2, NovaDraw.fade(0xFF494950, drawAlpha));
 		}
 
 		int iconWidth = this.icon == null ? 0 : Math.round(this.icon.width() * ICON_SCALE);
@@ -177,7 +177,7 @@ public final class MenuButton {
 				badgeWidth = canvas.textWidth(badge) + 10;
 				int badgeX = x2 - 6 - canvas.textWidth(badge);
 				canvas.fill(badgeX - 7, textY + 1, badgeX - 3, textY + 5, NovaDraw.fade(NovaDraw.ONLINE, drawAlpha));
-				canvas.text(badge, badgeX, textY, NovaDraw.fade(0xFFDCE6F7, drawAlpha), false);
+				canvas.text(badge, badgeX, textY, NovaDraw.fade(0xFFE4E4ED, drawAlpha), false);
 			}
 			// Zentriert, solange Icon und Badge frei bleiben – sonst mittig im freien Bereich
 			int left = x1 + (this.icon == null ? 4 : 6 + iconWidth + 4);

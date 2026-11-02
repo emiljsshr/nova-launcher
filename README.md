@@ -47,12 +47,16 @@ Alle Daten liegen im App-Datenordner (Einstellungen → Daten → Launcher-Daten
 `accounts.json` (Tokens, nur für den Nutzer lesbar), `profiles.json`, `versions/`, `libraries/`,
 `assets/`, `runtime/` (Java von Mojang) und `instances/<profil-id>/` (Welten, Mods, Screenshots).
 
-## Logo
+## Logo und Farben
 
-Quelle sind `tools/branding/emblem.png` (Wappen), `emblem-white.png` (flache weiße Variante) und
-`wordmark.png` (Schriftzug). `java tools/branding/Branding.java` erzeugt daraus Favicon, Mod-Icon und das
-Logo aus Wappen + Schriftzug für Launcher-Kopfzeile, Ladebildschirm und Hauptmenü der Mod.
-Danach `npx tauri icon src-tauri/app-icon.png` für die App-Icons und `mod/build-all.sh` für die Mod.
+Quelle ist das Wappen `tools/branding/emblem.png` (flache weiße Variante: `emblem-white.png`).
+`java tools/branding/Branding.java` erzeugt daraus Favicon, Mod-Icon und das Logo für Launcher-Kopfzeile,
+Willkommensbildschirm, Ladebildschirm und Hauptmenü der Mod (`NovaDraw.LOGO_WIDTH/LOGO_HEIGHT` passen zu dessen
+Größe). Danach `npx tauri icon src-tauri/app-icon.png` für die App-Icons und `mod/build-all.sh` für die Mod.
+
+Die Farben folgen dem Wappen: kühles Graphit und Silber. `node tools/branding/recolor.mjs` hat das frühere
+Frost-Blau einmalig umgestellt (Helligkeit bleibt, Status-, Seltenheits- und Markenfarben bleiben) – nicht erneut
+auf schon umgestellte Dateien anwenden.
 
 ## Nova-Server (`server/`)
 

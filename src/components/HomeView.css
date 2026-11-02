@@ -39,7 +39,7 @@
   align-items: flex-end;
 
   min-height: 0;
-  background: #0b1229;
+  background: #131319;
 }
 
 .frost-scene {
@@ -53,8 +53,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(8, 12, 30, 0.72) 0%, rgba(8, 12, 30, 0.35) 45%, transparent 70%),
-    linear-gradient(0deg, rgba(8, 12, 30, 0.55) 0%, transparent 40%);
+    linear-gradient(90deg, rgba(13, 13, 18, 0.72) 0%, rgba(13, 13, 18, 0.35) 45%, transparent 70%),
+    linear-gradient(0deg, rgba(13, 13, 18, 0.55) 0%, transparent 40%);
   pointer-events: none;
 }
 
@@ -88,7 +88,7 @@
 
   padding: 8px 12px;
   background: var(--frost);
-  color: #0d1631;
+  color: #17171d;
 
   font-size: 11px;
   letter-spacing: 0.18em;
@@ -97,7 +97,7 @@
 .hero-badge-dot {
   width: 8px;
   height: 8px;
-  background: #0d1631;
+  background: #17171d;
 }
 
 .hero-title {
@@ -113,7 +113,7 @@
   line-height: 1;
   letter-spacing: 0.14em;
 
-  text-shadow: 4px 4px 0 rgba(5, 8, 22, 0.55);
+  text-shadow: 4px 4px 0 rgba(8, 8, 13, 0.55);
 }
 
 .hero-title-accent {
@@ -124,7 +124,7 @@
   max-width: 560px;
   margin: 0 0 26px;
 
-  color: #e3e9f6;
+  color: #e8e8f1;
   font-size: 15px;
   line-height: 1.6;
 }
@@ -189,7 +189,7 @@
   flex: 0 0 auto;
   padding: 18px 22px;
   background: var(--card);
-  box-shadow: inset 0 -4px 0 #e2e6ee;
+  box-shadow: inset 0 -4px 0 #e5e5ee;
 }
 
 .side-card-header {
@@ -245,7 +245,7 @@
 
 .partner-preview-list li {
   padding: 8px 0;
-  border-bottom: 2px dashed #d3d9e3;
+  border-bottom: 2px dashed #d8d8e0;
 }
 
 .partner-preview-list li:last-child {

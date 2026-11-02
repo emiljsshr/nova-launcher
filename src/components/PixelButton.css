@@ -13,10 +13,10 @@
   appearance: none;
   border: 3px solid #1e1e1f;
   border-radius: 0;
-  background: #e0e4ec;
+  background: #e3e3ec;
   box-shadow:
     inset 4px 4px 0 #ffffff,
-    inset -4px -5px 0 #b9bfcb;
+    inset -4px -5px 0 #bebec7;
 
   color: #171717;
   flex-shrink: 0;

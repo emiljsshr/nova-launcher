@@ -34,13 +34,13 @@ public final class NovaModMenu {
 
 	private static final NovaModMenu INSTANCE = new NovaModMenu();
 
-	private static final int BACKGROUND = 0xF00B1229;
-	private static final int HEADER = 0xFF141C36;
-	private static final int TILE = 0xFF1A2442;
-	private static final int TILE_HOVER = 0xFF243462;
-	private static final int TILE_ACTIVE = 0xFF2B4F8F;
-	private static final int BORDER = 0xFF3A4A66;
-	private static final int OFFLINE = 0xFF5B6478;
+	private static final int BACKGROUND = 0xF0131319;
+	private static final int HEADER = 0xFF1D1D23;
+	private static final int TILE = 0xFF25252B;
+	private static final int TILE_HOVER = 0xFF36363D;
+	private static final int TILE_ACTIVE = 0xFF4A4A55;
+	private static final int BORDER = 0xFF494950;
+	private static final int OFFLINE = 0xFF63636B;
 	private static final int HEADER_HEIGHT = 22;
 	private static final int TILE_HEIGHT = 20;
 	private static final int FRIEND_HEIGHT = 22;
@@ -375,7 +375,7 @@ public final class NovaModMenu {
 
 		int chatX = x + listWidth + 8;
 		int chatWidth = width - listWidth - 8;
-		canvas.fill(chatX, y, chatX + chatWidth, y + height, 0xFF0E1630);
+		canvas.fill(chatX, y, chatX + chatWidth, y + height, 0xFF17171D);
 		NovaSocial.Friend friend = null;
 		for (NovaSocial.Friend candidate : NovaSocial.friends()) {
 			if (candidate.id.equals(this.selectedFriend)) {
@@ -474,7 +474,7 @@ public final class NovaModMenu {
 	}
 
 	private void iconButton(NovaCanvas canvas, int x, int y, String icon, int color, int clipTop, int clipHeight, Runnable action) {
-		canvas.fill(x, y, x + 12, y + 12, 0xFF0E1630);
+		canvas.fill(x, y, x + 12, y + 12, 0xFF17171D);
 		canvas.text(icon, x + (12 - canvas.textWidth(icon)) / 2 + 1, y + 2, color, false);
 		if (y + 12 > clipTop && y < clipTop + clipHeight) {
 			this.hits.add(new Hit(x, y, x + 12, y + 12, action));
@@ -535,7 +535,7 @@ public final class NovaModMenu {
 	private void input(NovaCanvas canvas, int x, int y, int width, StringBuilder text, String placeholder, final Focus target) {
 		boolean focused = this.focus == target;
 		canvas.fill(x, y, x + width, y + INPUT_HEIGHT, focused ? NovaDraw.FROST : BORDER);
-		canvas.fill(x + 1, y + 1, x + width - 1, y + INPUT_HEIGHT - 1, 0xFF070C1C);
+		canvas.fill(x + 1, y + 1, x + width - 1, y + INPUT_HEIGHT - 1, 0xFF0C0C11);
 		int textY = y + (INPUT_HEIGHT - canvas.fontHeight()) / 2 + 1;
 		if (text.length() == 0 && !focused) {
 			canvas.text(NovaDraw.trim(canvas, placeholder, width - 8), x + 4, textY, NovaDraw.MUTED, false);

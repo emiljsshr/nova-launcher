@@ -90,11 +90,11 @@ public final class NovaLoadingRenderer {
 		}
 
 		// Logo mit weichem, ovalem Schein dahinter
-		int logoWidth = Math.min((int) (width * 0.24F), Math.min(220, (int) (height * 0.8F)));
-		int logoHeight = NovaDraw.logoHeight(logoWidth);
+		int logoHeight = Math.min((int) (height * 0.24F), Math.min(120, (int) (width * 0.3F)));
+		int logoWidth = NovaDraw.logoWidth(logoHeight);
 		int logoX = (width - logoWidth) / 2;
 		int logoY = (int) (height * 0.34F) - logoHeight / 2;
-		this.glow(width / 2, logoY + logoHeight / 2, logoWidth, background);
+		this.glow(width / 2, logoY + logoHeight / 2, logoHeight * 2, background);
 		NovaDraw.logo(this.canvas, logoX, logoY, logoWidth, content);
 
 		int subtitleY = logoY + logoHeight + 6;
@@ -146,7 +146,7 @@ public final class NovaLoadingRenderer {
 			for (int row = -radiusY; row <= radiusY; row++) {
 				float t = row / (float) radiusY;
 				int half = (int) (radius * Math.sqrt(1.0F - t * t));
-				this.canvas.fill(centerX - half, centerY + row, centerX + half, centerY + row + 1, NovaDraw.fade(0x066F9BE0, alpha));
+				this.canvas.fill(centerX - half, centerY + row, centerX + half, centerY + row + 1, NovaDraw.fade(0x065E5E66, alpha));
 			}
 		}
 	}
@@ -156,8 +156,8 @@ public final class NovaLoadingRenderer {
 			return;
 		}
 		int height = 5;
-		NovaDraw.panel(this.canvas, x - 2, y - 2, width + 4, height + 4, NovaDraw.fade(0xFF26365F, alpha));
-		this.canvas.fill(x - 1, y - 1, x + width + 1, y + height + 1, NovaDraw.fade(0xFF0E1630, alpha));
+		NovaDraw.panel(this.canvas, x - 2, y - 2, width + 4, height + 4, NovaDraw.fade(0xFF37373E, alpha));
+		this.canvas.fill(x - 1, y - 1, x + width + 1, y + height + 1, NovaDraw.fade(0xFF17171D, alpha));
 
 		int segment = 4;
 		int gap = 1;
@@ -170,7 +170,7 @@ public final class NovaLoadingRenderer {
 			int segmentX = x + index * (segment + gap);
 			int color;
 			if (unknown) {
-				color = index >= runStart && index < runStart + 6 ? NovaDraw.FROST : 0xFF19233F;
+				color = index >= runStart && index < runStart + 6 ? NovaDraw.FROST : 0xFF24242A;
 			} else if (index < filled - 1) {
 				color = NovaDraw.FROST;
 			} else if (index == filled - 1) {
@@ -178,7 +178,7 @@ public final class NovaLoadingRenderer {
 				float pulse = 0.55F + 0.45F * (float) Math.abs(Math.sin(System.currentTimeMillis() / 300.0));
 				color = NovaDraw.fade(NovaDraw.FROST_DEEP, pulse);
 			} else {
-				color = 0xFF19233F;
+				color = 0xFF24242A;
 			}
 			this.canvas.fill(segmentX, y, segmentX + segment, y + height, NovaDraw.fade(color, alpha));
 		}
@@ -204,8 +204,8 @@ public final class NovaLoadingRenderer {
 		for (int index = 0; index < labels.length; index++) {
 			boolean done = index < activeIndex;
 			boolean active = index == activeIndex;
-			int squareColor = done ? NovaDraw.ONLINE : active ? NovaDraw.FROST : 0xFF2A3A66;
-			int textColor = done || active ? NovaDraw.SOFT : 0xFF4E5E86;
+			int squareColor = done ? NovaDraw.ONLINE : active ? NovaDraw.FROST : 0xFF3C3C43;
+			int textColor = done || active ? NovaDraw.SOFT : 0xFF5E5E66;
 			this.canvas.fill(cursor, y, cursor + square, y + square, NovaDraw.fade(squareColor, alpha));
 			this.text(labels[index], cursor + square + 4, y, NovaDraw.fade(textColor, alpha), 2);
 			cursor += square + 4 + this.textWidth(labels[index], 2) + gap;
@@ -243,12 +243,12 @@ public final class NovaLoadingRenderer {
 		int y = centerY - boxHeight / 2;
 		float textY = y + (boxHeight - this.textHeight()) / 2.0F;
 
-		NovaDraw.panel(this.canvas, x, y, boxWidth, boxHeight, NovaDraw.fade(0xE60E1630, alpha));
+		NovaDraw.panel(this.canvas, x, y, boxWidth, boxHeight, NovaDraw.fade(0xE617171D, alpha));
 		int cursor = x + padding;
 		this.canvas.fill(cursor, y + 3, cursor + badgeWidth, y + boxHeight - 3, NovaDraw.fade(NovaDraw.FROST, alpha));
 		this.text(badge, cursor + padding, textY, NovaDraw.fade(NovaDraw.INK, alpha), 2);
 		cursor += badgeWidth + 6;
-		this.canvas.fill(cursor, y + 3, cursor + keyWidth, y + boxHeight - 3, NovaDraw.fade(0xFF26365F, alpha));
+		this.canvas.fill(cursor, y + 3, cursor + keyWidth, y + boxHeight - 3, NovaDraw.fade(0xFF37373E, alpha));
 		this.text(tip[0], cursor + padding, textY, NovaDraw.fade(NovaDraw.WHITE, alpha), 1);
 		cursor += keyWidth + 6;
 		this.text(text, cursor, textY, NovaDraw.fade(NovaDraw.SOFT, alpha), 1);

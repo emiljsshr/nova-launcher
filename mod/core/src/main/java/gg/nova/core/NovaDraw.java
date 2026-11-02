@@ -2,23 +2,24 @@ package gg.nova.core;
 
 /** Farben und Zeichen-Helfer im Nova-Stil. */
 public final class NovaDraw {
-	public static final int FROST = 0xFF9CC2F7;
-	public static final int FROST_LIGHT = 0xFFB2D0F9;
-	public static final int FROST_DEEP = 0xFF6F9BE0;
-	public static final int FROST_STRONG = 0xFF4A7FD6;
-	public static final int NAVY = 0xFF0B1229;
-	public static final int NAVY_LIGHT = 0xFF1A2A55;
-	public static final int INK = 0xFF0D1631;
-	public static final int MUTED = 0xFF8F9BB7;
-	public static final int SOFT = 0xFFB9C7E4;
+	public static final int FROST = 0xFFBEBEC7;
+	public static final int FROST_LIGHT = 0xFFCDCDD5;
+	public static final int FROST_DEEP = 0xFF5E5E66;
+	public static final int FROST_STRONG = 0xFF47474F;
+	public static final int NAVY = 0xFF131319;
+	public static final int NAVY_LIGHT = 0xFF2C2C33;
+	public static final int INK = 0xFF17171D;
+	public static final int MUTED = 0xFF9A9AA2;
+	public static final int SOFT = 0xFFC6C6CE;
 	public static final int WHITE = 0xFFFFFFFF;
 	public static final int ONLINE = 0xFF3FBF5A;
 	public static final int GOLD = 0xFFFFD84A;
-	public static final int PANEL = 0xD9141C36;
-	public static final int PANEL_HOVER = 0xE6243462;
+	public static final int PANEL = 0xD91D1D23;
+	public static final int PANEL_HOVER = 0xE636363D;
 
-	public static final int LOGO_WIDTH = 590;
-	public static final int LOGO_HEIGHT = 181;
+	/** Nova-Wappen (textures/gui/logo.png, aus tools/branding/Branding.java). */
+	public static final int LOGO_WIDTH = 228;
+	public static final int LOGO_HEIGHT = 256;
 
 	private NovaDraw() {
 	}
@@ -44,6 +45,10 @@ public final class NovaDraw {
 
 	public static int logoHeight(int width) {
 		return Math.round(width * (float) LOGO_HEIGHT / LOGO_WIDTH);
+	}
+
+	public static int logoWidth(int height) {
+		return Math.round(height * (float) LOGO_WIDTH / LOGO_HEIGHT);
 	}
 
 	public static void logo(NovaCanvas canvas, int x, int y, int width, float alpha) {

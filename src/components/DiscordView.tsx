@@ -24,9 +24,9 @@ function ChatIcon() {
       shapeRendering="crispEdges"
       aria-hidden="true"
     >
-      <path fill="#9cc2f7" d="M2 2h12v1h1v8h-1v1H8v1H7v1H6v1H5v-3H2v-1H1V3h1z" />
-      <path fill="#e3eefd" d="M2 3h12v1H2z" />
-      <path fill="#121a36" d="M4 6h2v2H4zm3 0h2v2H7zm3 0h2v2h-2z" />
+      <path fill="#bebec7" d="M2 2h12v1h1v8h-1v1H8v1H7v1H6v1H5v-3H2v-1H1V3h1z" />
+      <path fill="#ececf5" d="M2 3h12v1H2z" />
+      <path fill="#1c1c21" d="M4 6h2v2H4zm3 0h2v2H7zm3 0h2v2h-2z" />
     </svg>
   );
 }

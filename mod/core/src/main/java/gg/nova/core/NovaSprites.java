@@ -7,7 +7,7 @@ package gg.nova.core;
 public final class NovaSprites {
 	private static final String KEYS = "kwbmgGyr";
 	private static final int[] PALETTE = {
-		0xFF0D1124, 0xFFF2F5FB, 0xFF7FA8E8, 0xFF4A7FD6, 0xFFB8C4D8, 0xFF3FBF5A, 0xFFE0A33A, 0xFFE05555,
+		0xFF121217, 0xFFF4F4FB, 0xFF6A6A72, 0xFF47474F, 0xFFC2C2CB, 0xFF3FBF5A, 0xFFE0A33A, 0xFFE05555,
 	};
 
 	private NovaSprites() {
@@ -180,5 +180,5 @@ public final class NovaSprites {
 		".dddddDDDDD.",
 		"...dddDDD...",
 		".....dD.....",
-	}, "wstdD", new int[] {0xFFFFFFFF, 0xFFD6E2F5, 0xFFB9C9E4, 0xFF8B6139, 0xFF5C3D24});
+	}, "wstdD", new int[] {0xFFFFFFFF, 0xFFE0E0E9, 0xFFC7C7CF, 0xFF8B6139, 0xFF5C3D24});
 }

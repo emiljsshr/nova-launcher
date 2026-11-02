@@ -31,21 +31,21 @@
 }
 
 :root {
-  color: #101116;
-  background: #e0e4ec;
+  color: #111116;
+  background: #e3e3ec;
 
-  --background: #e0e4ec;
-  --pixel-light: #e7eaf1;
-  --pixel-dark: #d4d9e3;
-  --ink: #101116;
-  --ink-soft: #3c4150;
-  --ink-muted: #6b7180;
-  --bottom-bar: #2b2e36;
-  --bottom-bar-raised: #353944;
-  --card: #f4f6f9;
-  --frost: #9cc2f7;
-  --frost-strong: #4a7fd6;
-  --frost-deep: #6f9be0;
+  --background: #e3e3ec;
+  --pixel-light: #e9e9f1;
+  --pixel-dark: #d8d8e1;
+  --ink: #111116;
+  --ink-soft: #414148;
+  --ink-muted: #707078;
+  --bottom-bar: #2d2d34;
+  --bottom-bar-raised: #39393f;
+  --card: #f5f5f9;
+  --frost: #bebec7;
+  --frost-strong: #47474f;
+  --frost-deep: #5e5e66;
   --online: #3fbf5a;
 
   font-family: "Minecraft Seven v2", sans-serif;
@@ -95,7 +95,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid #17191f;
+  outline: 2px solid #19191f;
   outline-offset: 3px;
 }
 
@@ -143,7 +143,7 @@ img {
 }
 
 .pixel-block-0 {
-  background: #d6dbe5;
+  background: #dadae3;
 }
 
 .pixel-block-1 {
@@ -152,15 +152,15 @@ img {
 }
 
 .pixel-block-2 {
-  background: #d8dde7;
+  background: #dcdce5;
 }
 
 .pixel-block-3 {
-  background: #e6e9f0;
+  background: #e8e8f0;
 }
 
 .pixel-block-4 {
-  background: #cfd5e0;
+  background: #d4d4dd;
   opacity: 0.48;
 }
 
@@ -189,7 +189,7 @@ img {
   display: flex;
   align-items: center;
 
-  width: 140px;
+  width: 40px;
   height: 44px;
   padding: 0;
 
@@ -296,7 +296,7 @@ img {
 }
 
 .window-button:hover {
-  background: rgba(16, 17, 22, 0.08);
+  background: rgba(17, 17, 22, 0.08);
 }
 
 .window-button.close:hover {
@@ -367,19 +367,19 @@ img {
 }
 
 .nova-button-light:hover {
-  border-color: #dfe8f8;
-  background: #dfe8f8;
+  border-color: #e7e7ef;
+  background: #e7e7ef;
 }
 
 .nova-button-outline {
   border-color: rgba(255, 255, 255, 0.45);
-  background: rgba(10, 16, 36, 0.35);
+  background: rgba(17, 17, 22, 0.35);
   color: #fff;
 }
 
 .nova-button-outline:hover {
   border-color: #fff;
-  background: rgba(10, 16, 36, 0.55);
+  background: rgba(17, 17, 22, 0.55);
 }
 
 .nova-button-dark {
@@ -389,24 +389,24 @@ img {
 }
 
 .nova-button-dark:hover {
-  border-color: #3a3e49;
-  background: #3a3e49;
+  border-color: #3d3d44;
+  background: #3d3d44;
 }
 
 .nova-button-muted {
-  border-color: #dde2ea;
-  background: #dde2ea;
+  border-color: #e1e1ea;
+  background: #e1e1ea;
   color: var(--ink);
 }
 
 .nova-button-muted:hover {
-  border-color: #cfd5e0;
-  background: #cfd5e0;
+  border-color: #d4d4dd;
+  background: #d4d4dd;
 }
 
 .nova-button-muted[aria-pressed="true"] {
   border-color: var(--frost);
-  background: #e3eefd;
+  background: #ececf5;
 }
 
 /* ========================================
@@ -418,7 +418,7 @@ img {
   flex: 0 0 auto;
   width: 8px;
   height: 8px;
-  background: #9aa1ad;
+  background: #a0a0a8;
 }
 
 .status-square.is-online {
@@ -445,7 +445,7 @@ img {
 
   border-left: 4px solid var(--frost-strong);
   background: var(--bottom-bar);
-  box-shadow: 4px 4px 0 rgba(20, 23, 31, 0.2);
+  box-shadow: 4px 4px 0 rgba(23, 23, 29, 0.2);
   color: #fff;
 
   font-size: 12px;

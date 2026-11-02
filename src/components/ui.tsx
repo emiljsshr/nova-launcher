@@ -165,10 +165,10 @@ export function CoinIcon({ size = 16 }: { size?: number }) {
       shapeRendering="crispEdges"
       aria-hidden="true"
     >
-      <path fill="#2b4f8f" d="M2 0h4v1h1v1h1v4H7v1H6v1H2V7H1V6H0V2h1V1h1z" />
-      <path fill="#9cc2f7" d="M2 1h4v1h1v4H6v1H2V6H1V2h1z" />
-      <path fill="#e3eefd" d="M2 2h1v1H2zm1-1h2v1H3z" />
-      <path fill="#4a7fd6" d="M3 3h2v2H3z" />
+      <path fill="#1d1d23" d="M2 0h4v1h1v1h1v4H7v1H6v1H2V7H1V6H0V2h1V1h1z" />
+      <path fill="#bebec7" d="M2 1h4v1h1v4H6v1H2V6H1V2h1z" />
+      <path fill="#ececf5" d="M2 2h1v1H2zm1-1h2v1H3z" />
+      <path fill="#47474f" d="M3 3h2v2H3z" />
     </svg>
   );
 }

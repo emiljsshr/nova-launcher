@@ -66,7 +66,7 @@
 
 .welcome-logo {
   display: block;
-  width: clamp(320px, 37vw, 580px);
+  width: clamp(170px, 15vw, 250px);
   height: auto;
 }
 
@@ -126,10 +126,10 @@
   margin-bottom: 6px;
   padding: 10px;
 
-  background: #e0e4ec;
+  background: #e3e3ec;
   box-shadow:
     inset 3px 3px 0 #fff,
-    inset 0 -4px 0 #b9bfcb;
+    inset 0 -4px 0 #bebec7;
   color: var(--ink);
 
   font-family: "Nova Minecrafter Regular", sans-serif;
@@ -146,14 +146,14 @@
   padding: 12px;
 
   border: 0;
-  background: #363b44;
+  background: #3a3a41;
   color: #fff;
   text-align: left;
   transition: background-color 120ms ease;
 }
 
 .game-option:hover {
-  background: #444a56;
+  background: #494950;
 }
 
 .game-option:focus-visible {
@@ -191,7 +191,7 @@
 }
 
 .game-option-copy small {
-  color: #b9c3d6;
+  color: #c2c2ca;
   font-size: 11px;
 }
 

@@ -15,7 +15,7 @@ public interface NovaCanvas {
 	/** Vertikaler Verlauf von {@code top} nach {@code bottom}. */
 	void gradient(int x1, int y1, int x2, int y2, int top, int bottom);
 
-	/** Nova-Logo (590 × 181) in das Rechteck zeichnen; {@code color} trägt die Deckkraft. */
+	/** Nova-Wappen ({@link NovaDraw#LOGO_WIDTH} × {@link NovaDraw#LOGO_HEIGHT}) in das Rechteck zeichnen; {@code color} trägt die Deckkraft. */
 	void logo(int x, int y, int width, int height, int color);
 
 	/** Text in Minecrafts Schrift – nur verwenden, wenn die Schriften geladen sind. */

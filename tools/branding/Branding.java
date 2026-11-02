@@ -6,12 +6,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Erzeugt alle Logo-Dateien aus dem Wappen (tools/branding/emblem.png) und dem Schriftzug
- * (tools/branding/wordmark.png, 590 × 181):
+ * Erzeugt alle Logo-Dateien aus dem Wappen (tools/branding/emblem.png):
  *   src-tauri/app-icon.png                 1024², Quelle für "npx tauri icon"
  *   public/favicon.png                     256², Browser-/Fenster-Icon
- *   src/assets/nova-logo.png               1180 × 362, Wappen + Schriftzug (Launcher-Kopfzeile)
- *   mod/.../textures/gui/logo.png          590 × 181, dasselbe für Ladebildschirm und Hauptmenü der Mod
+ *   src/assets/nova-logo.png               512 hoch, Launcher-Kopfzeile und Willkommensbildschirm
+ *   mod/.../textures/gui/logo.png          256 hoch, Ladebildschirm und Hauptmenü der Mod
+ *                                          (Größe muss zu NovaDraw.LOGO_WIDTH/LOGO_HEIGHT passen)
  *   mod/.../assets/nova/icon.png           128², Mod-Icon (Mod-Liste)
  *
  *   java tools/branding/Branding.java
@@ -20,28 +20,16 @@ public class Branding {
 	public static void main(String[] args) throws IOException {
 		File root = new File(args.length > 0 ? args[0] : ".");
 		BufferedImage emblem = crop(ImageIO.read(new File(root, "tools/branding/emblem.png")));
-		BufferedImage wordmark = crop(ImageIO.read(new File(root, "tools/branding/wordmark.png")));
 
 		write(square(emblem, 1024, 0.06), new File(root, "src-tauri/app-icon.png"));
 		write(square(emblem, 256, 0.04), new File(root, "public/favicon.png"));
 		write(square(emblem, 128, 0.04), new File(root, "mod/core/src/main/resources/assets/nova/icon.png"));
-		write(lockup(emblem, wordmark, 1180, 362), new File(root, "src/assets/nova-logo.png"));
-		write(lockup(emblem, wordmark, 590, 181), new File(root, "mod/core/src/main/resources/assets/nova/textures/gui/logo.png"));
+		write(byHeight(emblem, 512), new File(root, "src/assets/nova-logo.png"));
+		write(byHeight(emblem, 256), new File(root, "mod/core/src/main/resources/assets/nova/textures/gui/logo.png"));
 	}
 
-	/** Wappen links in voller Höhe, Schriftzug rechts daneben, senkrecht mittig. */
-	static BufferedImage lockup(BufferedImage emblem, BufferedImage wordmark, int width, int height) {
-		BufferedImage out = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = graphics(out);
-		int emblemHeight = height;
-		int emblemWidth = Math.round(emblem.getWidth() * (float) emblemHeight / emblem.getHeight());
-		g.drawImage(scale(emblem, emblemWidth, emblemHeight), 0, 0, null);
-		int gap = Math.round(height * 0.08F);
-		int textWidth = width - emblemWidth - gap;
-		int textHeight = Math.round(wordmark.getHeight() * (float) textWidth / wordmark.getWidth());
-		g.drawImage(scale(wordmark, textWidth, textHeight), emblemWidth + gap, (height - textHeight) / 2, null);
-		g.dispose();
-		return out;
+	static BufferedImage byHeight(BufferedImage image, int height) {
+		return scale(image, Math.round(image.getWidth() * (float) height / image.getHeight()), height);
 	}
 
 	/** Mittig in ein transparentes Quadrat mit Rand ({@code margin} als Anteil der Kante). */

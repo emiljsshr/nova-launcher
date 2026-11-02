@@ -21,7 +21,7 @@
 
 .login-error {
   padding: 12px 14px;
-  background: #fbe4e2;
+  background: #e9e9f2;
   color: #8e2a20 !important;
 }
 
@@ -86,8 +86,8 @@
 .login-note {
   margin: 0 0 16px;
   padding: 12px 14px;
-  background: #dce9fc;
-  color: #24457f !important;
+  background: #e7e7f0;
+  color: #46464d !important;
   font-size: 13px;
   line-height: 1.55;
 }

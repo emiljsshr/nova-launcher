@@ -30,28 +30,28 @@ type Mountain = {
 };
 
 const skyBands = [
-  "#0a1129",
-  "#0c142f",
-  "#0e1834",
-  "#111c3a",
-  "#142140",
-  "#172646",
-  "#1a2a4c",
-  "#1d2f52",
+  "#121218",
+  "#16161b",
+  "#19191f",
+  "#1d1d23",
+  "#222228",
+  "#27272d",
+  "#2b2b31",
+  "#2f2f36",
 ];
 
 const backMountains: Mountain[] = [
-  { peakX: 18, peakY: 52, slope: 0.9, baseY: 92, light: "#26355c", dark: "#1f2c4e", snowLight: "#55688f", snowDark: "#45577c", snowDepth: 4 },
-  { peakX: 62, peakY: 54, slope: 0.8, baseY: 92, light: "#2a3b66", dark: "#223157", snowLight: "#6b80ad", snowDark: "#55688f", snowDepth: 5 },
-  { peakX: 104, peakY: 50, slope: 0.85, baseY: 92, light: "#2a3b66", dark: "#223157", snowLight: "#6b80ad", snowDark: "#55688f", snowDepth: 5 },
-  { peakX: 150, peakY: 56, slope: 0.8, baseY: 92, light: "#26355c", dark: "#1f2c4e", snowLight: "#55688f", snowDark: "#45577c", snowDepth: 4 },
+  { peakX: 18, peakY: 52, slope: 0.9, baseY: 92, light: "#36363d", dark: "#2d2d34", snowLight: "#67676f", snowDark: "#57575e", snowDepth: 4 },
+  { peakX: 62, peakY: 54, slope: 0.8, baseY: 92, light: "#3c3c43", dark: "#323239", snowLight: "#808088", snowDark: "#67676f", snowDepth: 5 },
+  { peakX: 104, peakY: 50, slope: 0.85, baseY: 92, light: "#3c3c43", dark: "#323239", snowLight: "#808088", snowDark: "#67676f", snowDepth: 5 },
+  { peakX: 150, peakY: 56, slope: 0.8, baseY: 92, light: "#36363d", dark: "#2d2d34", snowLight: "#67676f", snowDark: "#57575e", snowDepth: 4 },
 ];
 
 const frontMountains: Mountain[] = [
-  { peakX: 54, peakY: 62, slope: 1.1, baseY: 94, light: "#3a5187", dark: "#2c3f6c", snowLight: "#a9bde3", snowDark: "#8099c7", snowDepth: 6 },
-  { peakX: 82, peakY: 56, slope: 1.0, baseY: 94, light: "#44609c", dark: "#33497c", snowLight: "#e3ecfb", snowDark: "#b4c7ea", snowDepth: 8 },
-  { peakX: 116, peakY: 68, slope: 1.05, baseY: 94, light: "#3a5187", dark: "#2c3f6c", snowLight: "#c7d6f2", snowDark: "#9db2dc", snowDepth: 5 },
-  { peakX: 140, peakY: 66, slope: 1.1, baseY: 94, light: "#3a5187", dark: "#2c3f6c", snowLight: "#c7d6f2", snowDark: "#9db2dc", snowDepth: 5 },
+  { peakX: 54, peakY: 62, slope: 1.1, baseY: 94, light: "#52525a", dark: "#404047", snowLight: "#bcbcc4", snowDark: "#9898a0", snowDepth: 6 },
+  { peakX: 82, peakY: 56, slope: 1.0, baseY: 94, light: "#2c2c33", dark: "#4a4a51", snowLight: "#eaeaf3", snowDark: "#c5c5cd", snowDepth: 8 },
+  { peakX: 116, peakY: 68, slope: 1.05, baseY: 94, light: "#52525a", dark: "#404047", snowLight: "#d5d5dc", snowDark: "#b1b1b9", snowDepth: 5 },
+  { peakX: 140, peakY: 66, slope: 1.1, baseY: 94, light: "#52525a", dark: "#404047", snowLight: "#d5d5dc", snowDark: "#b1b1b9", snowDepth: 5 },
 ];
 
 function drawMountain(mountain: Mountain, random: () => number): Rect[] {
@@ -102,13 +102,13 @@ function drawTree(x: number, baseY: number, height: number): Rect[] {
       y: baseY - height + row,
       w: half * 2 + 1,
       h: 1,
-      fill: row % 3 === 0 && row > 0 ? "#1b2a4a" : "#14203b",
+      fill: row % 3 === 0 && row > 0 ? "#2a2a31" : "#202026",
     });
   }
 
   // Schnee auf der Spitze und Stamm
-  rects.push({ x, y: baseY - height, w: 1, h: 1, fill: "#d9e4f7" });
-  rects.push({ x, y: baseY, w: 1, h: 2, fill: "#2a1d18" });
+  rects.push({ x, y: baseY - height, w: 1, h: 1, fill: "#e2e2eb" });
+  rects.push({ x, y: baseY, w: 1, h: 2, fill: "#202026" });
   return rects;
 }
 
@@ -127,9 +127,9 @@ function buildScene(): Rect[] {
     const center = Math.round(
       34 + 7 * Math.sin(x / 15) + 3 * Math.sin(x / 6 + 1),
     );
-    rects.push({ x, y: center - 9, w: 2, h: 18, fill: "#1f3263", opacity: 0.75 });
-    rects.push({ x, y: center - 5, w: 2, h: 10, fill: "#2a4380", opacity: 0.55 });
-    rects.push({ x, y: center - 2, w: 2, h: 4, fill: "#3b5ba3", opacity: 0.35 });
+    rects.push({ x, y: center - 9, w: 2, h: 18, fill: "#34343b", opacity: 0.75 });
+    rects.push({ x, y: center - 5, w: 2, h: 10, fill: "#46464d", opacity: 0.55 });
+    rects.push({ x, y: center - 2, w: 2, h: 4, fill: "#292930", opacity: 0.35 });
   }
 
   // Sterne
@@ -145,9 +145,9 @@ function buildScene(): Rect[] {
   }
 
   // Mond
-  rects.push({ x: 118, y: 10, w: 10, h: 10, fill: "#eef3fd" });
-  rects.push({ x: 120, y: 12, w: 2, h: 2, fill: "#c6d3ec" });
-  rects.push({ x: 124, y: 15, w: 3, h: 2, fill: "#c6d3ec" });
+  rects.push({ x: 118, y: 10, w: 10, h: 10, fill: "#f2f2fb" });
+  rects.push({ x: 120, y: 12, w: 2, h: 2, fill: "#d2d2d9" });
+  rects.push({ x: 124, y: 15, w: 3, h: 2, fill: "#d2d2d9" });
 
   backMountains.forEach((mountain) => rects.push(...drawMountain(mountain, random)));
   frontMountains.forEach((mountain) => rects.push(...drawMountain(mountain, random)));
@@ -161,12 +161,12 @@ function buildScene(): Rect[] {
   let groundTop = 90;
   for (let x = 0; x < WIDTH; x += 4) {
     if (random() > 0.6) groundTop = 88 + Math.floor(random() * 4) * 2;
-    rects.push({ x, y: groundTop, w: 4, h: HEIGHT - groundTop, fill: random() > 0.5 ? "#2b3349" : "#323b55" });
+    rects.push({ x, y: groundTop, w: 4, h: HEIGHT - groundTop, fill: random() > 0.5 ? "#333339" : "#3b3b42" });
     if (random() > 0.35) {
-      rects.push({ x, y: groundTop, w: 4, h: 1, fill: "#c9d6ee" });
+      rects.push({ x, y: groundTop, w: 4, h: 1, fill: "#d5d5dc" });
     }
     if (random() > 0.6) {
-      rects.push({ x, y: groundTop + 4 + Math.floor(random() * 6), w: 4, h: 4, fill: "#262d42" });
+      rects.push({ x, y: groundTop + 4 + Math.floor(random() * 6), w: 4, h: 4, fill: "#2d2d33" });
     }
   }
 

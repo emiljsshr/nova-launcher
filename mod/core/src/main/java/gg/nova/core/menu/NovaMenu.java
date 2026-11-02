@@ -104,8 +104,9 @@ public final class NovaMenu {
 		this.compact = width < 430;
 
 		int buttonWidth = clamp((int) (width * 0.25F), 200, 260);
-		this.logoWidth = clamp((int) (width * 0.3F), 180, 270);
-		int logoHeight = NovaDraw.logoHeight(this.logoWidth);
+		// Wappen etwa so hoch wie früher der Schriftzug plus ein Drittel
+		int logoHeight = clamp((int) (height * 0.22F), 62, 100);
+		this.logoWidth = NovaDraw.logoWidth(logoHeight);
 
 		// Gesamthöhe: Logo, Band, Abstand, drei Haupt-Buttons, Abstand, untere Reihe
 		int stackHeight = logoHeight + 4 + 13 + 18 + 3 * (BUTTON_HEIGHT + GAP) + 8 + BUTTON_HEIGHT;
@@ -192,13 +193,13 @@ public final class NovaMenu {
 
 	/** Leichte Abdunklung oben und unten – nach dem Panorama, vor den Widgets. */
 	public void renderBackground(NovaCanvas canvas, float alpha) {
-		canvas.gradient(0, 0, this.width, this.height / 3, 0x660B1229, 0x000B1229);
-		canvas.gradient(0, this.height * 2 / 3, this.width, this.height, 0x000B1229, 0x800B1229);
+		canvas.gradient(0, 0, this.width, this.height / 3, 0x66131319, 0x00131319);
+		canvas.gradient(0, this.height * 2 / 3, this.width, this.height, 0x00131319, 0x80131319);
 
 		if (this.showPlayerCard()) {
 			int x = this.width - 8 - this.cardWidth;
-			canvas.fill(x, 8, x + this.cardWidth, 8 + 26, NovaDraw.fade(0xE60E1630, alpha));
-			int frame = NovaDraw.fade(0xFF4A7FD6, alpha);
+			canvas.fill(x, 8, x + this.cardWidth, 8 + 26, NovaDraw.fade(0xE617171D, alpha));
+			int frame = NovaDraw.fade(0xFF47474F, alpha);
 			canvas.fill(x, 8, x + this.cardWidth, 9, frame);
 			canvas.fill(x, 33, x + this.cardWidth, 34, frame);
 			canvas.fill(x, 8, x + 1, 34, frame);
@@ -231,8 +232,8 @@ public final class NovaMenu {
 		int y = this.ribbonY;
 		int ribbonHeight = 13;
 
-		int face = NovaDraw.fade(0xF0141C36, alpha);
-		int edge = NovaDraw.fade(0xFF4A7FD6, alpha);
+		int face = NovaDraw.fade(0xF01D1D23, alpha);
+		int edge = NovaDraw.fade(0xFF47474F, alpha);
 		canvas.fill(x, y, x + ribbonWidth, y + ribbonHeight, face);
 		canvas.fill(x, y, x + ribbonWidth, y + 1, edge);
 		canvas.fill(x, y + ribbonHeight - 1, x + ribbonWidth, y + ribbonHeight, edge);
@@ -241,7 +242,7 @@ public final class NovaMenu {
 			canvas.fill(x - step - 1, y + step + 1, x, y + ribbonHeight - step - 1, face);
 			canvas.fill(x + ribbonWidth, y + step + 1, x + ribbonWidth + step + 1, y + ribbonHeight - step - 1, face);
 		}
-		NovaDraw.spacedText(canvas, text, x + 12, y + 3, NovaDraw.fade(0xFFDCE6F7, alpha), 2, false);
+		NovaDraw.spacedText(canvas, text, x + 12, y + 3, NovaDraw.fade(0xFFE4E4ED, alpha), 2, false);
 	}
 
 	/** Gelber Splash-Text wie im Vanilla-Menü, schräg rechts neben dem Logo. */
@@ -291,7 +292,7 @@ public final class NovaMenu {
 		String unofficial = state.translate().apply("nova.menu.unofficial");
 		int unofficialWidth = canvas.textWidth(unofficial);
 		if (this.width - unofficialWidth - this.margin() > 4 + canvas.textWidth("Nova Client " + state.novaVersion()) + 8) {
-			canvas.text(unofficial, this.width - unofficialWidth - this.margin(), this.height - 22, NovaDraw.fade(0xFFDCE6F7, alpha), true);
+			canvas.text(unofficial, this.width - unofficialWidth - this.margin(), this.height - 22, NovaDraw.fade(0xFFE4E4ED, alpha), true);
 		}
 	}
 

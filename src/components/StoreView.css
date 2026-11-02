@@ -12,7 +12,7 @@
   padding: 32px 44px;
   overflow: hidden;
 
-  background: #0b1229;
+  background: #131319;
   color: #fff;
 }
 
@@ -28,9 +28,9 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(8, 12, 30, 0.85) 0%,
-    rgba(8, 12, 30, 0.45) 55%,
-    rgba(8, 12, 30, 0.2) 100%
+    rgba(13, 13, 18, 0.85) 0%,
+    rgba(13, 13, 18, 0.45) 55%,
+    rgba(13, 13, 18, 0.2) 100%
   );
 }
 
@@ -46,12 +46,12 @@
   font-size: 38px;
   font-weight: 400;
   letter-spacing: 0.14em;
-  text-shadow: 3px 3px 0 rgba(5, 8, 22, 0.55);
+  text-shadow: 3px 3px 0 rgba(8, 8, 13, 0.55);
 }
 
 .store-bundle-copy p {
   margin: 0 0 22px;
-  color: #e3e9f6;
+  color: #e8e8f1;
   font-size: 14px;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .store-bundle-item span {
-  color: #dfe7f6;
+  color: #e6e6ef;
   font-size: 12px;
   text-align: center;
 }
@@ -104,7 +104,7 @@
 }
 
 .store-price s {
-  color: #8f9bb7;
+  color: #9a9aa2;
   font-size: 14px;
 }
 
@@ -160,10 +160,10 @@
 
   height: 150px;
 
-  background-color: #e6eaf1;
+  background-color: #e9e9f1;
   background-image:
-    linear-gradient(45deg, #dde2ea 25%, transparent 25%, transparent 75%, #dde2ea 75%),
-    linear-gradient(45deg, #dde2ea 25%, transparent 25%, transparent 75%, #dde2ea 75%);
+    linear-gradient(45deg, #e1e1ea 25%, transparent 25%, transparent 75%, #e1e1ea 75%),
+    linear-gradient(45deg, #e1e1ea 25%, transparent 25%, transparent 75%, #e1e1ea 75%);
   background-position: 0 0, 12px 12px;
   background-size: 24px 24px;
   box-shadow: inset 0 -4px 0 var(--rarity);
@@ -172,7 +172,7 @@
 .store-item-stage .cosmetic-thumb {
   width: 104px;
   height: 104px;
-  filter: drop-shadow(4px 4px 0 rgba(16, 17, 22, 0.18));
+  filter: drop-shadow(4px 4px 0 rgba(17, 17, 22, 0.18));
   transition: transform 160ms ease;
 }
 
@@ -186,7 +186,7 @@
   left: 12px;
   padding: 4px 7px;
   background: var(--frost);
-  color: #0d1631;
+  color: #17171d;
   font-family: var(--font-display);
   font-size: 9px;
   letter-spacing: 0.2em;
@@ -254,7 +254,7 @@
 }
 
 .store-item-preview:hover {
-  background: #0b1229;
+  background: #131319;
 }
 
 .store-preview {
@@ -266,7 +266,7 @@
 .store-preview-stage {
   position: relative;
   flex: none;
-  background: #0b1229;
+  background: #131319;
 }
 
 .store-preview-hint {
@@ -274,7 +274,7 @@
   left: 0;
   right: 0;
   bottom: 12px;
-  color: rgba(227, 233, 246, 0.6);
+  color: rgba(232, 232, 241, 0.6);
   font-family: var(--font-display);
   font-size: 9px;
   letter-spacing: 0.2em;

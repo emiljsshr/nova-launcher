@@ -25,8 +25,8 @@
   padding: 14px 0 6px;
 
   background:
-    radial-gradient(ellipse at 50% 90%, rgba(156, 194, 247, 0.3), transparent 60%),
-    linear-gradient(180deg, #0f1730 0%, #1b2950 100%);
+    radial-gradient(ellipse at 50% 90%, rgba(190, 190, 199, 0.3), transparent 60%),
+    linear-gradient(180deg, #18181e 0%, #2b2b32 100%);
 }
 
 .profile-identity {
@@ -49,7 +49,7 @@
 
 .profile-uuid {
   margin: 8px 0 16px;
-  color: #6f7fa6;
+  color: #7f7f87;
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
   font-size: 10px;
   -webkit-user-select: text;
@@ -61,7 +61,7 @@
   align-items: center;
   justify-content: center;
   height: 290px;
-  color: #6f7fa6;
+  color: #7f7f87;
   font-size: 12px;
 }
 
@@ -76,7 +76,7 @@
   padding: 0 14px;
   border: 0;
   background: rgba(255, 255, 255, 0.08);
-  color: #dfe7f6;
+  color: #e6e6ef;
   font-family: var(--font-display);
   font-size: 9px;
   letter-spacing: 0.2em;
@@ -84,7 +84,7 @@
 
 .profile-skin-model button.is-active {
   background: var(--frost);
-  color: #0d1631;
+  color: #17171d;
 }
 
 .profile-cosmetics-link {
@@ -114,7 +114,7 @@
 
 .profile-connect-hero p {
   margin: 0 0 6px;
-  color: #b9c7e4;
+  color: #c6c6ce;
   font-size: 13px;
   line-height: 1.55;
 }
@@ -139,11 +139,11 @@
   align-items: center;
   gap: 12px;
   padding: 8px 10px;
-  background: #e9edf3;
+  background: #ececf3;
 }
 
 .profile-accounts li.is-active {
-  background: #dce9fc;
+  background: #e7e7f0;
   box-shadow: inset 4px 0 0 var(--frost-strong);
 }
 
@@ -214,7 +214,7 @@
 
   padding: 18px 20px;
   background: var(--card);
-  box-shadow: inset 0 -4px 0 #e2e6ee;
+  box-shadow: inset 0 -4px 0 #e5e5ee;
 }
 
 .profile-stat span {
@@ -242,7 +242,7 @@
   align-items: center;
   gap: 14px;
   padding: 10px 0;
-  border-bottom: 2px dashed #d3d9e3;
+  border-bottom: 2px dashed #d8d8e0;
 }
 
 .profile-activity li:last-child {

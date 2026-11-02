@@ -19,8 +19,8 @@
 .discord-hero {
   padding: 32px 36px;
   background:
-    linear-gradient(120deg, rgba(74, 127, 214, 0.25), transparent 55%),
-    #121a36;
+    linear-gradient(120deg, rgba(71, 71, 79, 0.25), transparent 55%),
+    #1c1c21;
 }
 
 .discord-hero-copy {
@@ -46,7 +46,7 @@
 .discord-hero-copy p {
   max-width: 560px;
   margin: 0;
-  color: #c9d4ea;
+  color: #d3d3db;
   font-size: 14px;
   line-height: 1.6;
 }
@@ -73,7 +73,7 @@
 
 .discord-stats dt {
   margin-bottom: 8px;
-  color: #8f9bb7;
+  color: #9a9aa2;
   font-family: var(--font-display);
   font-size: 8px;
   letter-spacing: 0.22em;
@@ -101,7 +101,7 @@
 
 .discord-announcements li {
   padding: 14px 0;
-  border-bottom: 2px dashed #d3d9e3;
+  border-bottom: 2px dashed #d8d8e0;
 }
 
 .discord-announcements li:first-child {
@@ -168,7 +168,7 @@
 
   width: 30px;
   height: 30px;
-  background: #e3e8f0;
+  background: #e7e7f0;
   color: var(--frost-strong);
   font-size: 15px;
 }

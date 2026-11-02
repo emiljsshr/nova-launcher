@@ -15,7 +15,7 @@ public final class NovaScenery {
 	}
 
 	public static void sky(NovaCanvas canvas, int x, int y, int width, int height, float alpha) {
-		canvas.gradient(x, y, x + width, y + height, NovaDraw.fade(0xFF070C1E, alpha), NovaDraw.fade(0xFF16244A, alpha));
+		canvas.gradient(x, y, x + width, y + height, NovaDraw.fade(0xFF0D0D12, alpha), NovaDraw.fade(0xFF26262D, alpha));
 	}
 
 	/** Funkelnde Sterne; {@code density} ≈ Sterne pro 1000 Pixel². */
@@ -55,7 +55,7 @@ public final class NovaScenery {
 				float spread = 1.0F - layer / (float) layers;
 				int top = center - (int) (thickness * spread);
 				int bottom = center + (int) (thickness * 0.45F * spread);
-				int color = layer < layers / 2 ? 0x0A3FA88A : 0x0C4AD6A8;
+				int color = layer < layers / 2 ? 0x0A585860 : 0x0CB9B9C2;
 				canvas.fill(column, top, column + step, bottom, NovaDraw.fade(color, alpha * intensity));
 			}
 		}
@@ -71,15 +71,15 @@ public final class NovaScenery {
 			int flakeY = (int) ((offset + time * speed) % height);
 			int flakeX = (int) (seedX * width + Math.sin(time * 0.8 + index) * 4.0);
 			boolean big = NovaDraw.hash(index * 7 + 4) > 0.82F;
-			int color = NovaDraw.fade(big ? 0xCCFFFFFF : 0x99DCE6F7, alpha);
+			int color = NovaDraw.fade(big ? 0xCCFFFFFF : 0x99E4E4ED, alpha);
 			canvas.fill(flakeX, flakeY, flakeX + (big ? 2 : 1), flakeY + (big ? 2 : 1), color);
 		}
 	}
 
 	/** Vollständige Landschaft für den Ladebildschirm (Fläche = unterer Bildschirmbereich). */
 	public static void landscape(NovaCanvas canvas, int x, int y, int width, int height, float alpha) {
-		range(canvas, x, y, width, height, FAR_PEAKS, 0xFF2C3F6C, 0xFF23345C, 0xFF9DB2DC, 0xFF7F95C2, 0.7F, alpha);
-		range(canvas, x, y, width, height, NEAR_PEAKS, 0xFF1D2B50, 0xFF182444, 0xFF6F86B4, 0xFF5A6F9C, 0.55F, alpha);
+		range(canvas, x, y, width, height, FAR_PEAKS, 0xFF404047, 0xFF35353C, 0xFFB1B1B9, 0xFF94949C, 0.7F, alpha);
+		range(canvas, x, y, width, height, NEAR_PEAKS, 0xFF2C2C33, 0xFF25252C, 0xFF85858D, 0xFF6F6F77, 0.55F, alpha);
 
 		int groundY = y + height - Math.max(6, height / 10);
 		for (int index = 0; index < TREES.length; index++) {
@@ -87,13 +87,13 @@ public final class NovaScenery {
 			tree(canvas, x + (int) (width * TREES[index]), groundY, treeHeight, alpha);
 		}
 
-		canvas.fill(x, groundY, x + width, y + height, NovaDraw.fade(0xFF0E1630, alpha));
-		canvas.fill(x, groundY, x + width, groundY + 1, NovaDraw.fade(0xFF2A3A66, alpha));
+		canvas.fill(x, groundY, x + width, y + height, NovaDraw.fade(0xFF17171D, alpha));
+		canvas.fill(x, groundY, x + width, groundY + 1, NovaDraw.fade(0xFF3C3C43, alpha));
 	}
 
 	/** Kleine Variante ohne Tannen, z. B. für Banner im Menü. */
 	public static void mountains(NovaCanvas canvas, int x, int y, int width, int height, float alpha) {
-		range(canvas, x, y, width, height, FAR_PEAKS, 0xFF2C3F6C, 0xFF23345C, 0xFFC7D6F2, 0xFF9DB2DC, 0.55F, alpha);
+		range(canvas, x, y, width, height, FAR_PEAKS, 0xFF404047, 0xFF35353C, 0xFFD5D5DC, 0xFFB1B1B9, 0.55F, alpha);
 	}
 
 	private static void range(
@@ -138,7 +138,7 @@ public final class NovaScenery {
 	}
 
 	private static void tree(NovaCanvas canvas, int centerX, int groundY, int height, float alpha) {
-		int color = NovaDraw.fade(0xFF0C1428, alpha);
+		int color = NovaDraw.fade(0xFF14141A, alpha);
 		int top = groundY - height;
 		for (int row = 0; row < height; row += 2) {
 			// Drei gestufte Etagen wie bei einer Pixel-Tanne
@@ -148,6 +148,6 @@ public final class NovaScenery {
 			canvas.fill(centerX - half, top + row, centerX + half + 1, top + row + 2, color);
 		}
 		canvas.fill(centerX - 1, groundY - 3, centerX + 2, groundY, color);
-		canvas.fill(centerX, top - 2, centerX + 1, top, NovaDraw.fade(0xFFDCE6F7, alpha * 0.8F));
+		canvas.fill(centerX, top - 2, centerX + 1, top, NovaDraw.fade(0xFFE4E4ED, alpha * 0.8F));
 	}
 }

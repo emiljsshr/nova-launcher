@@ -98,11 +98,11 @@
 }
 
 .friend-row:hover {
-  background: rgba(156, 194, 247, 0.18);
+  background: rgba(190, 190, 199, 0.18);
 }
 
 .friend-row.is-active {
-  background: rgba(156, 194, 247, 0.35);
+  background: rgba(190, 190, 199, 0.35);
   box-shadow: inset 3px 0 0 var(--frost-strong);
 }
 
@@ -173,7 +173,7 @@
 }
 
 .friends-icon-button:hover {
-  background: #f1d6d6;
+  background: #dcdce5;
   color: #9c2f2f;
 }
 
@@ -214,7 +214,7 @@
 }
 
 .friends-chat-header span {
-  color: #8f9bb7;
+  color: #9a9aa2;
   font-size: 12px;
 }
 
@@ -222,7 +222,7 @@
   padding: 8px 12px;
   border: 0;
   background: transparent;
-  color: #8f9bb7;
+  color: #9a9aa2;
   font-family: var(--font-display);
   font-size: 9px;
   letter-spacing: 0.2em;
@@ -245,7 +245,7 @@
 }
 
 .friends-messages .friends-hint {
-  color: #8f9bb7;
+  color: #9a9aa2;
 }
 
 .friends-message {
@@ -257,7 +257,7 @@
 
 .friends-message.is-mine {
   align-self: flex-end;
-  background: rgba(74, 127, 214, 0.45);
+  background: rgba(71, 71, 79, 0.45);
 }
 
 .friends-message p {
@@ -269,7 +269,7 @@
 }
 
 .friends-message time {
-  color: #8f9bb7;
+  color: #9a9aa2;
   font-size: 10px;
 }
 
@@ -290,7 +290,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  color: #8f9bb7;
+  color: #9a9aa2;
   font-size: 13px;
 }
 
