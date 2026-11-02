@@ -8,6 +8,7 @@
   "contact": {
     "homepage": "https://github.com/emiljsshr/nova-client"
   },
+  "icon": "assets/nova/icon.png",
   "license": "All-Rights-Reserved",
   "environment": "client",
   "entrypoints": {

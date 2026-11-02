@@ -47,6 +47,13 @@ Alle Daten liegen im App-Datenordner (Einstellungen → Daten → Launcher-Daten
 `accounts.json` (Tokens, nur für den Nutzer lesbar), `profiles.json`, `versions/`, `libraries/`,
 `assets/`, `runtime/` (Java von Mojang) und `instances/<profil-id>/` (Welten, Mods, Screenshots).
 
+## Logo
+
+Quelle sind `tools/branding/emblem.png` (Wappen), `emblem-white.png` (flache weiße Variante) und
+`wordmark.png` (Schriftzug). `java tools/branding/Branding.java` erzeugt daraus Favicon, Mod-Icon und das
+Logo aus Wappen + Schriftzug für Launcher-Kopfzeile, Ladebildschirm und Hauptmenü der Mod.
+Danach `npx tauri icon src-tauri/app-icon.png` für die App-Icons und `mod/build-all.sh` für die Mod.
+
 ## Nova-Server (`server/`)
 
 Freunde, Online-Status, Chat und die News der Startseite. Node.js (≥ 20) mit WebSocket, Daten in
