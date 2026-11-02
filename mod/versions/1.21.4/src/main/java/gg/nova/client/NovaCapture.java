@@ -206,7 +206,12 @@ public final class NovaCapture {
 						menuOpened = true;
 						client.execute(() -> {
 							boolean friends = "friends".equals(menu);
-							client.setScreen(new NovaMenuScreen(null, friends ? NovaModMenu.Tab.FRIENDS : NovaModMenu.Tab.COSMETICS));
+							client.setScreen(new NovaMenuScreen(null, friends ? NovaModMenu.Tab.FRIENDS : "mods".equals(menu) ? NovaModMenu.Tab.MODS : NovaModMenu.Tab.COSMETICS));
+							if ("hudedit".equals(menu)) {
+								NovaModMenu.get().openHudEditor();
+							} else if ("settings".equals(menu)) {
+								NovaModMenu.get().openSettings(gg.nova.core.mods.NovaMods.KEYSTROKES);
+							}
 							if (friends && !NovaSocial.friends().isEmpty()) {
 								NovaModMenu.get().openChatWith(NovaSocial.friends().get(0).id);
 							}

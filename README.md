@@ -103,6 +103,32 @@ Person sich einmal mit dem Nova Launcher angemeldet hat.
 
 Ohne Nova Launcher (Lunar) gibt es im Menü nur Cosmetics, Freunde und Chat brauchen die Launcher-Verbindung.
 
+## Mod-Menü der Mod (Rechts-Shift)
+
+Seitenleiste mit Kategorien (Alle Mods, HUD, PvP, Visuell, Werkzeuge, Performance), Cosmetics und Freunden;
+rechts Suche, Zähler und Karten mit AKTIV/AUS. Das Zahnrad öffnet die Einstellungen eines Moduls,
+„HUD bearbeiten“ den Editor zum Verschieben, „Einstellungen“ globale Optionen. Gespeichert in
+`config/nova-mods.json`.
+
+| Modul | Was es tut |
+| --- | --- |
+| Keystrokes, CPS, FPS, Ping, Coordinates, Clock | HUD-Anzeigen (Hintergrund, Größe 75–150 %) |
+| Armor Status, Potion Effects, Inventory HUD | Rüstung mit Haltbarkeit, Effekte mit Restzeit, Inventar |
+| Toggle Sprint | sprintet automatisch beim Vorwärtslaufen |
+| Zoom | C halten, 2×/4×/8×, weich oder sofort |
+| Fullbright, No Clouds, Fewer Particles, No Shadows | setzen die Spieloptionen und stellen sie beim Abschalten zurück |
+
+Code: `core/.../mods/` (Module, HUD, Speichern), `core/.../menu/NovaModMenu.java` (Menü); je Version
+`NovaGameAdapter` (Spielzustand, Optionen) und die Mixins `HudMixin`, `FovMixin`, `OptionAccessor`.
+
+## Performance-Mods
+
+Für Fabric-Profile ab 1.20 installiert der Launcher vor jedem Start passende Versionen von **Sodium, Lithium,
+FerriteCore, ImmediatelyFast und Entity Culling** von Modrinth, samt Pflicht-Abhängigkeiten (z. B. Fabric API),
+geprüft per SHA-1 (`src-tauri/src/performance.rs`). Eigene Dateien im Mods-Ordner bleiben unberührt; liegt eine
+der Mods dort schon, wird sie nicht doppelt installiert. Abschaltbar in den Einstellungen („Performance-Mods“),
+dann entfernt der Launcher nur seine eigenen Dateien wieder. Ohne Internet startet das Spiel trotzdem.
+
 ## Mehrspielermenü der Mod
 
 Ersetzt das Vanilla-Mehrspielermenü in allen Versionen (`MinecraftClientMixin`): Tabs **Gespeicherte Server**,
@@ -257,7 +283,8 @@ cd mod
 # mit -Pnova.glide startet sie mit Elytra hoch in der Luft und gleitet (Pets fliegen dann mit);
 # -Pnova.menu=cosmetics|friends öffnet das Nova-Menü, -Pnova.bridge=127.0.0.1:<port> -Pnova.bridge.token=<t>
 # verbindet mit einem (Test-)Launcher; -Pnova.capture=multiplayer fotografiert das Mehrspielermenü (1.21.4),
-# -Pnova.open=multiplayer öffnet es in 26.3 und speichert einen Screenshot
+# -Pnova.open=multiplayer|mods öffnet Mehrspieler- oder Mod-Menü in 26.3 und speichert einen Screenshot;
+# -Pnova.menu=mods|hudedit|settings zeigt das Mod-Menü, den HUD-Editor oder Modul-Einstellungen (1.21.4)
 ```
 
 ## Tests

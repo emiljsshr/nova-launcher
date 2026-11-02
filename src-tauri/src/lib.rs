@@ -6,6 +6,7 @@ mod error;
 mod launch;
 mod minecraft;
 mod nova_mod;
+mod performance;
 mod profiles;
 mod screenshots;
 mod social;

@@ -45,6 +45,10 @@ public interface NovaCanvas {
 		this.texture(texture, x, y, width, height, 64, 64);
 	}
 
+	/** Gegenstand (ItemStack der Version) 16 × 16 mit Anzahl und Haltbarkeitsbalken. Ohne Umsetzung passiert nichts. */
+	default void item(Object stack, int x, int y) {
+	}
+
 	/** Ganze Textur mit der Größe {@code textureWidth} × {@code textureHeight} (z. B. ein Partner-Banner) ins Rechteck. */
 	default void texture(Object texture, int x, int y, int width, int height, int textureWidth, int textureHeight) {
 	}

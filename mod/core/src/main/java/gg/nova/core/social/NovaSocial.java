@@ -98,6 +98,8 @@ public final class NovaSocial {
 	/** Freund, dessen Chat gerade im Nova-Menü offen ist (dann keine Chatzeile im Spiel). */
 	private static String openChat;
 	private static String lastPresence;
+	/** Freunde-Hinweise (online, neue Nachricht) im Spiel-Chat zeigen. */
+	private static boolean chatAlerts = true;
 	private static String notice;
 	private static long noticeUntil;
 
@@ -154,7 +156,7 @@ public final class NovaSocial {
 			List<Friend> next = new ArrayList<Friend>();
 			for (Friend friend : friends) {
 				if (friend.id.equals(id)) {
-					if (online && !friend.online) {
+					if (online && !friend.online && chatAlerts) {
 						chat.line("§9[Nova] §b" + friend.name + " §7ist jetzt online.");
 					}
 					friend = new Friend(friend.id, friend.name, online, presenceOf(message));
@@ -174,7 +176,7 @@ public final class NovaSocial {
 					markRead(other);
 				} else {
 					UNREAD.put(other, unread(other) + 1);
-					chat.line("§9[Nova] §b" + nameOf(other) + "§7: §f" + chatMessage.text + " §8(Rechts-Shift)");
+					if (chatAlerts) chat.line("§9[Nova] §b" + nameOf(other) + "§7: §f" + chatMessage.text + " §8(Rechts-Shift)");
 				}
 			}
 		} else if ("chat.history".equals(type)) {
@@ -211,6 +213,20 @@ public final class NovaSocial {
 	}
 
 	// Abfragen für das Nova-Menü
+
+	public static boolean chatAlerts() {
+		return chatAlerts;
+	}
+
+	/** Beim Laden der Einstellungen (ohne erneut zu speichern). */
+	public static void setChatAlertsQuietly(boolean enabled) {
+		chatAlerts = enabled;
+	}
+
+	public static void setChatAlerts(boolean enabled) {
+		chatAlerts = enabled;
+		gg.nova.core.mods.NovaMods.save();
+	}
 
 	/** Läuft das Spiel mit Nova Launcher, der beim Nova-Server angemeldet ist? */
 	public static boolean available() {

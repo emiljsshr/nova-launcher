@@ -30,6 +30,12 @@ public class NovaMenuScreen extends Screen {
 	}
 
 	@Override
+	public boolean mouseReleased(Click click) {
+		NovaModMenu.get().release();
+		return super.mouseReleased(click);
+	}
+
+	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double horizontal, double vertical) {
 		return NovaModMenu.get().scroll(mouseX, mouseY, vertical);
 	}

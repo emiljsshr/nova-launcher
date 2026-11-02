@@ -4,6 +4,7 @@ import gg.nova.core.NovaCanvas;
 import gg.nova.core.NovaDraw;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.gl.RenderPipelines;
 
@@ -43,6 +44,13 @@ public final class DrawContextCanvas implements NovaCanvas {
 			RenderPipelines.GUI_TEXTURED, NovaClient.LOGO, x, y, 0.0F, 0.0F, width, height,
 			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, color
 		);
+	}
+
+	/** Gegenstand mit Anzahl und Haltbarkeitsbalken. */
+	@Override
+	public void item(Object stack, int x, int y) {
+		this.context.drawItem((ItemStack) stack, x, y);
+		this.context.drawStackOverlay(this.textRenderer, (ItemStack) stack, x, y);
 	}
 
 	/** Ganze Textur (Server-Icon, Partner-Banner) ins Rechteck. */

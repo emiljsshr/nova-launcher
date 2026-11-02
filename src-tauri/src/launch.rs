@@ -15,6 +15,7 @@ use crate::download::{download_all, Progress};
 use crate::error::{Error, Result};
 use crate::minecraft::{self, Features};
 use crate::nova_mod;
+use crate::performance;
 use crate::profiles::{self, Loader};
 use crate::state::{LauncherState, RunningGame};
 
@@ -32,6 +33,13 @@ pub struct LaunchOptions {
     /// Angelegte Cosmetics; die Nova-Mod liest sie aus `-Dnova.cosmetics`
     #[serde(default)]
     cosmetics: Vec<String>,
+    /// Sodium, Lithium & Co. von Modrinth mitinstallieren (siehe performance.rs)
+    #[serde(default = "enabled")]
+    performance_mods: bool,
+}
+
+fn enabled() -> bool {
+    true
 }
 
 #[derive(Serialize, Clone)]
@@ -114,6 +122,20 @@ async fn prepare_and_spawn(
         profile.loader == Loader::Fabric,
     )
     .await?;
+
+    // Ohne Internet oder bei Modrinth-Problemen trotzdem starten – nur ohne neue Performance-Mods
+    let is_fabric = profile.loader == Loader::Fabric;
+    match performance::sync_profile(http, paths, &profile.id, &profile.game_version, is_fabric, options.performance_mods, &progress).await {
+        Ok(files) if !files.is_empty() => {
+            let line = format!("[Nova] Performance-Mods: {}", files.join(", "));
+            let _ = app.emit("game-log", GameLog { line, error: false });
+        }
+        Ok(_) => {}
+        Err(error) => {
+            let line = format!("[Nova] Performance-Mods konnten nicht geladen werden: {}", error.message());
+            let _ = app.emit("game-log", GameLog { line, error: true });
+        }
+    }
 
     progress.report("version", "Version wird geladen", 0, 0);
     let vanilla = minecraft::vanilla_version_json(http, paths, &profile.game_version).await?;

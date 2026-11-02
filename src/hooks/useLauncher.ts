@@ -147,6 +147,7 @@ export function useLauncher(
           fullscreen: current.fullscreen,
           server,
           cosmetics,
+          performanceMods: current.performanceMods,
         });
       } catch (error) {
         setGame({ status: "idle" });

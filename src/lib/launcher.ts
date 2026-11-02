@@ -65,6 +65,8 @@ export type LaunchOptions = {
   server: string | null;
   // Angelegte Cosmetics, die die Nova-Mod im Spiel zeigt
   cosmetics: string[];
+  // Sodium, Lithium & Co. mitinstallieren
+  performanceMods: boolean;
 };
 
 export type LaunchProgress = {

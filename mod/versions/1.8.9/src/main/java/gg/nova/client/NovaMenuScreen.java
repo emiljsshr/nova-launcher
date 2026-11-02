@@ -30,6 +30,11 @@ public class NovaMenuScreen extends Screen {
 	}
 
 	@Override
+	protected void mouseReleased(int mouseX, int mouseY, int button) {
+		NovaModMenu.get().release();
+	}
+
+	@Override
 	public void handleMouse() {
 		super.handleMouse();
 		int wheel = Mouse.getEventDWheel();

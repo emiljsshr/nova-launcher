@@ -108,6 +108,17 @@ export default function SettingsView({
               label="Vollbild"
             />
           </SettingRow>
+
+          <SettingRow
+            title="Performance-Mods"
+            description="Installiert Sodium, Lithium, FerriteCore, ImmediatelyFast und Entity Culling in Fabric-Profile (ab 1.20)."
+          >
+            <Toggle
+              checked={settings.performanceMods}
+              onChange={(performanceMods) => onSettingsChange({ performanceMods })}
+              label="Performance-Mods"
+            />
+          </SettingRow>
         </Card>
 
         <div className="settings-column">

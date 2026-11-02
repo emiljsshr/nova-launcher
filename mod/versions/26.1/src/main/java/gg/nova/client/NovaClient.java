@@ -1,6 +1,7 @@
 package gg.nova.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import gg.nova.core.mods.NovaMods;
 import gg.nova.core.social.NovaSocial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
@@ -26,6 +27,7 @@ public final class NovaClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("Nova Client {} geladen", version());
+		NovaMods.init(new NovaGameAdapter());
 		NovaSocial.init(text -> Minecraft.getInstance().gui.getChat().addClientSystemMessage(Component.literal(text)));
 	}
 
@@ -35,6 +37,7 @@ public final class NovaClient implements ClientModInitializer {
 	public static void tick(Minecraft minecraft) {
 		ServerData server = minecraft.getCurrentServer();
 		String state = minecraft.level == null ? "menu" : minecraft.hasSingleplayerServer() ? "singleplayer" : "multiplayer";
+		NovaMods.tick();
 		NovaSocial.tick(state, "multiplayer".equals(state) && server != null ? server.ip : null);
 		boolean down = InputConstants.isKeyDown(minecraft.getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
 		if (down && !menuKeyDown && minecraft.screen == null) {

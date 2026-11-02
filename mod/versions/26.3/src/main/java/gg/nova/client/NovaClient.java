@@ -1,6 +1,7 @@
 package gg.nova.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import gg.nova.core.mods.NovaMods;
 import gg.nova.core.social.NovaSocial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
@@ -27,6 +28,7 @@ public final class NovaClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("Nova Client {} geladen", version());
+		NovaMods.init(new NovaGameAdapter());
 		NovaSocial.init(text -> Minecraft.getInstance().gui.hud.getChat().addClientSystemMessage(Component.literal(text)));
 	}
 
@@ -36,6 +38,7 @@ public final class NovaClient implements ClientModInitializer {
 	public static void tick(Minecraft minecraft) {
 		ServerData server = minecraft.getCurrentServer();
 		String state = minecraft.level == null ? "menu" : minecraft.hasSingleplayerServer() ? "singleplayer" : "multiplayer";
+		NovaMods.tick();
 		NovaSocial.tick(state, "multiplayer".equals(state) && server != null ? server.ip : null);
 		boolean down = InputConstants.isKeyDown(InputConstants.KEY_RSHIFT);
 		if (down && !menuKeyDown && minecraft.gui.screen() == null) {
@@ -47,14 +50,17 @@ public final class NovaClient implements ClientModInitializer {
 
 	private static int debugTicks = -1;
 
-	/** -Dnova.open=multiplayer: Mehrspielermenü öffnen, nach 6 Sekunden Screenshot und beenden (Test ohne Maus). */
+	/** -Dnova.open=multiplayer|mods: Mehrspielermenü oder Mod-Menü öffnen, nach 6 Sekunden Screenshot und beenden (Test ohne Maus). */
 	private static void debugOpen(Minecraft minecraft) {
-		if (!"multiplayer".equals(System.getProperty("nova.open"))) {
+		String open = System.getProperty("nova.open");
+		if (!"multiplayer".equals(open) && !"mods".equals(open)) {
 			return;
 		}
 		if (debugTicks < 0 && minecraft.gui.screen() instanceof NovaTitleScreen) {
 			debugTicks = 0;
-			minecraft.gui.setScreen(new JoinMultiplayerScreen(minecraft.gui.screen()));
+			minecraft.gui.setScreen("mods".equals(open)
+				? new NovaMenuScreen(minecraft.gui.screen(), gg.nova.core.menu.NovaModMenu.Tab.MODS)
+				: new JoinMultiplayerScreen(minecraft.gui.screen()));
 		} else if (debugTicks >= 0 && ++debugTicks == 120) {
 			Screenshot.grab(minecraft, false);
 		} else if (debugTicks == 160) {

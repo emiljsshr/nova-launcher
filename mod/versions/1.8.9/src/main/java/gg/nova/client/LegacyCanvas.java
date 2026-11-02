@@ -6,6 +6,8 @@ import gg.nova.core.NovaDraw;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.render.DiffuseLighting;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
@@ -80,6 +82,21 @@ public final class LegacyCanvas implements NovaCanvas {
 		DrawableHelper.drawTexture(x, y, 0.0F, 0.0F, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, width, height,
 			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+
+	/** Gegenstand mit Anzahl und Haltbarkeitsbalken. */
+	@Override
+	public void item(Object stack, int x, int y) {
+		if (stack == null) {
+			return;
+		}
+		GlStateManager.enableRescaleNormal();
+		DiffuseLighting.enable();
+		this.client.getItemRenderer().renderInGuiWithOverrides((ItemStack) stack, x, y);
+		this.client.getItemRenderer().renderGuiItemOverlay(this.textRenderer, (ItemStack) stack, x, y);
+		DiffuseLighting.disable();
+		GlStateManager.disableRescaleNormal();
+		GlStateManager.enableBlend();
 	}
 
 	/** Ganze Textur (z. B. ein Partner-Banner) ins Rechteck. */

@@ -4,6 +4,7 @@ import gg.nova.core.NovaCanvas;
 import gg.nova.core.NovaDraw;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.Identifier;
 import net.minecraft.client.renderer.RenderPipelines;
 
@@ -46,6 +47,13 @@ public final class GuiCanvas implements NovaCanvas {
 			RenderPipelines.GUI_TEXTURED, NovaClient.LOGO, x, y, 0.0F, 0.0F, width, height,
 			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, color
 		);
+	}
+
+	/** Gegenstand mit Anzahl und Haltbarkeitsbalken. */
+	@Override
+	public void item(Object stack, int x, int y) {
+		this.graphics.item((ItemStack) stack, x, y);
+		this.graphics.itemDecorations(this.font, (ItemStack) stack, x, y);
 	}
 
 	/** Ganze Textur (Server-Icon, Partner-Banner) ins Rechteck. */

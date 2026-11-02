@@ -269,6 +269,8 @@ export type LauncherSettings = {
   afterLaunch: "keep" | "minimize" | "hide";
   discordPresence: boolean;
   showFriendActivity: boolean;
+  // Sodium & Co. von Modrinth in Fabric-Profile legen
+  performanceMods: boolean;
 };
 
 export const defaultSettings: LauncherSettings = {
@@ -281,4 +283,5 @@ export const defaultSettings: LauncherSettings = {
   afterLaunch: "minimize",
   discordPresence: true,
   showFriendActivity: true,
+  performanceMods: true,
 };

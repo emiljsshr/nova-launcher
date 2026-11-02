@@ -1,5 +1,6 @@
 package gg.nova.client;
 
+import gg.nova.core.mods.NovaMods;
 import gg.nova.core.social.NovaSocial;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ServerInfo;
@@ -25,6 +26,7 @@ public final class NovaClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("Nova Client {} geladen", version());
+		NovaMods.init(new NovaGameAdapter());
 		NovaSocial.init(text -> MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(new LiteralText(text)));
 	}
 
@@ -34,6 +36,7 @@ public final class NovaClient implements ClientModInitializer {
 	public static void tick(MinecraftClient client) {
 		ServerInfo server = client.getCurrentServerEntry();
 		String state = client.world == null ? "menu" : client.isInSingleplayer() ? "singleplayer" : "multiplayer";
+		NovaMods.tick();
 		NovaSocial.tick(state, "multiplayer".equals(state) && server != null ? server.address : null);
 		boolean down = Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 		if (down && !menuKeyDown && client.currentScreen == null) {

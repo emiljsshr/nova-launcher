@@ -6,6 +6,9 @@
   "client": [
     "ClientTickMixin",
     "ElytraModelMixin",
+    "FovMixin",
+    "HudMixin",
+    "OptionAccessor",
     "ElytraTextureMixin",
     "MinecraftClientMixin",
     "PlayerRendererMixin",
