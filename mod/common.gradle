@@ -1,0 +1,110 @@
+// Gemeinsame Build-Logik aller Versionen – eingebunden aus versions/<mc>/build.gradle.
+// Jede Version kompiliert den Kern (core/) zusammen mit ihrer eigenen Anpassungsschicht.
+
+def novaDir = file("../..")
+def nova = new Properties()
+file("${novaDir}/nova.properties").withInputStream { nova.load(it) }
+
+version = "${nova.mod_version}+mc${project.minecraft_version}"
+group = nova.maven_group
+
+base {
+    archivesName = "nova-client"
+}
+
+sourceSets.main {
+    java.srcDir "${novaDir}/core/src/main/java"
+    resources.srcDir "${novaDir}/core/src/main/resources"
+}
+
+// Katalog aller 3D-Cosmetics (ID, Name, Typ) für das Nova-Menü im Spiel → assets/nova/cosmetics/index.json
+def cosmeticsDir = file("${novaDir}/../public/cosmetics")
+def catalogDir = layout.buildDirectory.dir("generated/nova-catalog")
+def cosmeticCatalog = tasks.register("cosmeticCatalog") {
+    inputs.dir(cosmeticsDir)
+    outputs.dir(catalogDir)
+    doLast {
+        def entries = cosmeticsDir.listFiles()
+            .findAll { new File(it, "cosmetic.json").isFile() }
+            .sort { it.name }
+            .collect { dir ->
+                def manifest = new groovy.json.JsonSlurper().parse(new File(dir, "cosmetic.json"), "UTF-8")
+                [id: dir.name, name: manifest.name ?: dir.name, type: manifest.type ?: "CAPE"]
+            }
+        def out = catalogDir.get().file("assets/nova/cosmetics/index.json").asFile
+        out.parentFile.mkdirs()
+        out.setText(groovy.json.JsonOutput.toJson(entries), "UTF-8")
+    }
+}
+
+processResources {
+    // 3D-Cosmetics des Launchers (public/cosmetics/<id>/) → assets/nova/cosmetics/<id>/
+    from("${novaDir}/../public/cosmetics") {
+        into "assets/nova/cosmetics"
+    }
+    from(cosmeticCatalog)
+    def props = [
+        version             : project.version,
+        minecraft_dependency: project.minecraft_dependency,
+        java_version        : project.java_version,
+        // Ressourcen-Modul der (Legacy) Fabric API, das die Sprachdateien der Mod lädt
+        resource_loader_id  : project.findProperty("resource_loader_id") ?: "fabric-resource-loader-v0",
+    ]
+    inputs.properties props
+    filesMatching(["fabric.mod.json", "nova.mixins.json"]) {
+        expand props
+    }
+}
+
+def javaVersion = (project.java_version as String) as int
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = javaVersion
+    it.options.encoding = "UTF-8"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    targetCompatibility = JavaVersion.toVersion(javaVersion)
+}
+
+// Testclient mit der Java-Version starten, die diese Minecraft-Version erwartet.
+// -Pnova.capture=true: Screenshots von Ladebildschirm und Menü speichern, dann beenden.
+// -Pnova.capture=world: zusätzlich Testwelt anlegen und den Spieler von hinten fotografieren (1.21.4).
+tasks.matching { it.name == "runClient" }.configureEach {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of((project.run_java_version as String) as int)
+    }
+    // -Pnova.cosmetics=frost-wings: Cosmetics im Testclient anlegen (sonst übergibt sie der Launcher)
+    if (project.hasProperty("nova.cosmetics")) {
+        jvmArgs "-Dnova.cosmetics=${project.property("nova.cosmetics")}"
+    }
+    // -Pnova.elytra: Testfigur trägt im Welt-Screenshot eine Elytra (1.21.4)
+    if (project.hasProperty("nova.elytra")) {
+        jvmArgs "-Dnova.capture.elytra=true"
+    }
+    // -Pnova.walk: im Welt-Screenshot erst laufen, dann ducken (Spuren, Aura, Emotes)
+    if (project.hasProperty("nova.walk")) {
+        jvmArgs "-Dnova.capture.walk=true"
+    }
+    // -Pnova.helmet: zusammen mit -Pnova.elytra zusätzlich einen Helm
+    if (project.hasProperty("nova.helmet")) {
+        jvmArgs "-Dnova.capture.helmet=true"
+    }
+    // -Pnova.glide: mit Elytra hoch in der Luft starten und gleiten (Pets beim Gleitflug)
+    if (project.hasProperty("nova.glide")) {
+        jvmArgs "-Dnova.capture.elytra=true", "-Dnova.capture.glide=true"
+    }
+    // -Pnova.menu=cosmetics|friends: im Welt-Screenshot das Nova-Menü offen (1.21.4); bei friends mit erstem Freund im Chat
+    if (project.hasProperty("nova.menu")) {
+        jvmArgs "-Dnova.capture.menu=${project.property("nova.menu")}"
+    }
+    // -Pnova.bridge=127.0.0.1:<port> -Pnova.bridge.token=…: mit einem (Test-)Launcher verbinden
+    if (project.hasProperty("nova.bridge")) {
+        jvmArgs "-Dnova.bridge=${project.property("nova.bridge")}", "-Dnova.bridge.token=${project.findProperty("nova.bridge.token") ?: ""}"
+    }
+    if (project.hasProperty("nova.capture")) {
+        jvmArgs "-Dnova.capture=${project.property("nova.capture")}"
+        args "--width", "1600", "--height", "900"
+    }
+}

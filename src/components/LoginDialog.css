@@ -1,0 +1,125 @@
+
+.login-dialog {
+  width: min(480px, calc(100% - 32px));
+}
+
+.login-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0 8px;
+  text-align: center;
+}
+
+.login-state p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.login-error {
+  padding: 12px 14px;
+  background: #fbe4e2;
+  color: #8e2a20 !important;
+}
+
+.login-steps ol {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.login-steps strong {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.login-code {
+  padding: 18px;
+  background: var(--bottom-bar);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.32em;
+  text-align: center;
+  -webkit-user-select: all;
+  user-select: all;
+}
+
+.login-open {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.login-waiting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0 0;
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+
+.login-spinner {
+  width: 18px;
+  height: 18px;
+  background: var(--frost-deep);
+  animation: login-spin 900ms steps(4) infinite;
+}
+
+.login-spinner.is-small {
+  width: 10px;
+  height: 10px;
+}
+
+@keyframes login-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-note {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  background: #dce9fc;
+  color: #24457f !important;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.login-offline .nova-input {
+  margin-bottom: 10px;
+}
+
+.login-hint {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.login-offline .login-error {
+  margin: 12px 0 0;
+  font-size: 12px;
+}
+
+.login-offline-link {
+  display: block;
+  margin: 18px auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+
+.login-offline-link:hover {
+  color: var(--frost-strong);
+}

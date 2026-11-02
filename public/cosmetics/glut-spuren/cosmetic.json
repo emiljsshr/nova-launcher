@@ -1,0 +1,13 @@
+{
+  "id": "glut-spuren",
+  "name": "Glutspuren",
+  "type": "TRAIL",
+  "rarity": "RARE",
+  "description": "Bei jedem Schritt glimmt ein roter Abdruck auf und verglüht langsam.",
+  "attach": "root",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "glow": {"texture": "glow.png", "intensity": 0.9},
+  "trail": {"stride": 0.8, "life": 3.5, "spread": 0.14, "width": 3, "length": 5, "uv": [0, 0, 12, 20]},
+  "thumbnail": {"seconds": 0, "yaw": 25, "pitch": -65}
+}

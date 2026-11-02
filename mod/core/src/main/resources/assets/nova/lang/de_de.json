@@ -1,0 +1,19 @@
+{
+  "nova.menu.title": "Nova Hauptmenü",
+  "nova.menu.edition": "Client Edition",
+  "nova.menu.splash": "Frost Season ist da!",
+  "nova.menu.servers": "Nova Server",
+  "nova.menu.servers.subtitle": "Partner-Server mit Nova-Bonus",
+  "nova.menu.mods": "Mods",
+  "nova.menu.mods.tooltip": "Mods-Ordner öffnen",
+  "nova.menu.cosmetics": "Cosmetics",
+  "nova.menu.cosmetics.soon": "Cosmetics kommen mit einem der nächsten Updates.",
+  "nova.menu.screenshots": "Screenshots",
+  "nova.menu.screenshots.tooltip": "Screenshot-Ordner öffnen",
+  "nova.menu.join": "Join",
+  "nova.menu.pinging": "…",
+  "nova.menu.offline": "Offline",
+  "nova.menu.account.online": "Online",
+  "nova.menu.account.offline": "Offline-Konto",
+  "nova.menu.unofficial": "Nicht offiziell mit Mojang verbunden"
+}

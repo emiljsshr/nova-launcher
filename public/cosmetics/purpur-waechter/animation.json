@@ -1,0 +1,25 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.nova.purpur_waechter.idle": {
+      "loop": true,
+      "animation_length": 4,
+      "bones": {
+        "cape": {"rotation": ["-1 - math.sin(query.anim_time * 90) * 1.5", 0, "math.sin(query.anim_time * 90) * 1"]},
+        "cape_1": {"rotation": ["-0.6 - math.sin((query.anim_time - 0.35) * 90) * 1.2", 0, 0]},
+        "cape_2": {"rotation": ["-1.2 - math.sin((query.anim_time - 0.7) * 90) * 2.4", 0, 0]},
+        "cape_3": {"rotation": ["-1.8 - math.sin((query.anim_time - 1.05) * 90) * 3.6", 0, 0]}
+      }
+    },
+    "animation.nova.purpur_waechter.run": {
+      "loop": true,
+      "animation_length": 0.5,
+      "bones": {
+        "cape": {"rotation": [0, 0, "math.sin(query.anim_time * 720) * 3"]},
+        "cape_1": {"rotation": ["-2.5 - math.sin((query.anim_time - 0.06) * 720) * 3.5", 0, 0]},
+        "cape_2": {"rotation": ["-5 - math.sin((query.anim_time - 0.12) * 720) * 7", 0, 0]},
+        "cape_3": {"rotation": ["-7.5 - math.sin((query.anim_time - 0.18) * 720) * 10.5", 0, 0]}
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.nova.frost_wings.idle": {
+      "loop": true,
+      "animation_length": 4,
+      "bones": {
+        "wings": {"position": [0, "math.sin(query.anim_time * 180) * 0.25", 0]},
+        "wing_left": {"rotation": [0, "-6 - math.sin(query.anim_time * 90) * 6", "math.sin(query.anim_time * 90) * 4"]},
+        "wing_right": {"rotation": [0, "6 + math.sin(query.anim_time * 90) * 6", "-math.sin(query.anim_time * 90) * 4"]},
+        "wing_left_outer": {"rotation": [0, "-3.6 - math.sin((query.anim_time - 0.35) * 90) * 3.6", "math.sin((query.anim_time - 0.35) * 90) * 6"]},
+        "wing_right_outer": {"rotation": [0, "3.6 + math.sin((query.anim_time - 0.35) * 90) * 3.6", "-math.sin((query.anim_time - 0.35) * 90) * 6"]}
+      }
+    },
+    "animation.nova.frost_wings.fly": {
+      "loop": true,
+      "animation_length": 1,
+      "bones": {
+        "wings": {"position": [0, "math.sin(query.anim_time * 720) * 0.25", 0]},
+        "wing_left": {"rotation": [0, "-14 - math.sin(query.anim_time * 360) * 14", "math.sin(query.anim_time * 360) * 10"]},
+        "wing_right": {"rotation": [0, "14 + math.sin(query.anim_time * 360) * 14", "-math.sin(query.anim_time * 360) * 10"]},
+        "wing_left_outer": {"rotation": [0, "-8.4 - math.sin((query.anim_time - 0.1) * 360) * 8.4", "math.sin((query.anim_time - 0.1) * 360) * 15"]},
+        "wing_right_outer": {"rotation": [0, "8.4 + math.sin((query.anim_time - 0.1) * 360) * 8.4", "-math.sin((query.anim_time - 0.1) * 360) * 15"]}
+      }
+    }
+  }
+}

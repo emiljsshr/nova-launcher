@@ -1,0 +1,45 @@
+// 1.8.9 läuft mit Legacy Fabric (eigene Intermediary/Yarn-Mappings) und Java 8
+plugins {
+    id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
+    id "legacy-looming" version "${loom_version}"
+}
+
+apply from: "../../common.gradle"
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings(legacy.yarn(project.minecraft_version, project.yarn_build))
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Nur das Ressourcen-Modul der Legacy Fabric API (lädt Sprachdateien der Mod) – wird in die JAR eingebettet
+    ["legacy-fabric-api-base", "legacy-fabric-logger-api-v1", "legacy-fabric-resource-loader-v1"].each { name ->
+        def module = legacy.apiModule(name, project.fabric_version)
+        modImplementation module
+        include module
+    }
+}
+
+// 1.8.9 liest Sprachdateien im alten .lang-Format (schlüssel=wert, z. B. de_DE.lang).
+// Sie werden beim Bauen aus den JSON-Dateien des Kerns erzeugt – es gibt nur eine Quelle.
+def legacyLangDir = layout.buildDirectory.dir("generated/legacy-lang")
+
+def legacyLang = tasks.register("legacyLang") {
+    def source = file("../../core/src/main/resources/assets/nova/lang")
+    inputs.dir source
+    outputs.dir legacyLangDir
+    doLast {
+        def target = legacyLangDir.get().dir("assets/nova/lang").asFile
+        target.mkdirs()
+        source.listFiles().findAll { it.name.endsWith(".json") }.each { json ->
+            def entries = new groovy.json.JsonSlurper().parse(json, "UTF-8")
+            def parts = json.name.replace(".json", "").split("_")
+            def name = "${parts[0]}_${parts[1].toUpperCase()}.lang"
+            new File(target, name).withWriter("UTF-8") { writer ->
+                entries.each { key, value -> writer.write("${key}=${value}\n") }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir(legacyLangDir)
+processResources.dependsOn legacyLang

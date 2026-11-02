@@ -1,0 +1,325 @@
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Spieler-Karte */
+
+.profile-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0;
+  text-align: center;
+}
+
+.profile-stage {
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+
+  margin: 0 -22px 14px;
+  padding: 14px 0 6px;
+
+  background:
+    radial-gradient(ellipse at 50% 90%, rgba(156, 194, 247, 0.3), transparent 60%),
+    linear-gradient(180deg, #0f1730 0%, #1b2950 100%);
+}
+
+.profile-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-stat strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-identity h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.profile-uuid {
+  margin: 8px 0 16px;
+  color: #6f7fa6;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 10px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.profile-stage-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 290px;
+  color: #6f7fa6;
+  font-size: 12px;
+}
+
+.profile-skin-model {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.profile-skin-model button {
+  height: 30px;
+  padding: 0 14px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dfe7f6;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+
+.profile-skin-model button.is-active {
+  background: var(--frost);
+  color: #0d1631;
+}
+
+.profile-cosmetics-link {
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--frost);
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+}
+
+.profile-connect-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 4px 6px;
+}
+
+.profile-connect-hero h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.profile-connect-hero p {
+  margin: 0 0 6px;
+  color: #b9c7e4;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.profile-empty {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.profile-accounts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-accounts li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  background: #e9edf3;
+}
+
+.profile-accounts li.is-active {
+  background: #dce9fc;
+  box-shadow: inset 4px 0 0 var(--frost-strong);
+}
+
+.profile-accounts li > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.profile-accounts strong {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+}
+
+.profile-accounts li > div span {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.profile-accounts .nova-button {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+.profile-account-remove {
+  width: 30px;
+  padding: 0 !important;
+}
+
+.profile-hero-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.profile-hero-actions .nova-button {
+  padding: 0 10px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+/* Statistiken */
+
+.profile-center {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 18px 20px;
+  background: var(--card);
+  box-shadow: inset 0 -4px 0 #e2e6ee;
+}
+
+.profile-stat span {
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+}
+
+.profile-stat strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.profile-activity {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-activity li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 2px dashed #d3d9e3;
+}
+
+.profile-activity li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.profile-activity div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-activity strong {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-activity span {
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+
+/* Seitenspalte */
+
+.profile-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-name-row {
+  display: flex;
+  gap: 8px;
+}
+
+.profile-name-row .nova-button {
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.profile-hint {
+  margin: 10px 0 0;
+  color: var(--ink-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.profile-hint.is-error {
+  color: #c0392b;
+}
+
+.profile-account {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.profile-connect {
+  width: 100%;
+  font-size: 11px;
+}
+
+@media (max-width: 1250px) {
+  .profile-layout {
+    grid-template-columns: 320px minmax(0, 1fr);
+  }
+
+  .profile-side {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  .profile-side > * {
+    flex: 1;
+  }
+}

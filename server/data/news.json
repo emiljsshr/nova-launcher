@@ -1,0 +1,71 @@
+{
+  "slides": [
+    {
+      "id": "purpur-set",
+      "badge": "NEU · COSMETICS",
+      "titleTop": "PURPUR",
+      "titleBottom": "WÄCHTER",
+      "description": "Cape mit passender Elytra, Krone, Halo, Hörner, Glutspuren und der Purpur-Rabe – jetzt in deiner Garderobe.",
+      "action": "COSMETICS"
+    },
+    {
+      "id": "freunde",
+      "badge": "NEU · SOCIAL",
+      "titleTop": "FREUNDE",
+      "titleBottom": "& CHAT",
+      "description": "Sieh, wer online ist und auf welchem Server, und schreib deinen Freunden direkt aus dem Launcher oder im Spiel.",
+      "action": "FRIENDS"
+    },
+    {
+      "id": "rabe-gleitflug",
+      "badge": "UPDATE · PETS",
+      "titleTop": "RABE IM",
+      "titleBottom": "GLEITFLUG",
+      "description": "Fliegst du mit der Elytra, gleitet dein Rabe mit ausgebreiteten Flügeln rechts neben dir mit.",
+      "action": "COSMETICS"
+    }
+  ],
+  "patchNotes": [
+    {
+      "version": "0.2.0",
+      "date": "2026-11-02",
+      "title": "Freunde, Chat und Nova-Menü",
+      "sections": [
+        {
+          "title": "Neu",
+          "items": [
+            "Freundesliste mit Online-Status: Launcher, Hauptmenü, Einzelspieler oder Server",
+            "Chat mit Freunden im Launcher und im Spiel",
+            "Nova-Menü im Spiel (Rechts-Shift): Cosmetics ohne Neustart wechseln, Freunde und Chat",
+            "Screenshot-Galerie im Launcher",
+            "Discord Rich Presence",
+            "Automatische Updates für Launcher und Mod"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "0.1.0",
+      "date": "2026-10-31",
+      "title": "Cosmetics",
+      "sections": [
+        {
+          "title": "Neu",
+          "items": [
+            "3D-Cosmetics im Launcher mit Vorschau am eigenen Skin und im Spiel in allen Versionen",
+            "Purpur-Wächter-Set: Cape mit eigener Elytra, Krone, Halo, Hörner, Glutspuren, Purpur-Rabe",
+            "Rabe als Pet: fliegt Runden mit Herzen, setzt sich nach 10 Sekunden neben dich, gleitet mit der Elytra mit",
+            "Bis zu drei Kopf-Cosmetics gleichzeitig"
+          ]
+        },
+        {
+          "title": "Verbessert",
+          "items": [
+            "Elytra ist nur noch 0,5 Pixel dick und steckt nicht mehr im Körper",
+            "Krone bleibt über einem Helm sichtbar"
+          ]
+        }
+      ]
+    }
+  ]
+}

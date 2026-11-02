@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "nova",
+  "version": "${version}",
+  "name": "Nova Client",
+  "description": "Nova Client: eigener Ladebildschirm und Hauptmenü im Nova-Design.",
+  "authors": ["Emil Schröder"],
+  "contact": {
+    "homepage": "https://github.com/emiljsshr/nova-client"
+  },
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["gg.nova.client.NovaClient"]
+  },
+  "mixins": ["nova.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "${resource_loader_id}": "*",
+    "minecraft": "${minecraft_dependency}",
+    "java": ">=${java_version}"
+  }
+}

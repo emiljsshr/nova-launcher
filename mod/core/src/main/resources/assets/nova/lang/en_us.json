@@ -1,0 +1,19 @@
+{
+  "nova.menu.title": "Nova main menu",
+  "nova.menu.edition": "Client Edition",
+  "nova.menu.splash": "Frost Season is here!",
+  "nova.menu.servers": "Nova Servers",
+  "nova.menu.servers.subtitle": "Partner servers with Nova perks",
+  "nova.menu.mods": "Mods",
+  "nova.menu.mods.tooltip": "Open the mods folder",
+  "nova.menu.cosmetics": "Cosmetics",
+  "nova.menu.cosmetics.soon": "Cosmetics are coming in one of the next updates.",
+  "nova.menu.screenshots": "Screenshots",
+  "nova.menu.screenshots.tooltip": "Open the screenshots folder",
+  "nova.menu.join": "Join",
+  "nova.menu.pinging": "…",
+  "nova.menu.offline": "Offline",
+  "nova.menu.account.online": "Online",
+  "nova.menu.account.offline": "Offline account",
+  "nova.menu.unofficial": "Not an official Minecraft product"
+}

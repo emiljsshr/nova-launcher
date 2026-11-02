@@ -1,0 +1,4 @@
+node_modules
+# Laufzeitdaten (Spieler, Tokens, Nachrichten)
+data/store.json
+data/store.json.tmp

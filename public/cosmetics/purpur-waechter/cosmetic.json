@@ -1,0 +1,19 @@
+{
+  "id": "purpur-waechter",
+  "name": "Purpur-Wächter",
+  "type": "CAPE",
+  "rarity": "LEGENDARY",
+  "description": "Dunkles Pflaume-Lila mit roten Kanten. In der Mitte ein Wappen mit glühender Klinge, unten gezackte Spitzen.",
+  "attach": "body",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "glow": {"texture": "glow.png", "intensity": "0.75 + math.sin(query.anim_time * 90) * 0.15"},
+  "elytra": "elytra.png",
+  "cape": {"bone": "cape", "rest": 6, "perSpeed": 9, "max": 70, "runSpeed": 5.6},
+  "thumbnail": {"seconds": 0, "yaw": 18, "pitch": 6},
+  "animationFile": "animation.json",
+  "animations": {
+    "idle": "animation.nova.purpur_waechter.idle",
+    "run": "animation.nova.purpur_waechter.run"
+  }
+}

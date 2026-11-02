@@ -1,0 +1,131 @@
+.screenshots-hint {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.screenshot-tile {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #121a36;
+  color: #fff;
+  text-align: left;
+}
+
+.screenshot-tile img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: opacity 120ms ease;
+}
+
+.screenshot-tile:hover img {
+  opacity: 0.85;
+}
+
+.screenshot-tile > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.screenshot-tile strong {
+  font-weight: 400;
+}
+
+.screenshot-tile > span > span {
+  overflow: hidden;
+  color: #8f9bb7;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Großansicht */
+
+.screenshot-lightbox {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(8, 11, 24, 0.86);
+  animation: page-in 160ms ease-out;
+}
+
+.screenshot-lightbox-body {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+  background: #121a36;
+}
+
+.screenshot-lightbox-body img {
+  display: block;
+  min-height: 0;
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  object-fit: contain;
+}
+
+.screenshot-lightbox-body footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  color: #fff;
+}
+
+.screenshot-lightbox-body footer div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.screenshot-lightbox-body footer div span {
+  color: #8f9bb7;
+  font-size: 11px;
+}
+
+.screenshot-lightbox-body footer button {
+  min-width: 36px;
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+
+.screenshot-lightbox-body footer button:hover:not(:disabled) {
+  background: rgba(156, 194, 247, 0.3);
+}
+
+.screenshot-lightbox-body footer button:disabled {
+  opacity: 0.35;
+}
+
+.screenshot-lightbox-body footer button.is-danger:hover {
+  background: rgba(255, 90, 90, 0.3);
+}

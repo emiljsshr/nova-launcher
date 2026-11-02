@@ -1,0 +1,327 @@
+
+.profiles-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 30vw, 480px);
+  gap: 24px;
+  align-items: start;
+}
+
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 16px;
+}
+
+/* Profilkarte */
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--card);
+  box-shadow: inset 0 -4px 0 #e2e6ee;
+}
+
+.profile-card.is-selected {
+  box-shadow:
+    inset 4px 0 0 var(--frost-strong),
+    inset 0 -4px 0 #e2e6ee;
+}
+
+.profile-card-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.profile-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.profile-card-copy > span:last-child {
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.profile-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-card-title strong {
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-card-title .nova-chip {
+  padding: 3px 6px;
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.nova-chip.is-running {
+  background: #dff3e3;
+  color: #2f7a40;
+}
+
+.profile-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0;
+}
+
+.profile-card-stats div {
+  padding: 8px 10px;
+  background: #e9edf3;
+}
+
+.profile-card-stats dt {
+  margin-bottom: 6px;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+}
+
+.profile-card-stats dd {
+  margin: 0;
+  font-size: 13px;
+}
+
+.profile-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.profile-card-actions .nova-button {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.profile-card-actions .nova-button:first-child {
+  flex: 1;
+}
+
+.profile-delete {
+  width: 36px;
+  padding: 0 !important;
+}
+
+/* Konsole */
+
+.game-console {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-console pre {
+  height: 440px;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+
+  background: rgba(0, 0, 0, 0.25);
+  color: #c9d4ea;
+
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.game-console pre .is-error {
+  color: #ff9c8f;
+}
+
+.game-console-empty {
+  color: #6f7fa6;
+  font-family: var(--font-ui);
+  font-size: 12px;
+}
+
+.game-console-copy {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--frost);
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.game-console-copy:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Editor */
+
+.profile-editor {
+  width: min(560px, calc(100% - 32px));
+}
+
+.profile-editor-field {
+  margin-bottom: 18px;
+}
+
+.profile-editor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.profile-editor-row .nova-field-label {
+  margin: 0;
+}
+
+.profile-editor-snapshots {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+
+.profile-icon-picker {
+  display: flex;
+  gap: 8px;
+}
+
+.profile-icon-picker button {
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 2px transparent;
+}
+
+.profile-icon-picker button.is-active {
+  box-shadow: inset 0 0 0 2px var(--frost-strong);
+  background: #dce9fc;
+}
+
+.profile-loader-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.profile-loader-picker button {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 0;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #d3d9e3;
+  text-align: left;
+}
+
+.profile-loader-picker button strong {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.profile-loader-picker button span {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.profile-loader-picker button.is-active {
+  background: #dce9fc;
+  box-shadow: inset 0 0 0 2px var(--frost-strong);
+}
+
+.profile-loader-picker button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.profile-editor-hint {
+  margin: 10px 0 0;
+  color: #725b22;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.profile-editor-error {
+  margin: 0;
+  padding: 10px 12px;
+  background: #fbe4e2;
+  color: #8e2a20;
+  font-size: 12px;
+}
+
+/* Löschen */
+
+.delete-dialog {
+  width: min(440px, calc(100% - 32px));
+}
+
+.delete-text {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.delete-text strong {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.delete-files {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.delete-files span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.delete-files small {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.profile-delete-confirm {
+  border-color: #b8372b;
+  background: #b8372b;
+}
+
+.profile-delete-confirm:hover {
+  border-color: #9c2c22;
+  background: #9c2c22;
+}
+
+@media (max-width: 1100px) {
+  .profiles-layout {
+    grid-template-columns: 1fr;
+  }
+}

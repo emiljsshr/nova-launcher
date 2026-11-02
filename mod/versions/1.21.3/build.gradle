@@ -1,0 +1,18 @@
+plugins {
+    id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
+}
+
+apply from: "../../common.gradle"
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Nur das Ressourcen-Modul der Fabric API (lädt Sprachdateien der Mod) – wird in die JAR eingebettet
+    ["fabric-api-base", "fabric-resource-loader-v0"].each { name ->
+        def module = fabricApi.module(name, project.fabric_version)
+        modImplementation module
+        include module
+    }
+}

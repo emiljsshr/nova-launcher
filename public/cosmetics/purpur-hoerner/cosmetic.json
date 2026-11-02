@@ -1,0 +1,12 @@
+{
+  "id": "purpur-hoerner",
+  "name": "Purpur-Hörner",
+  "type": "HEAD",
+  "rarity": "EPIC",
+  "description": "Gebogene Hörner aus Pflaume-Metall, die Spitzen glühen rot.",
+  "attach": "head",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "glow": {"texture": "glow.png", "intensity": "0.8 + math.sin(query.anim_time * 90) * 0.15"},
+  "thumbnail": {"seconds": 0, "yaw": 210, "pitch": -12}
+}

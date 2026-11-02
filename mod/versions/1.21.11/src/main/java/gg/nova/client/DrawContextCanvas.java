@@ -1,0 +1,96 @@
+package gg.nova.client;
+
+import gg.nova.core.NovaCanvas;
+import gg.nova.core.NovaDraw;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gl.RenderPipelines;
+
+/** {@link NovaCanvas} für Minecraft 1.21.6 – 1.21.8 (GUI-Render-State, Matrix3x2f). Ohne {@link DrawContext} (null) nur zum Messen. */
+public final class DrawContextCanvas implements NovaCanvas {
+	private final DrawContext context;
+	private final TextRenderer textRenderer;
+
+	public DrawContextCanvas(DrawContext context, TextRenderer textRenderer) {
+		this.context = context;
+		this.textRenderer = textRenderer;
+	}
+
+	@Override
+	public int width() {
+		return this.context.getScaledWindowWidth();
+	}
+
+	@Override
+	public int height() {
+		return this.context.getScaledWindowHeight();
+	}
+
+	@Override
+	public void fill(int x1, int y1, int x2, int y2, int color) {
+		this.context.fill(x1, y1, x2, y2, color);
+	}
+
+	@Override
+	public void gradient(int x1, int y1, int x2, int y2, int top, int bottom) {
+		this.context.fillGradient(x1, y1, x2, y2, top, bottom);
+	}
+
+	@Override
+	public void logo(int x, int y, int width, int height, int color) {
+		this.context.drawTexture(
+			RenderPipelines.GUI_TEXTURED, NovaClient.LOGO, x, y, 0.0F, 0.0F, width, height,
+			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, color
+		);
+	}
+
+	@Override
+	public void text(String text, int x, int y, int color, boolean shadow) {
+		this.context.drawText(this.textRenderer, text, x, y, color, shadow);
+	}
+
+	@Override
+	public int textWidth(String text) {
+		return this.textRenderer.getWidth(text);
+	}
+
+	@Override
+	public int fontHeight() {
+		return this.textRenderer.fontHeight;
+	}
+
+	@Override
+	public void push() {
+		this.context.getMatrices().pushMatrix();
+	}
+
+	@Override
+	public void pop() {
+		this.context.getMatrices().popMatrix();
+	}
+
+	@Override
+	public void translate(float x, float y) {
+		this.context.getMatrices().translate(x, y);
+	}
+
+	@Override
+	public void scale(float scale) {
+		this.context.getMatrices().scale(scale, scale);
+	}
+
+	@Override
+	public void rotate(float degrees) {
+		this.context.getMatrices().rotate((float) Math.toRadians(degrees));
+	}
+
+	@Override
+	public void enableScissor(int x1, int y1, int x2, int y2) {
+		this.context.enableScissor(x1, y1, x2, y2);
+	}
+
+	@Override
+	public void disableScissor() {
+		this.context.disableScissor();
+	}
+}

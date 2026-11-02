@@ -1,0 +1,25 @@
+{
+  "id": "raven",
+  "name": "Rabe",
+  "type": "PET",
+  "rarity": "EPIC",
+  "description": "Kreist schwarz schimmernd neben dir und lässt dich nie aus den Augen.",
+  "attach": "body",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "thumbnail": {"seconds": 0.5, "yaw": 245, "pitch": 18},
+  "animationFile": "animation.json",
+  "animations": {
+    "idle": "animation.nova.raven.idle",
+    "fly": "animation.nova.raven.fly",
+    "glide": "animation.nova.raven.glide",
+    "sit": "animation.nova.raven.sit"
+  },
+  "pet": {
+    "root": "raven",
+    "sit": {"position": [-10, 4.6, -2], "after": 10},
+    "glide": {"position": [-30, 20, 5], "rotation": [90, 0, 0]},
+    "circle": {"first": 4, "every": [18, 35], "duration": 4.5, "widen": 6, "rise": 4},
+    "hearts": {"uv": [0, 96, 16, 16], "interval": 0.22, "life": 1.8, "size": 2.6, "rise": 7, "spread": 8, "height": 35}
+  }
+}

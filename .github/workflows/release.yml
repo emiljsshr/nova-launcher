@@ -1,0 +1,44 @@
+# Baut den Windows-Installer, signiert das Update und legt einen Release-Entwurf mit latest.json an.
+# Auslöser: ein Tag wie v0.2.0. Die Mod-JARs liegen fertig in src-tauri/resources/nova-mods (mod/build-all.sh).
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+          NOVA_MS_CLIENT_ID: ${{ secrets.NOVA_MS_CLIENT_ID }}
+          NOVA_SERVER_URL: ${{ secrets.NOVA_SERVER_URL }}
+          NOVA_DISCORD_APP_ID: ${{ secrets.NOVA_DISCORD_APP_ID }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "Nova Launcher ${{ github.ref_name }}"
+          releaseBody: "Patchnotes stehen im Launcher unter PATCH NOTES."
+          releaseDraft: true
+          includeUpdaterJson: true

@@ -1,0 +1,14 @@
+{
+  "id": "purpur-halo",
+  "name": "Purpur-Halo",
+  "type": "HEAD",
+  "rarity": "EPIC",
+  "description": "Ein dunkler Ring mit rot glühender Kante schwebt über deinem Kopf und dreht sich langsam.",
+  "attach": "head",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "glow": {"texture": "glow.png", "intensity": "0.75 + math.sin(query.anim_time * 60) * 0.2"},
+  "thumbnail": {"seconds": 0, "yaw": 20, "pitch": -30},
+  "animationFile": "animation.json",
+  "animations": {"idle": "animation.nova.purpur_halo.idle"}
+}

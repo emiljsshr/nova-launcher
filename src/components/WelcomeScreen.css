@@ -1,0 +1,200 @@
+
+.welcome-screen {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.welcome-screen .pixel-background {
+  bottom: 44px;
+}
+
+.welcome-topbar {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 110px;
+  padding: 0 120px;
+}
+
+.welcome-navigation {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 4vw, 58px);
+}
+
+.welcome-navigation .nav-link {
+  font-family: "Nova Minecraft", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.welcome-navigation .nav-link.active::after {
+  right: 0;
+  height: 2px;
+}
+
+.welcome-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 150px;
+}
+
+.welcome-title {
+  margin: 0 0 18px;
+
+  font-family: "Nova Minecrafter Regular", sans-serif;
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.welcome-logo {
+  display: block;
+  width: clamp(320px, 37vw, 580px);
+  height: auto;
+}
+
+.welcome-bottom-bar {
+  flex: 0 0 44px;
+  background: var(--bottom-bar);
+}
+
+.welcome-screen .select-game-button {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  z-index: 20;
+  transform: translateX(-50%);
+}
+
+.welcome-screen .select-game-button:active:not(:disabled) {
+  transform: translate(-50%, 2px);
+}
+
+/* ========================================
+   SPIELAUSWAHL
+======================================== */
+
+.game-selection {
+  position: absolute;
+  bottom: 118px;
+  left: 50%;
+  z-index: 15;
+
+  width: min(340px, calc(100% - 36px));
+  padding: 6px;
+
+  border: 3px solid #1e1e1f;
+  background: var(--bottom-bar);
+  box-shadow:
+    inset 3px 3px 0 rgb(255 255 255 / 12%),
+    5px 5px 0 rgb(20 23 31 / 25%);
+
+  transform: translateX(-50%);
+  animation: selection-in 160ms ease-out;
+}
+
+@keyframes selection-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.game-selection-heading {
+  margin-bottom: 6px;
+  padding: 10px;
+
+  background: #e0e4ec;
+  box-shadow:
+    inset 3px 3px 0 #fff,
+    inset 0 -4px 0 #b9bfcb;
+  color: var(--ink);
+
+  font-family: "Nova Minecrafter Regular", sans-serif;
+  font-size: 13px;
+  text-align: center;
+}
+
+.game-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 12px;
+
+  border: 0;
+  background: #363b44;
+  color: #fff;
+  text-align: left;
+  transition: background-color 120ms ease;
+}
+
+.game-option:hover {
+  background: #444a56;
+}
+
+.game-option:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+
+.game-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+
+  border: 2px solid var(--frost);
+  background: #1e1e1f;
+
+  font-family: "Nova Minecrafter Regular", sans-serif;
+  font-size: 19px;
+}
+
+.game-option-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.game-option-copy strong {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.game-option-copy small {
+  color: #b9c3d6;
+  font-size: 11px;
+}
+
+.game-arrow {
+  font-size: 22px;
+}

@@ -1,0 +1,12 @@
+{
+  "id": "purpur-krone",
+  "name": "Purpur-Krone",
+  "type": "HEAD",
+  "rarity": "LEGENDARY",
+  "description": "Reif aus dunklem Pflaume-Metall mit roten Kanten und goldenen Nieten, Samtpolster und glühenden roten Steinen.",
+  "attach": "head",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "glow": {"texture": "glow.png", "intensity": "0.75 + math.sin(query.anim_time * 90) * 0.15"},
+  "thumbnail": {"seconds": 0, "yaw": 200, "pitch": -28}
+}

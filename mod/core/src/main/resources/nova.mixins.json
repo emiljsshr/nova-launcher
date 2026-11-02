@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "gg.nova.client.mixin",
+  "compatibilityLevel": "JAVA_${java_version}",
+  "client": [
+    "ClientTickMixin",
+    "ElytraModelMixin",
+    "ElytraTextureMixin",
+    "MinecraftClientMixin",
+    "PlayerRendererMixin",
+    "SplashOverlayMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

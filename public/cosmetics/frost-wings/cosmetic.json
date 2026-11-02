@@ -1,0 +1,27 @@
+{
+  "id": "frost-wings",
+  "name": "Frostblitz-Schwingen",
+  "type": "WINGS",
+  "rarity": "LEGENDARY",
+  "description": "Glatte Federn mit Verlauf von Eisweiß zu tiefem Blau. Durch jede Schwungfeder zuckt ein leuchtender Frost-Blitz, am Flügelbogen sitzen Eiskristalle.",
+  "attach": "body",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "glow": {
+    "texture": "glow.png",
+    "intensity": "0.78 + math.sin(query.anim_time * 180) * 0.22"
+  },
+  "sparkles": {
+    "count": 34,
+    "min": [-30, 6, 2],
+    "max": [30, 46, 12],
+    "size": 1.6,
+    "rise": 3.5,
+    "uv": [960, 0, 64, 64]
+  },
+  "animationFile": "animation.json",
+  "animations": {
+    "idle": "animation.nova.frost_wings.idle",
+    "fly": "animation.nova.frost_wings.fly"
+  }
+}

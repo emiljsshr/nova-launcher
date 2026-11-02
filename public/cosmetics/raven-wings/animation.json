@@ -1,0 +1,23 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.nova.raven_wings.open": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "wings": {"position": [0, "math.sin(query.anim_time * 180) * 0.3", 0]},
+        "wing_left": {"rotation": [0, "-6 - math.sin(query.anim_time * 180) * 8", "math.sin(query.anim_time * 180) * 6"]},
+        "wing_right": {"rotation": [0, "6 + math.sin(query.anim_time * 180) * 8", "-math.sin(query.anim_time * 180) * 6"]}
+      }
+    },
+    "animation.nova.raven_wings.closed": {
+      "loop": true,
+      "animation_length": 4,
+      "bones": {
+        "wings": {"position": [0, "math.sin(query.anim_time * 90) * 0.15", 0]},
+        "wing_left": {"rotation": [0, "-52 + math.sin(query.anim_time * 90) * 2", -10]},
+        "wing_right": {"rotation": [0, "52 - math.sin(query.anim_time * 90) * 2", 10]}
+      }
+    }
+  }
+}

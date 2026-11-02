@@ -1,0 +1,499 @@
+
+.launch-bar {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  flex: 0 0 96px;
+  padding: 0 40px;
+
+  background: var(--bottom-bar);
+  color: #fff;
+}
+
+.launch-label {
+  color: #9097a6;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+}
+
+/* Spieler */
+
+.launch-player {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 210px;
+  height: 64px;
+  padding: 0 18px 0 10px;
+
+  border: 0;
+  background: var(--bottom-bar-raised);
+  text-align: left;
+  transition: background-color 120ms ease;
+}
+
+.launch-player:hover {
+  background: #3e4350;
+}
+
+.launch-player-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.launch-player-copy strong {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.launch-player-copy > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--online);
+  font-size: 12px;
+}
+
+/* Version */
+
+.launch-version {
+  position: relative;
+}
+
+.launch-version-trigger {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  width: 260px;
+  height: 64px;
+  padding: 0 52px 0 20px;
+
+  border: 0;
+  background: var(--bottom-bar-raised);
+  text-align: left;
+  transition: background-color 120ms ease;
+}
+
+.launch-version-trigger:hover,
+.launch-version-trigger[aria-expanded="true"] {
+  background: #3e4350;
+}
+
+.launch-version-trigger strong {
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.launch-caret {
+  position: absolute;
+  top: 50%;
+  right: 22px;
+
+  width: 0;
+  height: 0;
+  border-top: 7px solid #c3c8d2;
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  transform: translateY(-50%);
+}
+
+.launch-version-trigger[aria-expanded="true"] .launch-caret {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.launch-version-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+
+  width: 100%;
+  margin: 0;
+  padding: 6px;
+
+  list-style: none;
+  background: var(--bottom-bar);
+  border: 2px solid #464b58;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.launch-version-menu {
+  width: 320px;
+}
+
+.launch-version-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.launch-version-menu li button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 10px;
+
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.launch-version-menu li button span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.launch-version-menu li button strong {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.launch-version-menu li button small {
+  color: #9097a6;
+  font-size: 11px;
+}
+
+.launch-version-menu li button.is-selected small {
+  color: #24457f;
+}
+
+.launch-version-manage {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border: 0;
+  border-top: 2px dashed #464b58;
+  background: transparent;
+  color: var(--frost);
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-align: left;
+}
+
+.launch-version-manage:hover {
+  background: var(--bottom-bar-raised);
+}
+
+.launch-version-menu li button:hover {
+  background: var(--bottom-bar-raised);
+}
+
+.launch-version-menu li button.is-selected {
+  background: var(--frost);
+  color: #0d1631;
+}
+
+/* Arbeitsspeicher */
+
+.launch-memory {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 260px;
+}
+
+.launch-memory-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.launch-memory-value {
+  color: #e6e9ef;
+}
+
+.launch-memory-blocks {
+  display: flex;
+  gap: 4px;
+}
+
+.launch-memory-blocks button {
+  flex: 1;
+  height: 10px;
+  padding: 0;
+
+  border: 0;
+  background: #464b58;
+  transition: background-color 100ms ease;
+}
+
+.launch-memory-blocks button.is-filled {
+  background: var(--frost-deep);
+}
+
+.launch-memory-blocks button:hover {
+  background: var(--frost);
+}
+
+/* Einstellungen */
+
+.launch-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+  padding: 20px;
+
+  border: 0;
+  background: var(--bottom-bar-raised);
+  color: #e6e9ef;
+  transition: background-color 120ms ease;
+}
+
+.launch-settings:hover {
+  background: #3e4350;
+}
+
+.launch-settings svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Play */
+
+.launch-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  width: clamp(260px, 24vw, 380px);
+  height: 72px;
+
+  border: 0;
+  background: var(--frost);
+  box-shadow:
+    inset 0 5px 0 #c3dafb,
+    inset 0 -6px 0 var(--frost-strong);
+  color: #0d1631;
+
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.32em;
+
+  transition:
+    filter 120ms ease,
+    transform 120ms ease;
+}
+
+.launch-play svg {
+  width: 20px;
+  height: 26px;
+}
+
+.launch-play:hover {
+  filter: brightness(1.06);
+}
+
+.launch-play:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 5px 0 #c3dafb,
+    inset 0 -3px 0 var(--frost-strong);
+}
+
+.launch-play:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 1250px) {
+  .launch-bar {
+    gap: 14px;
+    padding: 0 24px;
+  }
+
+  .launch-version-trigger,
+  .launch-memory {
+    width: 200px;
+  }
+
+  .launch-player {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .launch-memory,
+  .launch-settings {
+    display: none;
+  }
+}
+
+.launch-settings.is-active {
+  background: var(--frost);
+  color: #0d1631;
+}
+
+/* Speicherblöcke auf hellem Grund (Einstellungsseite) */
+.launch-memory-blocks.is-light button {
+  height: 14px;
+  background: #d3d9e3;
+}
+
+.launch-memory-blocks.is-light button.is-filled {
+  background: var(--frost-deep);
+}
+
+.launch-memory-blocks.is-light button:hover {
+  background: var(--frost);
+}
+
+.launch-spacer {
+  flex: 1;
+}
+
+/* Infos statt Version/RAM, z. B. auf der Cosmetics-Seite */
+.launch-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 4px;
+}
+
+.launch-info strong {
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.launch-secondary {
+  height: 64px;
+  padding: 0 28px;
+
+  border: 0;
+  background: var(--bottom-bar-raised);
+  color: #fff;
+
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  transition: background-color 120ms ease, opacity 120ms ease;
+}
+
+.launch-secondary:hover:not(:disabled) {
+  background: #3e4350;
+}
+
+.launch-secondary:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.launch-secondary.is-dirty {
+  box-shadow: inset 0 -4px 0 var(--frost-deep);
+}
+
+/* Anmelden */
+
+.launch-player.is-login {
+  box-shadow: inset 0 -4px 0 var(--frost-deep);
+}
+
+.launch-player-copy > span.is-muted {
+  color: #9097a6;
+}
+
+.launch-login-icon {
+  display: grid;
+  grid-template-columns: repeat(2, 18px);
+  gap: 4px;
+  padding: 2px;
+}
+
+.launch-login-icon span {
+  width: 18px;
+  height: 18px;
+}
+
+.launch-login-icon span:nth-child(1) { background: #f25022; }
+.launch-login-icon span:nth-child(2) { background: #7fba00; }
+.launch-login-icon span:nth-child(3) { background: #00a4ef; }
+.launch-login-icon span:nth-child(4) { background: #ffb900; }
+
+/* Play-Zustände */
+
+.launch-play {
+  position: relative;
+  overflow: hidden;
+}
+
+.launch-play:disabled {
+  cursor: default;
+}
+
+.launch-play:disabled:not(.is-preparing) {
+  opacity: 0.5;
+}
+
+.launch-play.is-running {
+  background: #e3e8f0;
+  box-shadow:
+    inset 0 5px 0 #fff,
+    inset 0 -6px 0 #b9bfcb;
+}
+
+.launch-play.is-running svg {
+  width: 18px;
+  height: 18px;
+}
+
+.launch-play.is-preparing {
+  justify-content: flex-start;
+  padding: 0 24px;
+  background: #3e4350;
+  box-shadow: none;
+  color: #fff;
+}
+
+.launch-play-progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--frost-deep);
+  transition: width 200ms linear;
+}
+
+.launch-play-status {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  letter-spacing: 0.1em;
+}
+
+.launch-play-status strong {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.launch-play-status small {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}

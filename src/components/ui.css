@@ -1,0 +1,557 @@
+
+/* ========================================
+   SEITENRAHMEN
+======================================== */
+
+.nova-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 100%;
+  min-height: 100%;
+  padding: 4px 40px 28px;
+
+  animation: page-in 220ms ease-out;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.page-eyebrow {
+  display: block;
+  color: var(--frost-strong);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+}
+
+.page-title {
+  margin: 10px 0 8px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.14em;
+}
+
+.page-description {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Pixelige, abgestufte Ecken */
+.nova-card,
+.pixel-corners {
+  clip-path: polygon(
+    0 6px,
+    6px 6px,
+    6px 0,
+    calc(100% - 6px) 0,
+    calc(100% - 6px) 6px,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    6px calc(100% - 6px),
+    0 calc(100% - 6px)
+  );
+}
+
+/* ========================================
+   KARTEN
+======================================== */
+
+.nova-card {
+  min-width: 0;
+  padding: 20px 22px;
+  background: var(--card);
+  box-shadow: inset 0 -4px 0 #e2e6ee;
+}
+
+.nova-card.is-dark {
+  background: #121a36;
+  box-shadow: inset 0 -4px 0 #0a1029;
+  color: #fff;
+}
+
+.nova-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.nova-card-header h2 {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+}
+
+.nova-card.is-dark .nova-card-header h2 {
+  color: #b9c7e4;
+}
+
+.nova-card-meta {
+  color: var(--frost-strong);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.nova-card.is-dark .nova-card-meta {
+  color: var(--frost);
+}
+
+/* ========================================
+   TABS
+======================================== */
+
+.nova-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nova-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  min-height: 36px;
+  padding: 0 14px;
+
+  border: 0;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink-soft);
+
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.nova-tabs button:hover {
+  background: #fff;
+}
+
+.nova-tabs button.is-active {
+  background: var(--bottom-bar);
+  color: #fff;
+}
+
+.nova-tab-count {
+  padding: 2px 5px;
+  background: rgba(16, 17, 22, 0.08);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+}
+
+.nova-tabs button.is-active .nova-tab-count {
+  background: var(--frost);
+  color: #0d1631;
+}
+
+/* ========================================
+   SUCHE / EINGABEN
+======================================== */
+
+.nova-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 240px;
+  height: 36px;
+  padding: 0 12px;
+
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 0 2px #d3d9e3;
+  color: var(--ink-muted);
+}
+
+.nova-search:focus-within {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px var(--frost-deep);
+}
+
+.nova-search svg {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+
+.nova-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.nova-input,
+.nova-select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #d3d9e3;
+  color: var(--ink);
+
+  font-size: 13px;
+}
+
+.nova-input:focus,
+.nova-select:focus {
+  box-shadow: inset 0 0 0 2px var(--frost-deep);
+}
+
+textarea.nova-input {
+  height: auto;
+  min-height: 72px;
+  padding: 10px 12px;
+  resize: vertical;
+  font-family: var(--font-ui);
+  line-height: 1.5;
+}
+
+.nova-select {
+  appearance: none;
+  padding-right: 34px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
+    linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+  cursor: pointer;
+}
+
+.nova-field-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+}
+
+/* ========================================
+   TOGGLE
+======================================== */
+
+.nova-toggle {
+  position: relative;
+  flex: 0 0 auto;
+
+  width: 44px;
+  height: 24px;
+  padding: 3px;
+
+  border: 0;
+  background: #c9cfda;
+  transition: background-color 140ms ease;
+}
+
+.nova-toggle span {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  box-shadow: inset 0 -3px 0 #d6dbe4;
+  transition: transform 140ms ease;
+}
+
+.nova-toggle.is-on {
+  background: var(--frost-deep);
+}
+
+.nova-toggle.is-on span {
+  transform: translateX(20px);
+}
+
+/* ========================================
+   EINSTELLUNGSZEILEN
+======================================== */
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  padding: 12px 0;
+  border-bottom: 2px dashed #d3d9e3;
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.setting-row-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.setting-row-copy strong {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.setting-row-copy span {
+  color: var(--ink-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.setting-row-control {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ========================================
+   KLEINE ELEMENTE
+======================================== */
+
+.nova-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 8px;
+  background: #e3e8f0;
+  color: var(--ink-soft);
+
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.nova-chip.is-frost {
+  background: #dce9fc;
+  color: #24457f;
+}
+
+.nova-card.is-dark .nova-chip {
+  background: rgba(255, 255, 255, 0.1);
+  color: #dfe7f6;
+}
+
+.coin-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.coin-balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  height: 44px;
+  padding: 0 16px;
+
+  background: var(--bottom-bar);
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+
+.nova-button-frost {
+  border-color: var(--frost);
+  background: var(--frost);
+  box-shadow: inset 0 -4px 0 var(--frost-deep);
+  color: #0d1631;
+}
+
+.nova-button-frost:hover {
+  border-color: #b2d0f9;
+  background: #b2d0f9;
+}
+
+.nova-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.nova-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 40px 20px;
+  color: var(--ink-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.nova-empty strong {
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+
+.rarity-common {
+  --rarity: #9aa1ad;
+}
+
+.rarity-rare {
+  --rarity: #4a7fd6;
+}
+
+.rarity-epic {
+  --rarity: #9a5bd6;
+}
+
+.rarity-legendary {
+  --rarity: #e0a33a;
+}
+
+.rarity-label {
+  color: var(--rarity);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+}
+
+/* 3D-Skin-Viewer */
+
+.minecraft-skin-viewer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minecraft-skin-viewer canvas {
+  display: block;
+  cursor: grab;
+}
+
+.minecraft-skin-viewer canvas:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 1100px) {
+  .nova-page {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+/* ========================================
+   DIALOGE
+======================================== */
+
+.nova-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(11, 18, 41, 0.55);
+  animation: modal-fade 140ms ease-out;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.nova-modal {
+  max-height: calc(100% - 48px);
+  overflow-y: auto;
+  padding: 24px 26px 26px;
+  background: var(--card);
+  box-shadow: inset 0 -4px 0 #e2e6ee;
+  animation: page-in 180ms ease-out;
+}
+
+.nova-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.nova-modal-header h2 {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+}
+
+.nova-modal-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: #e3e8f0;
+  font-size: 14px;
+}
+
+.nova-modal-close:hover {
+  background: #d3d9e3;
+}
+
+.nova-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}

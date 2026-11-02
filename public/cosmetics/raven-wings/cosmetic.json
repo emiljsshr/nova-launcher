@@ -1,0 +1,18 @@
+{
+  "id": "raven-wings",
+  "name": "Rabenschwingen",
+  "type": "WINGS",
+  "rarity": "EPIC",
+  "description": "Große schwarze Federflügel mit wenigen dunkelroten Federn. Angelegt am Rücken, beim Sprinten und Fliegen breiten sie sich aus.",
+  "attach": "body",
+  "model": "model.geo.json",
+  "texture": "texture.png",
+  "wings": {"openSpeed": 5.0, "closeSpeed": 4.4, "blend": 0.35},
+  "thumbnail": {"seconds": 0, "yaw": 15, "pitch": 6},
+  "animationFile": "animation.json",
+  "animations": {
+    "idle": "animation.nova.raven_wings.open",
+    "open": "animation.nova.raven_wings.open",
+    "closed": "animation.nova.raven_wings.closed"
+  }
+}
