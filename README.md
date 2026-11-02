@@ -103,6 +103,15 @@ Person sich einmal mit dem Nova Launcher angemeldet hat.
 
 Ohne Nova Launcher (Lunar) gibt es im Menü nur Cosmetics, Freunde und Chat brauchen die Launcher-Verbindung.
 
+## Mehrspielermenü der Mod
+
+Ersetzt das Vanilla-Mehrspielermenü in allen Versionen (`MinecraftClientMixin`): Tabs **Gespeicherte Server**,
+**Nova Server** und **LAN-Welten**, Partner-Karten mit Pixel-Banner und Badge (VERIFIED/PARTNER, `NovaContent`),
+darunter die gespeicherten Server mit Icon, MOTD, Spielerzahl und Ping. Unten Beitreten, Direkt verbinden,
+Hinzufügen, Bearbeiten, Löschen, Aktualisieren (F5), Zurück – die Dialoge sind die von Minecraft.
+Layout und Zeichnen: `core/.../menu/NovaMultiplayer.java`, Anbindung je Version: `NovaMultiplayerScreen`.
+1.8.9 zeigt Ersatz-Icons statt Server-Icons.
+
 ## Screenshots
 
 Seite SCREENSHOTS: alle Bilder aus `instances/<profil>/screenshots/`, Filter nach Profil, Großansicht mit
@@ -247,7 +256,8 @@ cd mod
 # (-Pnova.helmet zusätzlich einen Helm), mit -Pnova.walk läuft sie einen Steinweg entlang und duckt sich,
 # mit -Pnova.glide startet sie mit Elytra hoch in der Luft und gleitet (Pets fliegen dann mit);
 # -Pnova.menu=cosmetics|friends öffnet das Nova-Menü, -Pnova.bridge=127.0.0.1:<port> -Pnova.bridge.token=<t>
-# verbindet mit einem (Test-)Launcher
+# verbindet mit einem (Test-)Launcher; -Pnova.capture=multiplayer fotografiert das Mehrspielermenü (1.21.4),
+# -Pnova.open=multiplayer öffnet es in 26.3 und speichert einen Screenshot
 ```
 
 ## Tests

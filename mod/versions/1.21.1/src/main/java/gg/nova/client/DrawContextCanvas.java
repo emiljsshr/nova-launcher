@@ -4,6 +4,7 @@ import gg.nova.core.NovaCanvas;
 import gg.nova.core.NovaDraw;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.util.Identifier;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.util.math.RotationAxis;
 
@@ -44,6 +45,18 @@ public final class DrawContextCanvas implements NovaCanvas {
 		this.context.drawTexture(
 			NovaClient.LOGO, x, y, width, height, 0.0F, 0.0F,
 			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT
+		);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+
+	/** Ganze 64×64-Textur, z. B. ein Server-Icon. */
+	@Override
+	public void texture(Object texture, int x, int y, int width, int height) {
+		RenderSystem.enableBlend();
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		this.context.drawTexture(
+			(Identifier) texture, x, y, width, height, 0.0F, 0.0F,
+			64, 64, 64, 64
 		);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 	}

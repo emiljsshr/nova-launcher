@@ -23,6 +23,11 @@ public final class PartnerPings {
 		}
 	}
 
+	/** Pingt beliebige Server (z. B. die gespeicherte Serverliste) statt der Partner. */
+	public PartnerPings(List<ServerData> servers) {
+		this.servers.addAll(servers);
+	}
+
 	public ServerData server(int index) {
 		return this.servers.get(index);
 	}

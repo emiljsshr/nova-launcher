@@ -4,6 +4,7 @@ import gg.nova.core.NovaCanvas;
 import gg.nova.core.NovaDraw;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.util.Identifier;
 import net.minecraft.client.gl.RenderPipelines;
 
 /** {@link NovaCanvas} für Minecraft 1.21.6 – 1.21.8 (GUI-Render-State, Matrix3x2f). Ohne {@link DrawContext} (null) nur zum Messen. */
@@ -41,6 +42,15 @@ public final class DrawContextCanvas implements NovaCanvas {
 		this.context.drawTexture(
 			RenderPipelines.GUI_TEXTURED, NovaClient.LOGO, x, y, 0.0F, 0.0F, width, height,
 			NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, NovaDraw.LOGO_WIDTH, NovaDraw.LOGO_HEIGHT, color
+		);
+	}
+
+	/** Ganze 64×64-Textur, z. B. ein Server-Icon. */
+	@Override
+	public void texture(Object texture, int x, int y, int width, int height) {
+		this.context.drawTexture(
+			RenderPipelines.GUI_TEXTURED, (Identifier) texture, x, y, 0.0F, 0.0F, width, height,
+			64, 64, 64, 64, -1
 		);
 	}
 

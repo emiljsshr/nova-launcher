@@ -103,6 +103,10 @@ tasks.matching { it.name == "runClient" }.configureEach {
     if (project.hasProperty("nova.bridge")) {
         jvmArgs "-Dnova.bridge=${project.property("nova.bridge")}", "-Dnova.bridge.token=${project.findProperty("nova.bridge.token") ?: ""}"
     }
+    // -Pnova.open=multiplayer: Mehrspielermenü öffnen, Screenshot, beenden (26.3)
+    if (project.hasProperty("nova.open")) {
+        jvmArgs "-Dnova.open=${project.property("nova.open")}"
+    }
     if (project.hasProperty("nova.capture")) {
         jvmArgs "-Dnova.capture=${project.property("nova.capture")}"
         args "--width", "1600", "--height", "900"

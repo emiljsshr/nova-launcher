@@ -37,5 +37,12 @@ public interface NovaCanvas {
 
 	void enableScissor(int x1, int y1, int x2, int y2);
 
+	/**
+	 * Ganze Textur (z. B. Server-Icon) in das Rechteck zeichnen; {@code texture} ist die Textur-ID der Version.
+	 * Ohne Umsetzung passiert nichts – das Menü zeigt dann ein Ersatz-Icon.
+	 */
+	default void texture(Object texture, int x, int y, int width, int height) {
+	}
+
 	void disableScissor();
 }

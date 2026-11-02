@@ -15,5 +15,8 @@
   "nova.menu.offline": "Offline",
   "nova.menu.account.online": "Online",
   "nova.menu.account.offline": "Offline account",
-  "nova.menu.unofficial": "Not an official Minecraft product"
+  "nova.menu.unofficial": "Not an official Minecraft product",
+  "nova.mp.tab.saved": "Saved Servers",
+  "nova.mp.tab.lan": "LAN Worlds",
+  "nova.mp.empty": "No servers yet – add one with \"Add Server\"."
 }

@@ -15,5 +15,8 @@
   "nova.menu.offline": "Offline",
   "nova.menu.account.online": "Online",
   "nova.menu.account.offline": "Offline-Konto",
-  "nova.menu.unofficial": "Nicht offiziell mit Mojang verbunden"
+  "nova.menu.unofficial": "Nicht offiziell mit Mojang verbunden",
+  "nova.mp.tab.saved": "Gespeicherte Server",
+  "nova.mp.tab.lan": "LAN-Welten",
+  "nova.mp.empty": "Noch keine Server – füge mit „Server hinzufügen“ einen hinzu."
 }

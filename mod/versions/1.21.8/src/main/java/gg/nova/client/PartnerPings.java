@@ -21,6 +21,11 @@ public final class PartnerPings {
 		}
 	}
 
+	/** Pingt beliebige Server (z. B. die gespeicherte Serverliste) statt der Partner. */
+	public PartnerPings(List<ServerInfo> servers) {
+		this.servers.addAll(servers);
+	}
+
 	public ServerInfo server(int index) {
 		return this.servers.get(index);
 	}
@@ -35,8 +40,7 @@ public final class PartnerPings {
 			Util.getIoWorkerExecutor().execute(() -> {
 				try {
 					this.pinger.add(info, () -> {
-					}, () -> {
-					});
+					}, () -> info.setStatus(ServerInfo.Status.SUCCESSFUL));
 				} catch (UnknownHostException exception) {
 					info.setStatus(ServerInfo.Status.UNREACHABLE);
 				} catch (Exception exception) {

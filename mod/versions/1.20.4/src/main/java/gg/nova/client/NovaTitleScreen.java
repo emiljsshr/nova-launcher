@@ -103,7 +103,7 @@ public class NovaTitleScreen extends Screen {
 		}
 	}
 
-	private static void openFolder(Path folder) {
+	static void openFolder(Path folder) {
 		folder.toFile().mkdirs();
 		Util.getOperatingSystem().open(folder.toFile());
 	}

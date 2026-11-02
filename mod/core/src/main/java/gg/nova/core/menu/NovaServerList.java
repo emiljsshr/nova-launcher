@@ -134,7 +134,7 @@ public final class NovaServerList {
 		return barsWidth + 3 + labelWidth;
 	}
 
-	private static void partnerIcon(NovaCanvas canvas, NovaContent.IconStyle style, int x, int y) {
+	static void partnerIcon(NovaCanvas canvas, NovaContent.IconStyle style, int x, int y) {
 		int seed = style.ordinal() * 97 + 13;
 		for (int cell = 0; cell < 64; cell++) {
 			int cellX = cell % 8;

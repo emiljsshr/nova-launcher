@@ -45,6 +45,45 @@ public final class NovaCapture {
 			startWorldCapture();
 			return;
 		}
+		// -Dnova.capture=multiplayer: Mehrspielermenü öffnen (mit zwei Testservern, falls die Liste leer ist)
+		if ("multiplayer".equals(System.getProperty("nova.capture"))) {
+			worldStarted = true;
+			MinecraftClient client = MinecraftClient.getInstance();
+			net.minecraft.client.option.ServerList list = new net.minecraft.client.option.ServerList(client);
+			list.loadFile();
+			if (list.size() == 0) {
+				list.add(new net.minecraft.client.network.ServerInfo("Hypixel", "mc.hypixel.net", net.minecraft.client.network.ServerInfo.ServerType.OTHER), false);
+				list.add(new net.minecraft.client.network.ServerInfo("Minecraft Server", "localhost", net.minecraft.client.network.ServerInfo.ServerType.OTHER), false);
+				list.saveFile();
+			}
+			client.setScreen(new net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen(client.currentScreen));
+			Thread thread = new Thread(() -> {
+				try {
+					Thread.sleep(5000L);
+				} catch (InterruptedException exception) {
+					return;
+				}
+				client.execute(() -> {
+					ScreenshotRecorder.saveScreenshot(client.runDirectory, "nova-multiplayer.png", client.getFramebuffer(), text -> {
+					});
+					// Ganz nach unten scrollen: gespeicherte Server mit Icons
+					client.currentScreen.mouseScrolled(client.currentScreen.width / 2.0, client.currentScreen.height / 2.0, 0.0, -50.0);
+				});
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException exception) {
+					return;
+				}
+				client.execute(() -> {
+					ScreenshotRecorder.saveScreenshot(client.runDirectory, "nova-multiplayer-saved.png", client.getFramebuffer(), text -> {
+					});
+					client.scheduleStop();
+				});
+			}, "Nova multiplayer capture");
+			thread.setDaemon(true);
+			thread.start();
+			return;
+		}
 		MinecraftClient.getInstance().scheduleStop();
 	}
 

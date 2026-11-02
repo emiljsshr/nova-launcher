@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.SettingsScreen;
@@ -91,7 +92,7 @@ public class NovaTitleScreen extends Screen {
 		}
 	}
 
-	private static void openFolder(File folder) {
+	static void openFolder(File folder) {
 		folder.mkdirs();
 		Sys.openURL("file://" + folder.getAbsolutePath());
 	}
@@ -133,16 +134,25 @@ public class NovaTitleScreen extends Screen {
 	}
 
 	private Identifier currentSkin() {
+		return playerSkin(this.client);
+	}
+
+	/** Geladener Skin des Spielers, bis dahin der Standard-Skin (auch fürs Mehrspielermenü). */
+	static Identifier playerSkin(MinecraftClient client) {
 		if (skin != null) {
 			return skin;
 		}
-		GameProfile profile = this.client.getSession().getProfile();
+		GameProfile profile = client.getSession().getProfile();
 		return profile.getId() != null ? DefaultSkinHelper.getTexture(profile.getId()) : DefaultSkinHelper.getTexture();
 	}
 
-	/** Microsoft-Konten haben ein echtes Zugriffstoken; Offline-Konten "0" oder einen Platzhalter. */
 	private boolean microsoftAccount() {
-		String token = this.client.getSession().getAccessToken();
+		return microsoftAccount(this.client);
+	}
+
+	/** Microsoft-Konten haben ein echtes Zugriffstoken; Offline-Konten "0" oder einen Platzhalter. */
+	static boolean microsoftAccount(MinecraftClient client) {
+		String token = client.getSession().getAccessToken();
 		return token != null && token.length() > 32;
 	}
 

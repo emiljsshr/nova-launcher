@@ -3,6 +3,8 @@ package gg.nova.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import gg.nova.core.social.NovaSocial;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Screenshot;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.Component;
 import net.fabricmc.api.ClientModInitializer;
@@ -35,6 +37,24 @@ public final class NovaClient implements ClientModInitializer {
 			minecraft.gui.setScreen(new NovaMenuScreen(null, null));
 		}
 		menuKeyDown = down;
+		debugOpen(minecraft);
+	}
+
+	private static int debugTicks = -1;
+
+	/** -Dnova.open=multiplayer: Mehrspielermenü öffnen, nach 6 Sekunden Screenshot und beenden (Test ohne Maus). */
+	private static void debugOpen(Minecraft minecraft) {
+		if (!"multiplayer".equals(System.getProperty("nova.open"))) {
+			return;
+		}
+		if (debugTicks < 0 && minecraft.gui.screen() instanceof NovaTitleScreen) {
+			debugTicks = 0;
+			minecraft.gui.setScreen(new JoinMultiplayerScreen(minecraft.gui.screen()));
+		} else if (debugTicks >= 0 && ++debugTicks == 120) {
+			Screenshot.grab(minecraft, false);
+		} else if (debugTicks == 160) {
+			minecraft.stop();
+		}
 	}
 
 	public static String version() {
