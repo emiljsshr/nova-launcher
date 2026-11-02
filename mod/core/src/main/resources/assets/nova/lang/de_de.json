@@ -20,7 +20,7 @@
   "nova.mp.tab.lan": "LAN-Welten",
   "nova.mp.empty": "Noch keine Server – füge mit „Server hinzufügen“ einen hinzu.",
   "nova.mods.title": "Mod-Menü",
-  "nova.mods.close": "RECHTS-SHIFT zum Schließen",
+  "nova.mods.close": "Mit |Rechts-Shift| schließen",
   "nova.mods.friends": "Freunde",
   "nova.mods.category.all": "Alle Mods",
   "nova.mods.category.hud": "HUD",
@@ -30,8 +30,8 @@
   "nova.mods.category.performance": "Performance",
   "nova.mods.search": "Mods suchen ...",
   "nova.mods.count": "aktiv",
-  "nova.mods.enabled": "AKTIV",
-  "nova.mods.disabled": "AUS",
+  "nova.mods.enabled": "Aktiv",
+  "nova.mods.disabled": "Aus",
   "nova.mods.none": "Keine Mods gefunden",
   "nova.mods.editHud": "HUD bearbeiten",
   "nova.mods.settings": "Einstellungen",
@@ -57,5 +57,7 @@
   "nova.mods.setting.seconds": "Sekunden",
   "nova.mods.value.value": "Wert",
   "nova.mods.value.percent": "Prozent",
-  "nova.mods.value.none": "Aus"
+  "nova.mods.value.none": "Aus",
+  "nova.mods.categories": "Kategorien",
+  "nova.mods.of": "von"
 }

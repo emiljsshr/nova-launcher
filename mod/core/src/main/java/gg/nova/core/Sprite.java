@@ -91,6 +91,26 @@ public final class Sprite {
 		this.draw(canvas, x, y, scale, alpha);
 	}
 
+	/** Alle Pixel in einer Farbe (z. B. grünes Icon für aktive Module). */
+	public void drawTinted(NovaCanvas canvas, int x, int y, int scale, int color) {
+		for (int row = 0; row < this.rows.length; row++) {
+			String line = this.rows[row];
+			int column = 0;
+			while (column < line.length()) {
+				if (line.charAt(column) == '.') {
+					column++;
+					continue;
+				}
+				int run = 1;
+				while (column + run < line.length() && line.charAt(column + run) != '.') {
+					run++;
+				}
+				canvas.fill(x + column * scale, y + row * scale, x + (column + run) * scale, y + (row + 1) * scale, color);
+				column += run;
+			}
+		}
+	}
+
 	/** Einfarbiges Sprite ("a" = Farbe). */
 	public static Sprite mono(int color, String... rows) {
 		return new Sprite(rows, "a", new int[] {color});

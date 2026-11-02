@@ -51,7 +51,7 @@ processResources {
         resource_loader_id  : project.findProperty("resource_loader_id") ?: "fabric-resource-loader-v0",
     ]
     inputs.properties props
-    filesMatching(["fabric.mod.json", "nova.mixins.json"]) {
+    filesMatching(["fabric.mod.json", "nova.mixins.json", "assets/nova/version.txt"]) {
         expand props
     }
 }

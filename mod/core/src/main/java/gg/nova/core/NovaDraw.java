@@ -38,6 +38,29 @@ public final class NovaDraw {
 		return fade(WHITE, alpha);
 	}
 
+	/** Rechteck mit abgerundeten Ecken (Radius in Pixeln, stufenweise angenähert). */
+	public static void rounded(NovaCanvas canvas, int x, int y, int width, int height, int radius, int color) {
+		radius = Math.min(radius, Math.min(width, height) / 2);
+		if (radius <= 0) {
+			canvas.fill(x, y, x + width, y + height, color);
+			return;
+		}
+		canvas.fill(x, y + radius, x + width, y + height - radius, color);
+		for (int row = 0; row < radius; row++) {
+			// Einzug der Zeile auf dem Viertelkreis
+			double dy = radius - row - 0.5;
+			int inset = (int) Math.round(radius - Math.sqrt(Math.max(0.0, radius * radius - dy * dy)));
+			canvas.fill(x + inset, y + row, x + width - inset, y + row + 1, color);
+			canvas.fill(x + inset, y + height - row - 1, x + width - inset, y + height - row, color);
+		}
+	}
+
+	/** Rahmen mit abgerundeten Ecken: außen {@code color}, innen {@code fill}. */
+	public static void roundedFrame(NovaCanvas canvas, int x, int y, int width, int height, int radius, int color, int fill) {
+		rounded(canvas, x, y, width, height, radius, color);
+		rounded(canvas, x + 1, y + 1, width - 2, height - 2, Math.max(0, radius - 1), fill);
+	}
+
 	/** Flächiges Panel ohne Pixel-Ecken. */
 	public static void panel(NovaCanvas canvas, int x, int y, int width, int height, int color) {
 		canvas.fill(x, y, x + width, y + height, color);

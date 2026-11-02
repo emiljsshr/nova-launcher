@@ -22,6 +22,10 @@ public class NovaMenuScreen extends Screen {
 	@Override
 	public void render(int mouseX, int mouseY, float delta) {
 		NovaModMenu.get().render(new LegacyCanvas(this.client), mouseX, mouseY);
+		// Schließen-Knopf im Menü
+		if (NovaModMenu.get().consumeClose()) {
+			this.client.setScreen(this.parent);
+		}
 	}
 
 	@Override

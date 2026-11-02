@@ -40,15 +40,19 @@ public final class NovaModMenu {
 		SEARCH
 	}
 
-	private static final int PANEL = 0xF2141418;
-	private static final int SIDEBAR = 0xFF18181C;
-	private static final int CARD = 0xFF1E1E23;
-	private static final int CARD_BORDER = 0xFF34343B;
-	private static final int ENABLED = 0xFF2E7D32;
-	private static final int ENABLED_TEXT = 0xFFA6F5A6;
-	private static final int DISABLED = 0xFF7A1F1F;
-	private static final int DISABLED_TEXT = 0xFFFF9A9A;
-	private static final int HIGHLIGHT = 0xFFFFFF55;
+	private static final int PANEL = 0xF5181B20;
+	private static final int SIDEBAR = 0xFF14161A;
+	private static final int CARD = 0xFF1F2328;
+	private static final int CARD_HOVER = 0xFF252A30;
+	private static final int ICON_TILE = 0xFF2A2F36;
+	private static final int ICON_TILE_ON = 0xFF1C3A2C;
+	private static final int GREEN = 0xFF3DDC84;
+	private static final int TRACK_ON = 0xFF2FBF71;
+	private static final int TRACK_OFF = 0xFF3A3F47;
+	private static final int TEXT_DIM = 0xFF8B929C;
+	private static final int TEXT_FAINT = 0xFF5F6670;
+	private static final int DIVIDER = 0xFF2C3138;
+	private static final int ACTIVE_ITEM = 0xFF2A2E35;
 	private static final Sprite GEAR = Sprite.mono(0xFF8A8A92,
 		"..a.a..",
 		".aaaaa.",
@@ -107,6 +111,9 @@ public final class NovaModMenu {
 	private Module settingsModule;
 	private boolean globalSettings;
 	private boolean hudEditor;
+	/** X-Knopf geklickt: die Versions-Schicht schließt das Menü beim nächsten Bild. */
+	private boolean closeRequested;
+	private static String version;
 	private final StringBuilder search = new StringBuilder();
 	private int modsScroll;
 	private String selectedFriend;
@@ -135,6 +142,31 @@ public final class NovaModMenu {
 		this.focus = this.tab == Tab.FRIENDS && this.selectedFriend != null ? Focus.CHAT : Focus.NONE;
 		this.hudEditor = false;
 		NovaSocial.openChat(this.tab == Tab.FRIENDS ? this.selectedFriend : null);
+	}
+
+	/** Einmal true, nachdem der Schließen-Knopf geklickt wurde. */
+	public boolean consumeClose() {
+		boolean close = this.closeRequested;
+		this.closeRequested = false;
+		return close;
+	}
+
+	/** Version der Mod (assets/nova/version.txt, beim Bauen gefüllt), ohne "+mc…". */
+	private static String version() {
+		if (version == null) {
+			version = "";
+			try {
+				java.io.InputStream in = NovaModMenu.class.getResourceAsStream("/assets/nova/version.txt");
+				if (in != null) {
+					java.util.Scanner scanner = new java.util.Scanner(in, "UTF-8").useDelimiter("\\A");
+					version = scanner.hasNext() ? scanner.next().trim().replaceAll("\\+.*", "") : "";
+					in.close();
+				}
+			} catch (java.io.IOException | RuntimeException error) {
+				version = "";
+			}
+		}
+		return version;
 	}
 
 	/** HUD-Editor direkt öffnen. */
@@ -301,51 +333,78 @@ public final class NovaModMenu {
 			return;
 		}
 
-		int width = Math.min(752, canvas.width() - 24);
-		int height = Math.min(430, canvas.height() - 44);
+		int width = Math.min(730, canvas.width() - 24);
+		int height = Math.min(430, canvas.height() - 36);
 		int left = (canvas.width() - width) / 2;
-		int top = (canvas.height() - height) / 2 + 8;
+		int top = (canvas.height() - height) / 2 - 6;
 
-		canvas.fill(0, 0, canvas.width(), canvas.height(), 0x80000000);
-		// Titel über dem Fenster wie im Mockup
-		String title = this.tab == Tab.MODS ? t("nova.mods.title") : this.tab == Tab.COSMETICS ? t("nova.menu.cosmetics") : t("nova.mods.friends");
-		canvas.push();
-		canvas.translate(left, top - 17);
-		canvas.scale(1.5F);
-		canvas.text(title, 0, 0, NovaDraw.WHITE, true);
-		canvas.pop();
-		String hint = t("nova.mods.close");
-		canvas.text(hint, left + width - canvas.textWidth(hint), top - 13, 0xFF9A9AA2, true);
-
-		canvas.fill(left - 2, top - 2, left + width + 2, top + height + 2, 0xFF000000);
-		canvas.fill(left, top, left + width, top + height, PANEL);
-		int sidebarWidth = Math.max(110, Math.min(145, width * 19 / 100));
-		canvas.fill(left, top, left + sidebarWidth, top + height, SIDEBAR);
-		canvas.fill(left + sidebarWidth, top, left + sidebarWidth + 1, top + height, 0xFF2A2A30);
+		canvas.fill(0, 0, canvas.width(), canvas.height(), 0x99000000);
+		NovaDraw.rounded(canvas, left - 1, top - 1, width + 2, height + 2, 7, 0xFF262A30);
+		NovaDraw.rounded(canvas, left, top, width, height, 6, PANEL);
+		int sidebarWidth = Math.max(112, Math.min(130, width * 18 / 100));
+		NovaDraw.rounded(canvas, left, top, sidebarWidth + 6, height, 6, SIDEBAR);
+		canvas.fill(left + sidebarWidth, top, left + sidebarWidth + 6, top + height, PANEL);
+		canvas.fill(left + sidebarWidth, top, left + sidebarWidth + 1, top + height, DIVIDER);
 		this.renderSidebar(canvas, left, top, sidebarWidth, height, mouseX, mouseY);
 
-		int contentX = left + sidebarWidth + 12;
-		int contentY = top + 12;
-		int contentWidth = width - sidebarWidth - 24;
-		int contentHeight = height - 24;
+		int contentX = left + sidebarWidth + 14;
+		int contentY = top + 14;
+		int contentWidth = width - sidebarWidth - 28;
+		int contentHeight = height - 28;
 		String notice = NovaSocial.notice();
 		if (notice != null) {
 			contentHeight -= 12;
-			NovaDraw.smallText(canvas, NovaDraw.trim(canvas, notice, (int) (contentWidth / 0.75F)), contentX, top + height - 13, NovaDraw.FROST, 0);
+			NovaDraw.smallText(canvas, NovaDraw.trim(canvas, notice, (int) (contentWidth / 0.75F)), contentX, top + height - 13, GREEN, 0);
 		}
+
+		// Schließen oben rechts
+		int closeX = left + width - 14 - 21;
+		boolean closeHovered = inside(mouseX, mouseY, closeX, contentY, closeX + 21, contentY + 21);
+		NovaDraw.rounded(canvas, closeX, contentY, 21, 21, 4, closeHovered ? 0xFF353A42 : 0xFF262A30);
+		for (int i = 0; i < 7; i++) {
+			canvas.fill(closeX + 7 + i, contentY + 7 + i, closeX + 8 + i, contentY + 8 + i, NovaDraw.WHITE);
+			canvas.fill(closeX + 13 - i, contentY + 7 + i, closeX + 14 - i, contentY + 8 + i, NovaDraw.WHITE);
+		}
+		this.hits.add(new Hit(closeX, contentY, closeX + 21, contentY + 21, new Runnable() {
+			@Override
+			public void run() {
+				NovaModMenu.this.closeRequested = true;
+			}
+		}));
 
 		if (this.tab == Tab.MODS) {
 			if (this.settingsModule != null) {
-				this.renderModuleSettings(canvas, this.settingsModule, contentX, contentY, contentWidth, mouseX, mouseY);
+				this.renderModuleSettings(canvas, this.settingsModule, contentX, contentY, contentWidth - 29, mouseX, mouseY);
 			} else if (this.globalSettings) {
-				this.renderGlobalSettings(canvas, contentX, contentY, contentWidth, mouseX, mouseY);
+				this.renderGlobalSettings(canvas, contentX, contentY, contentWidth - 29, mouseX, mouseY);
 			} else {
 				this.renderMods(canvas, contentX, contentY, contentWidth, contentHeight, mouseX, mouseY, targets);
 			}
-		} else if (this.tab == Tab.COSMETICS) {
-			this.renderCosmetics(canvas, contentX, contentY, contentWidth, contentHeight, mouseX, mouseY, targets);
 		} else {
-			this.renderFriends(canvas, contentX, contentY, contentWidth, contentHeight, mouseX, mouseY, targets);
+			String title = this.tab == Tab.COSMETICS ? t("nova.menu.cosmetics") : t("nova.mods.friends");
+			this.title(canvas, title, null, contentX, contentY);
+			int bodyY = contentY + 32;
+			if (this.tab == Tab.COSMETICS) {
+				this.renderCosmetics(canvas, contentX, bodyY, contentWidth, contentHeight - 32, mouseX, mouseY, targets);
+			} else {
+				this.renderFriends(canvas, contentX, bodyY, contentWidth, contentHeight - 32, mouseX, mouseY, targets);
+			}
+		}
+
+		// Hinweis unter dem Fenster: "Press [Right Shift] to close"
+		String[] hint = t("nova.mods.close").split("\\|");
+		if (hint.length == 3) {
+			int keyWidth = canvas.textWidth(hint[1]) + 8;
+			int total = canvas.textWidth(hint[0]) + keyWidth + canvas.textWidth(hint[2]) + 8;
+			int hintX = (canvas.width() - total) / 2;
+			int hintY = top + height + 10;
+			if (hintY + 12 <= canvas.height()) {
+				canvas.text(hint[0], hintX, hintY + 2, TEXT_DIM, false);
+				hintX += canvas.textWidth(hint[0]) + 4;
+				NovaDraw.rounded(canvas, hintX, hintY - 1, keyWidth, 12, 2, 0xFF2A2E35);
+				canvas.text(hint[1], hintX + 4, hintY + 2, NovaDraw.WHITE, false);
+				canvas.text(hint[2], hintX + keyWidth + 4, hintY + 2, TEXT_DIM, false);
+			}
 		}
 
 		this.scrollTargets = new int[targets.size()];
@@ -354,55 +413,76 @@ public final class NovaModMenu {
 		}
 	}
 
+	/** Überschrift (fett, größer) mit grauer Unterzeile. */
+	private void title(NovaCanvas canvas, String title, String subtitle, int x, int y) {
+		canvas.push();
+		canvas.translate(x, y + 1);
+		canvas.scale(1.5F);
+		canvas.text("§l" + title, 0, 0, NovaDraw.WHITE, false);
+		canvas.pop();
+		if (subtitle != null) {
+			canvas.text(subtitle, x, y + 17, TEXT_DIM, false);
+		}
+	}
+
 	/* ========================================
 	   SEITENLEISTE
 	======================================== */
 
 	private void renderSidebar(NovaCanvas canvas, int left, int top, int width, int height, int mouseX, int mouseY) {
-		// Wenig Höhe (große GUI-Skalierung): kleinerer Kopf und Buttons
 		boolean compact = height < 300;
-		int buttonHeight = compact ? 16 : 20;
-		// Wappen mit "Nova / Client"
-		int emblemHeight = compact ? 16 : 22;
+		// Wappen, "Nova Client", Version
+		int emblemHeight = compact ? 14 : 18;
 		NovaDraw.logo(canvas, left + 12, top + 12, NovaDraw.logoWidth(emblemHeight), 1.0F);
-		int textX = left + 16 + NovaDraw.logoWidth(emblemHeight);
-		canvas.push();
-		canvas.translate(textX, top + 12);
-		canvas.scale(1.25F);
-		canvas.text("Nova", 0, 0, NovaDraw.WHITE, true);
-		canvas.pop();
+		int textX = left + 17 + NovaDraw.logoWidth(emblemHeight);
+		canvas.text("§lNova Client", textX, top + 13, NovaDraw.WHITE, false);
 		if (!compact) {
-			canvas.text("Client", textX, top + 25, 0xFF9A9AA2, true);
+			NovaDraw.smallText(canvas, "v" + version(), textX, top + 24, TEXT_FAINT, 0);
 		}
 
-		int x = left + 10;
-		int itemWidth = width - 20;
-		int y = top + (compact ? 32 : 46);
-		// Unten: HUD-Editor und Einstellungen; die Einträge darüber rücken bei wenig Höhe zusammen
-		int buttonY = top + height - (compact ? 8 : 12) - 2 * buttonHeight - (compact ? 4 : 6);
-		int step = Math.max(13, Math.min(24, (buttonY - 6 - y) * 10 / 85));
-		int itemHeight = Math.min(20, step - 2);
-		this.navItem(canvas, x, y, itemWidth, itemHeight, t("nova.mods.category.all"), this.tab == Tab.MODS && this.category == null && !this.globalSettings, mouseX, mouseY, Tab.MODS, null);
+		int x = left + 9;
+		int itemWidth = width - 18;
+		int buttonHeight = compact ? 16 : 22;
+		int buttonY = top + height - 10 - 2 * buttonHeight - 5;
+		int y = top + (compact ? 30 : 42);
+		int sections = 2;
+		int items = Module.Category.values().length + 3;
+		int step = Math.max(12, Math.min(24, (buttonY - 6 - y - sections * 12) / items));
+		int itemHeight = Math.min(22, step - 2);
+
+		NovaDraw.smallText(canvas, t("nova.mods.categories").toUpperCase(Locale.ROOT), x + 5, y, TEXT_FAINT, 1);
+		y += 12;
+		this.navItem(canvas, x, y, itemWidth, itemHeight, t("nova.mods.category.all"), NovaMods.modules().size(),
+			this.tab == Tab.MODS && this.category == null && this.settingsModule == null && !this.globalSettings, mouseX, mouseY, Tab.MODS, null);
 		y += step;
 		for (Module.Category candidate : Module.Category.values()) {
-			this.navItem(canvas, x, y, itemWidth, itemHeight, t(candidate.key), this.tab == Tab.MODS && this.category == candidate && !this.globalSettings, mouseX, mouseY, Tab.MODS, candidate);
+			int count = 0;
+			for (Module module : NovaMods.modules()) {
+				if (module.categories.contains(candidate)) {
+					count++;
+				}
+			}
+			this.navItem(canvas, x, y, itemWidth, itemHeight, t(candidate.key), count,
+				this.tab == Tab.MODS && this.category == candidate && this.settingsModule == null && !this.globalSettings, mouseX, mouseY, Tab.MODS, candidate);
 			y += step;
 		}
-		canvas.fill(x, y + step / 6, x + itemWidth, y + step / 6 + 1, 0xFF2A2A30);
-		y += step / 3;
-		this.navItem(canvas, x, y, itemWidth, itemHeight, t("nova.menu.cosmetics"), this.tab == Tab.COSMETICS, mouseX, mouseY, Tab.COSMETICS, null);
+		y += 4;
+		NovaDraw.smallText(canvas, "NOVA", x + 5, y, TEXT_FAINT, 1);
+		y += 12;
+		this.navItem(canvas, x, y, itemWidth, itemHeight, t("nova.menu.cosmetics"), -1, this.tab == Tab.COSMETICS, mouseX, mouseY, Tab.COSMETICS, null);
 		y += step;
 		int unread = NovaSocial.unreadTotal() + NovaSocial.incoming().size();
-		this.navItem(canvas, x, y, itemWidth, itemHeight, t("nova.mods.friends") + (unread > 0 ? " (" + unread + ")" : ""), this.tab == Tab.FRIENDS, mouseX, mouseY, Tab.FRIENDS, null);
+		this.navItem(canvas, x, y, itemWidth, itemHeight, t("nova.mods.friends"), unread > 0 ? unread : -1, this.tab == Tab.FRIENDS, mouseX, mouseY, Tab.FRIENDS, null);
 
-		this.button(canvas, x, buttonY, itemWidth, buttonHeight, t("nova.mods.editHud"), mouseX, mouseY, new Runnable() {
+		// Unten: HUD-Editor (hell) und Einstellungen (dunkel)
+		this.button(canvas, x, buttonY, itemWidth, buttonHeight, t("nova.mods.editHud"), true, mouseX, mouseY, new Runnable() {
 			@Override
 			public void run() {
 				NovaModMenu.this.hudEditor = true;
 				NovaModMenu.this.focus = Focus.NONE;
 			}
 		});
-		this.button(canvas, x, buttonY + buttonHeight + (compact ? 4 : 6), itemWidth, buttonHeight, t("nova.mods.settings"), mouseX, mouseY, new Runnable() {
+		this.button(canvas, x, buttonY + buttonHeight + 5, itemWidth, buttonHeight, t("nova.mods.settings"), false, mouseX, mouseY, new Runnable() {
 			@Override
 			public void run() {
 				NovaModMenu.this.tab = Tab.MODS;
@@ -412,16 +492,18 @@ public final class NovaModMenu {
 		});
 	}
 
-	private void navItem(NovaCanvas canvas, int x, int y, int width, int height, String label, boolean active, int mouseX, int mouseY,
+	private void navItem(NovaCanvas canvas, int x, int y, int width, int height, String label, int count, boolean active, int mouseX, int mouseY,
 			final Tab target, final Module.Category targetCategory) {
 		boolean hovered = inside(mouseX, mouseY, x, y, x + width, y + height);
-		if (active) {
-			canvas.fill(x, y, x + width, y + height, 0xFF2A2A30);
-			frame(canvas, x, y, width, height, NovaDraw.WHITE);
-		} else if (hovered) {
-			canvas.fill(x, y, x + width, y + height, 0xFF222228);
+		if (active || hovered) {
+			NovaDraw.rounded(canvas, x, y, width, height, 4, active ? ACTIVE_ITEM : 0xFF1D2025);
 		}
-		canvas.text(NovaDraw.trim(canvas, label, width - 16), x + 9, y + (height - 8) / 2 + 1, active ? HIGHLIGHT : NovaDraw.WHITE, true);
+		int textY = y + (height - 8) / 2 + 1;
+		canvas.text(NovaDraw.trim(canvas, (active ? "§l" : "") + label, width - 30), x + 7, textY, active ? NovaDraw.WHITE : 0xFFC9CED6, false);
+		if (count >= 0) {
+			String number = String.valueOf(count);
+			NovaDraw.smallText(canvas, number, x + width - 7 - NovaDraw.smallWidth(canvas, number, 0), textY + 1, TEXT_FAINT, 0);
+		}
 		this.hits.add(new Hit(x, y, x + width, y + height, new Runnable() {
 			@Override
 			public void run() {
@@ -436,27 +518,25 @@ public final class NovaModMenu {
 		}));
 	}
 
-	/** Grauer Button im Minecraft-Stil. */
-	private void button(NovaCanvas canvas, int x, int y, int width, int height, String label, int mouseX, int mouseY, Runnable action) {
+	/** Flacher Button mit runden Ecken; {@code primary} = hell mit dunkler Schrift. */
+	private void button(NovaCanvas canvas, int x, int y, int width, int height, String label, boolean primary, int mouseX, int mouseY, Runnable action) {
 		boolean hovered = inside(mouseX, mouseY, x, y, x + width, y + height);
-		canvas.fill(x, y, x + width, y + height, hovered ? NovaDraw.WHITE : 0xFF000000);
-		canvas.fill(x + 1, y + 1, x + width - 1, y + height - 1, hovered ? 0xFF5C5C68 : 0xFF3C3C44);
-		canvas.fill(x + 1, y + 1, x + width - 1, y + 2, 0x40FFFFFF);
-		canvas.fill(x + 1, y + height - 3, x + width - 1, y + height - 1, 0x50000000);
-		String text = NovaDraw.trim(canvas, label, width - 8);
-		canvas.text(text, x + (width - canvas.textWidth(text)) / 2, y + (height - 8) / 2, hovered ? 0xFFFFFFA0 : NovaDraw.WHITE, true);
+		int face = primary ? (hovered ? 0xFFE6E8EB : NovaDraw.WHITE) : (hovered ? 0xFF2E333A : 0xFF23272D);
+		NovaDraw.rounded(canvas, x, y, width, height, 4, face);
+		String text = NovaDraw.trim(canvas, (primary ? "§l" : "") + label, width - 8);
+		canvas.text(text, x + (width - canvas.textWidth(text)) / 2, y + (height - 8) / 2 + 1, primary ? 0xFF14161A : NovaDraw.WHITE, false);
 		this.hits.add(new Hit(x, y, x + width, y + height, action));
-	}
-
-	private static void frame(NovaCanvas canvas, int x, int y, int width, int height, int color) {
-		canvas.fill(x, y, x + width, y + 1, color);
-		canvas.fill(x, y + height - 1, x + width, y + height, color);
-		canvas.fill(x, y, x + 1, y + height, color);
-		canvas.fill(x + width - 1, y, x + width, y + height, color);
 	}
 
 	private static boolean inside(int mouseX, int mouseY, int x1, int y1, int x2, int y2) {
 		return mouseX >= x1 && mouseX < x2 && mouseY >= y1 && mouseY < y2;
+	}
+
+	/** Schalter wie im Launcher: grün mit Knopf rechts oder grau mit Knopf links. */
+	private static void toggle(NovaCanvas canvas, int x, int y, boolean on) {
+		NovaDraw.rounded(canvas, x, y, 20, 11, 5, on ? TRACK_ON : TRACK_OFF);
+		int knobX = on ? x + 10 : x + 1;
+		NovaDraw.rounded(canvas, knobX, y + 1, 9, 9, 4, NovaDraw.WHITE);
 	}
 
 	/* ========================================
@@ -464,58 +544,63 @@ public final class NovaModMenu {
 	======================================== */
 
 	private void renderMods(NovaCanvas canvas, int x, int y, int width, int height, int mouseX, int mouseY, List<Integer> targets) {
-		// Suche und Zähler
-		// Ohne Platzhalter übersetzen – Minecraft meldet sonst "Format error"
-		String count = NovaMods.enabledCount() + " / " + NovaMods.modules().size() + " " + t("nova.mods.count");
-		int countWidth = canvas.textWidth(count) + 16;
-		int searchWidth = width - countWidth - 8;
-		boolean searching = this.focus == Focus.SEARCH;
-		canvas.fill(x, y, x + searchWidth, y + 22, searching ? NovaDraw.WHITE : 0xFF8A8A92);
-		canvas.fill(x + 1, y + 1, x + searchWidth - 1, y + 21, 0xFF000000);
-		// Lupe
-		canvas.fill(x + 7, y + 7, x + 12, y + 8, 0xFF8A8A92);
-		canvas.fill(x + 7, y + 12, x + 12, y + 13, 0xFF8A8A92);
-		canvas.fill(x + 6, y + 8, x + 7, y + 12, 0xFF8A8A92);
-		canvas.fill(x + 12, y + 8, x + 13, y + 12, 0xFF8A8A92);
-		canvas.fill(x + 13, y + 13, x + 15, y + 15, 0xFF8A8A92);
+		String heading = this.category == null ? t("nova.mods.category.all") : t(this.category.key);
+		List<Module> shown = new ArrayList<Module>();
 		String query = this.search.toString();
+		String needle = query.toLowerCase(Locale.ROOT);
+		int enabled = 0;
+		int inCategoryCount = 0;
+		for (Module module : NovaMods.modules()) {
+			boolean inCategory = this.category == null || module.categories.contains(this.category);
+			if (inCategory) {
+				inCategoryCount++;
+				enabled += module.enabled() ? 1 : 0;
+			}
+			if (inCategory && (needle.isEmpty() || module.name.toLowerCase(Locale.ROOT).contains(needle))) {
+				shown.add(module);
+			}
+		}
+		// Ohne Platzhalter übersetzen – Minecraft meldet sonst "Format error"
+		this.title(canvas, heading, enabled + " " + t("nova.mods.of") + " " + inCategoryCount + " " + t("nova.mods.count"), x, y);
+
+		// Suche oben rechts, links neben dem Schließen-Knopf
+		int searchWidth = Math.min(170, width / 3);
+		int searchX = x + width - 29 - searchWidth;
+		boolean searching = this.focus == Focus.SEARCH;
+		NovaDraw.roundedFrame(canvas, searchX, y, searchWidth, 21, 4, searching ? 0xFF4A505A : 0xFF262A30, 0xFF1D2025);
+		// Lupe
+		canvas.fill(searchX + 8, y + 7, searchX + 12, y + 8, TEXT_DIM);
+		canvas.fill(searchX + 8, y + 11, searchX + 12, y + 12, TEXT_DIM);
+		canvas.fill(searchX + 7, y + 8, searchX + 8, y + 11, TEXT_DIM);
+		canvas.fill(searchX + 12, y + 8, searchX + 13, y + 11, TEXT_DIM);
+		canvas.fill(searchX + 13, y + 12, searchX + 15, y + 14, TEXT_DIM);
 		if (query.isEmpty() && !searching) {
-			canvas.text(t("nova.mods.search"), x + 20, y + 7, 0xFF707078, false);
+			canvas.text(t("nova.mods.search"), searchX + 20, y + 7, TEXT_FAINT, false);
 		} else {
 			boolean caret = searching && System.currentTimeMillis() / 500 % 2 == 0;
-			canvas.text(query + (caret ? "_" : ""), x + 20, y + 7, NovaDraw.WHITE, false);
+			canvas.text(NovaDraw.trim(canvas, query, searchWidth - 30) + (caret ? "_" : ""), searchX + 20, y + 7, NovaDraw.WHITE, false);
 		}
-		this.hits.add(new Hit(x, y, x + searchWidth, y + 22, new Runnable() {
+		this.hits.add(new Hit(searchX, y, searchX + searchWidth, y + 21, new Runnable() {
 			@Override
 			public void run() {
 				NovaModMenu.this.focus = Focus.SEARCH;
 			}
 		}));
-		canvas.fill(x + width - countWidth, y, x + width, y + 22, 0xFF1E1E23);
-		canvas.text(count, x + width - countWidth + 8, y + 7, 0xFFC6C6CE, false);
 
 		// Karten
-		List<Module> shown = new ArrayList<Module>();
-		String needle = query.toLowerCase(Locale.ROOT);
-		for (Module module : NovaMods.modules()) {
-			boolean inCategory = this.category == null || module.categories.contains(this.category);
-			if (inCategory && (needle.isEmpty() || module.name.toLowerCase(Locale.ROOT).contains(needle))) {
-				shown.add(module);
-			}
-		}
-		int gridY = y + 32;
-		int gridHeight = height - 32;
+		int gridY = y + 34;
+		int gridHeight = height - 34;
 		int gap = 7;
 		int columns = Math.max(2, Math.min(5, (width + gap) / (100 + gap)));
 		int cardWidth = (width - (columns - 1) * gap) / columns;
-		int cardHeight = 78;
+		int cardHeight = 88;
 		int rows = (shown.size() + columns - 1) / columns;
 		int total = rows * (cardHeight + gap) - gap;
 		this.modsScroll = Math.max(0, Math.min(this.modsScroll, total - gridHeight));
 		this.scrollAreas.add(new Hit(x, gridY, x + width, gridY + gridHeight, null));
 		targets.add(3);
 
-		canvas.enableScissor(x - 1, gridY - 1, x + width + 1, gridY + gridHeight);
+		canvas.enableScissor(x - 2, gridY - 2, x + width + 2, gridY + gridHeight);
 		for (int index = 0; index < shown.size(); index++) {
 			int cardX = x + index % columns * (cardWidth + gap);
 			int cardY = gridY + index / columns * (cardHeight + gap) - this.modsScroll;
@@ -527,42 +612,43 @@ public final class NovaModMenu {
 		canvas.disableScissor();
 		if (shown.isEmpty()) {
 			String empty = t("nova.mods.none");
-			canvas.text(empty, x + (width - canvas.textWidth(empty)) / 2, gridY + 20, 0xFF8A8A92, true);
+			canvas.text(empty, x + (width - canvas.textWidth(empty)) / 2, gridY + 24, TEXT_DIM, false);
 		}
 	}
 
 	private void card(NovaCanvas canvas, final Module module, int x, int y, int width, int height, int clipTop, int clipBottom, int mouseX, int mouseY) {
 		boolean visible = mouseY >= clipTop && mouseY < clipBottom;
 		boolean hovered = visible && inside(mouseX, mouseY, x, y, x + width, y + height);
-		int statusHeight = 14;
-		canvas.fill(x, y, x + width, y + height, hovered ? NovaDraw.WHITE : CARD_BORDER);
-		canvas.fill(x + 1, y + 1, x + width - 1, y + height - 1, CARD);
+		boolean on = module.enabled();
+		if (hovered) {
+			NovaDraw.roundedFrame(canvas, x, y, width, height, 5, NovaDraw.WHITE, CARD_HOVER);
+		} else {
+			NovaDraw.rounded(canvas, x, y, width, height, 5, CARD);
+		}
 
-		// Icon in dunklem Kasten
-		int box = 30;
-		int boxX = x + (width - box) / 2;
-		int boxY = y + 7;
-		canvas.fill(boxX, boxY, boxX + box, boxY + box, 0xFF0E0E11);
-		frame(canvas, boxX, boxY, box, box, 0xFF2E2E35);
-		module.icon.draw(canvas, boxX + 3, boxY + 4, 2, 1.0F);
+		// Icon-Kachel oben links, grün getönt wenn aktiv
+		int tile = 22;
+		NovaDraw.rounded(canvas, x + 8, y + 8, tile, tile, 4, on ? ICON_TILE_ON : ICON_TILE);
+		module.icon.drawTinted(canvas, x + 8 + (tile - module.icon.width()) / 2, y + 8 + (tile - 9) / 2, 1, on ? GREEN : 0xFFB4BAC2);
 
-		String name = NovaDraw.trim(canvas, module.name, width - 8);
-		canvas.text(name, x + (width - canvas.textWidth(name)) / 2, y + height - statusHeight - 15, NovaDraw.WHITE, true);
+		// Name (fett) und erste Kategorie
+		canvas.text(NovaDraw.trim(canvas, "§l" + module.name, width - 16), x + 8, y + 37, NovaDraw.WHITE, false);
+		canvas.text(t(module.categories.get(0).key), x + 8, y + 48, TEXT_DIM, false);
 
-		// Status unten
-		int statusY = y + height - statusHeight - 1;
-		canvas.fill(x + 1, statusY, x + width - 1, y + height - 1, module.enabled() ? ENABLED : DISABLED);
-		String status = t(module.enabled() ? "nova.mods.enabled" : "nova.mods.disabled");
-		canvas.text(status, x + (width - canvas.textWidth(status)) / 2, statusY + 3, module.enabled() ? ENABLED_TEXT : DISABLED_TEXT, true);
+		// Trennlinie, Status und Schalter
+		canvas.fill(x + 8, y + height - 25, x + width - 8, y + height - 24, DIVIDER);
+		String status = t(on ? "nova.mods.enabled" : "nova.mods.disabled");
+		canvas.text(on ? "§l" + status : status, x + 8, y + height - 15, on ? GREEN : TEXT_DIM, false);
+		toggle(canvas, x + width - 8 - 20, y + height - 17, on);
 
 		// Zahnrad oben rechts öffnet die Einstellungen
-		int gearX = x + width - 12;
-		int gearY = y + 4;
-		boolean gearHovered = visible && inside(mouseX, mouseY, gearX - 2, gearY - 2, gearX + 9, gearY + 9);
+		int gearX = x + width - 15;
+		int gearY = y + 8;
+		boolean gearHovered = visible && inside(mouseX, mouseY, gearX - 3, gearY - 3, gearX + 10, gearY + 10);
 		if (gearHovered) {
-			canvas.fill(gearX - 2, gearY - 2, gearX + 9, gearY + 9, 0xFF34343B);
+			NovaDraw.rounded(canvas, gearX - 3, gearY - 3, 13, 13, 3, 0xFF353A42);
 		}
-		GEAR.draw(canvas, gearX, gearY, 1, 1.0F);
+		GEAR.drawTinted(canvas, gearX, gearY, 1, gearHovered ? NovaDraw.WHITE : TEXT_DIM);
 
 		int top = Math.max(y, clipTop);
 		int bottom = Math.min(y + height, clipBottom);
@@ -575,8 +661,8 @@ public final class NovaModMenu {
 				module.toggle();
 			}
 		}));
-		if (gearY - 2 >= top && gearY + 9 <= bottom) {
-			this.hits.add(new Hit(gearX - 2, gearY - 2, gearX + 9, gearY + 9, new Runnable() {
+		if (gearY - 3 >= top && gearY + 10 <= bottom) {
+			this.hits.add(new Hit(gearX - 3, gearY - 3, gearX + 10, gearY + 10, new Runnable() {
 				@Override
 				public void run() {
 					NovaModMenu.this.settingsModule = module;
@@ -587,38 +673,32 @@ public final class NovaModMenu {
 
 	/** Einstellungen eines Moduls: an/aus und seine Optionen, jede Zeile ein Schalter oder eine Auswahl. */
 	private void renderModuleSettings(NovaCanvas canvas, final Module module, int x, int y, int width, int mouseX, int mouseY) {
-		this.button(canvas, x, y, 70, 20, "< " + t("nova.mods.back"), mouseX, mouseY, new Runnable() {
+		this.button(canvas, x, y + 1, 22, 20, "<", false, mouseX, mouseY, new Runnable() {
 			@Override
 			public void run() {
 				NovaModMenu.this.settingsModule = null;
 			}
 		});
-		module.icon.draw(canvas, x + 80, y + 2, 1, 1.0F);
-		canvas.push();
-		canvas.translate(x + 96, y + 3);
-		canvas.scale(1.5F);
-		canvas.text(module.name, 0, 0, NovaDraw.WHITE, true);
-		canvas.pop();
+		this.title(canvas, module.name, t(module.categories.get(0).key), x + 30, y);
 
-		int rowY = y + 32;
-		rowY = this.settingRow(canvas, x, rowY, width, t("nova.mods.setting.enabled"), t(module.enabled() ? "nova.mods.on" : "nova.mods.off"),
-			module.enabled(), mouseX, mouseY, new Runnable() {
-				@Override
-				public void run() {
-					module.toggle();
-				}
-			});
+		int rowY = y + 38;
+		rowY = this.settingRow(canvas, x, rowY, width, t("nova.mods.setting.enabled"), null, module.enabled(), mouseX, mouseY, new Runnable() {
+			@Override
+			public void run() {
+				module.toggle();
+			}
+		});
 		for (final Module.Setting setting : module.settings()) {
-			String value = setting.toggle() ? t(setting.on() ? "nova.mods.on" : "nova.mods.off") : valueLabel(setting);
-			rowY = this.settingRow(canvas, x, rowY, width, t(setting.key), value, setting.toggle() && setting.on(), mouseX, mouseY, new Runnable() {
-				@Override
-				public void run() {
-					setting.next();
-				}
-			});
+			rowY = this.settingRow(canvas, x, rowY, width, t(setting.key), setting.toggle() ? null : valueLabel(setting), setting.on(), mouseX, mouseY,
+				new Runnable() {
+					@Override
+					public void run() {
+						setting.next();
+					}
+				});
 		}
 		if (module.hud) {
-			NovaDraw.smallText(canvas, t("nova.mods.hudTip"), x, rowY + 6, 0xFF8A8A92, 0);
+			canvas.text(t("nova.mods.hudTip"), x, rowY + 6, TEXT_FAINT, false);
 		}
 	}
 
@@ -633,38 +713,39 @@ public final class NovaModMenu {
 		return t("nova.mods.value." + value);
 	}
 
+	/** Zeile mit Schalter ({@code value} null) oder Auswahl-Wert, der sich per Klick weiterdreht. */
 	private int settingRow(NovaCanvas canvas, int x, int y, int width, String label, String value, boolean on, int mouseX, int mouseY, Runnable action) {
-		boolean hovered = inside(mouseX, mouseY, x, y, x + width, y + 24);
-		canvas.fill(x, y, x + width, y + 24, hovered ? 0xFF26262C : CARD);
-		canvas.text(label, x + 10, y + 8, NovaDraw.WHITE, true);
-		int valueWidth = Math.max(70, canvas.textWidth(value) + 16);
-		int valueX = x + width - valueWidth - 6;
-		canvas.fill(valueX, y + 4, valueX + valueWidth, y + 20, on ? ENABLED : 0xFF3C3C44);
-		canvas.text(value, valueX + (valueWidth - canvas.textWidth(value)) / 2, y + 8, on ? ENABLED_TEXT : NovaDraw.WHITE, true);
-		this.hits.add(new Hit(x, y, x + width, y + 24, action));
-		return y + 28;
+		boolean hovered = inside(mouseX, mouseY, x, y, x + width, y + 26);
+		NovaDraw.rounded(canvas, x, y, width, 26, 4, hovered ? CARD_HOVER : CARD);
+		canvas.text(label, x + 10, y + 9, NovaDraw.WHITE, false);
+		if (value == null) {
+			toggle(canvas, x + width - 10 - 20, y + 8, on);
+		} else {
+			int valueWidth = Math.max(54, canvas.textWidth(value) + 22);
+			int valueX = x + width - 8 - valueWidth;
+			NovaDraw.rounded(canvas, valueX, y + 5, valueWidth, 16, 3, ICON_TILE);
+			canvas.text(value, valueX + 8, y + 9, NovaDraw.WHITE, false);
+			canvas.text("›", valueX + valueWidth - 9, y + 9, TEXT_DIM, false);
+		}
+		this.hits.add(new Hit(x, y, x + width, y + 26, action));
+		return y + 30;
 	}
 
 	private void renderGlobalSettings(NovaCanvas canvas, int x, int y, int width, int mouseX, int mouseY) {
-		this.button(canvas, x, y, 70, 20, "< " + t("nova.mods.back"), mouseX, mouseY, new Runnable() {
+		this.button(canvas, x, y + 1, 22, 20, "<", false, mouseX, mouseY, new Runnable() {
 			@Override
 			public void run() {
 				NovaModMenu.this.globalSettings = false;
 			}
 		});
-		canvas.push();
-		canvas.translate(x + 80, y + 3);
-		canvas.scale(1.5F);
-		canvas.text(t("nova.mods.settings"), 0, 0, NovaDraw.WHITE, true);
-		canvas.pop();
-		int rowY = y + 32;
-		rowY = this.settingRow(canvas, x, rowY, width, t("nova.mods.friendAlerts"), t(NovaSocial.chatAlerts() ? "nova.mods.on" : "nova.mods.off"),
-			NovaSocial.chatAlerts(), mouseX, mouseY, new Runnable() {
-				@Override
-				public void run() {
-					NovaSocial.setChatAlerts(!NovaSocial.chatAlerts());
-				}
-			});
+		this.title(canvas, t("nova.mods.settings"), "Nova Client v" + version(), x + 30, y);
+		int rowY = y + 38;
+		rowY = this.settingRow(canvas, x, rowY, width, t("nova.mods.friendAlerts"), null, NovaSocial.chatAlerts(), mouseX, mouseY, new Runnable() {
+			@Override
+			public void run() {
+				NovaSocial.setChatAlerts(!NovaSocial.chatAlerts());
+			}
+		});
 		this.settingRow(canvas, x, rowY, width, t("nova.mods.reset"), t("nova.mods.resetButton"), false, mouseX, mouseY, new Runnable() {
 			@Override
 			public void run() {
@@ -679,9 +760,9 @@ public final class NovaModMenu {
 		String hint = t("nova.mods.hudHint");
 		int width = canvas.textWidth(hint) + 16;
 		int x = (canvas.width() - width) / 2;
-		canvas.fill(x, 8, x + width, 22, 0xC0000000);
+		NovaDraw.rounded(canvas, x, 7, width, 16, 4, 0xD0181B20);
 		canvas.text(hint, x + 8, 11, 0xFFC6C6CE, true);
-		this.button(canvas, (canvas.width() - 80) / 2, 26, 80, 20, t("nova.mods.done"), mouseX, mouseY, new Runnable() {
+		this.button(canvas, (canvas.width() - 80) / 2, 26, 80, 20, t("nova.mods.done"), true, mouseX, mouseY, new Runnable() {
 			@Override
 			public void run() {
 				NovaModMenu.this.hudEditor = false;
