@@ -7,7 +7,8 @@ import javax.imageio.ImageIO;
 
 /**
  * Erzeugt alle Logo-Dateien aus dem Wappen (tools/branding/emblem.png):
- *   src-tauri/app-icon.png                 1024², Quelle für "npx tauri icon"
+ *   src-tauri/app-icon.png                 1024², weißes Wappen auf lila Quadrat (wie der Ladebildschirm),
+ *                                          Quelle für "npx tauri icon"
  *   public/favicon.png                     256², Browser-/Fenster-Icon
  *   src/assets/nova-logo.png               512 hoch, Launcher-Kopfzeile und Willkommensbildschirm
  *   mod/.../textures/gui/logo.png          256 hoch, Ladebildschirm und Hauptmenü der Mod
@@ -21,7 +22,8 @@ public class Branding {
 		File root = new File(args.length > 0 ? args[0] : ".");
 		BufferedImage emblem = crop(ImageIO.read(new File(root, "tools/branding/emblem.png")));
 
-		write(square(emblem, 1024, 0.06), new File(root, "src-tauri/app-icon.png"));
+		BufferedImage white = crop(ImageIO.read(new File(root, "tools/branding/emblem-white.png")));
+		write(appIcon(white, 1024), new File(root, "src-tauri/app-icon.png"));
 		write(square(emblem, 256, 0.04), new File(root, "public/favicon.png"));
 		write(square(emblem, 128, 0.04), new File(root, "mod/core/src/main/resources/assets/nova/icon.png"));
 		write(byHeight(emblem, 512), new File(root, "src/assets/nova-logo.png"));
@@ -30,6 +32,21 @@ public class Branding {
 
 	static BufferedImage byHeight(BufferedImage image, int height) {
 		return scale(image, Math.round(image.getWidth() * (float) height / image.getHeight()), height);
+	}
+
+	/** Lila Quadrat mit runden Ecken (#6D28D9 wie der Ladebildschirm), weißes Wappen in der Mitte. */
+	static BufferedImage appIcon(BufferedImage emblem, int size) {
+		BufferedImage out = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = graphics(out);
+		g.setColor(new java.awt.Color(0x6D28D9));
+		int radius = Math.round(size * 0.22F);
+		g.fillRoundRect(0, 0, size, size, radius * 2, radius * 2);
+		BufferedImage inner = square(emblem, Math.round(size * 0.66F), 0.0);
+		// Wappen optisch mittig: der Stern ragt nach rechts oben, darum leicht nach links unten
+		int offset = (size - inner.getWidth()) / 2;
+		g.drawImage(inner, offset - Math.round(size * 0.01F), offset + Math.round(size * 0.015F), null);
+		g.dispose();
+		return out;
 	}
 
 	/** Mittig in ein transparentes Quadrat mit Rand ({@code margin} als Anteil der Kante). */
